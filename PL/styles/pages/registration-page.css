@@ -1,0 +1,101 @@
+body{
+    color: #fff;
+    background-image: url("../../assets/images/regBg.jpg");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    background-attachment: fixed;
+}
+
+.form-control{
+    height: 40px;
+    box-shadow: none;
+    color: #969fa4;
+}
+
+.form-control:focus{
+    border-color: #5cb85c;
+}
+
+.form-control, .btn{        
+    border-radius: 3px;
+}
+
+.registrationForm{
+    width: 400px;
+    margin: 0 auto;
+    padding: 90px 0;
+}
+
+.registrationForm h2{
+    margin: 0 0 15px;
+    position: relative;
+    text-align: center;
+}
+.registrationForm h2:before, .registrationForm h2:after{
+    content: "";
+    height: 2px;
+    width: 30%;
+    background: #d4d4d4;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+}	
+.registrationForm h2:before{
+    left: 0;
+}
+.registrationForm h2:after{
+    right: 0;
+}
+.registrationForm .hint-text{
+    color: #999;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.registrationForm form{
+    background-color: #f0ecec;
+    color: black;
+    border-radius: 30px;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.registrationForm .form-group{
+    margin-bottom: 20px;
+}
+
+.registrationForm .btn{        
+    font-size: 14px;
+    font-weight: bold;		
+    min-width: 140px;
+    outline: none !important;
+}
+.registrationForm .row div:first-child{
+    padding-right: 10px;
+}
+.registrationForm .row div:last-child{
+    padding-left: 10px;
+}    	
+.registrationForm a{
+    color: #fff;
+    text-decoration: underline;
+}
+.registrationForm a:hover{
+    text-decoration: none;
+}
+.registrationForm form a{
+    color: black;
+    text-decoration: none;
+}	
+.registrationForm form a:hover{
+    text-decoration: underline;
+}  
+
+
+#passerror{
+    margin: 5px;
+}
