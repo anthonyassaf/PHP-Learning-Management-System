@@ -1,0 +1,13 @@
+.btn-success{
+    width:200px;
+}
+
+.dashboardActionImage{
+    width:200px;
+    height:200px;
+    margin-top: 25px;
+}
+
+#actionTable{
+    background-color:white;
+}
