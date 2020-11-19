@@ -13039,7 +13039,7 @@ File: scss
   .feeds li {
     list-style: none;
     padding: 12px 15px;
-    display: block; }
+    display: inline-block; }
     .feeds li:hover {
       background: #f8f9fa; }
     .feeds li > div {
@@ -13048,7 +13048,7 @@ File: scss
       margin-right: 5px;
       display: inline-block;
       text-align: center;
-      vertical-align: middle;
+      vertical-align: center;
       border-radius: 100%;
       color: #fff; }
       .feeds li > div i {
