@@ -7,13 +7,14 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Manage Users</title>
+    <title>Calendar</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../styles/pages/manageUsers-page.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/fullcalendar/fullcalendar.min.css"/>
+    <link href="../styles/pages/calendar-page.css" rel="stylesheet">
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -21,7 +22,7 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Manage Users</p>
+            <p class="loader__label">ECOURSES</p>
         </div>
     </div>
 
@@ -37,18 +38,17 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo"/>
+                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo" />
                         </b>
                     </a>
                 </div>
-
                 <!-- End Logo -->
                 <div class="navbar-collapse">
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
                         <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light"
-                                href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
+                                href="javascript:void(0)"><i class="ti-menu"></i></a></li>
                         <!-- Search -->
                         <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="fa fa-search"></i></a>
@@ -60,10 +60,10 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown"> fname lname
+                        <li class="nav-item dropdown"> Hanna Gover
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
+                                    src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                         </li>
                         <!-- User profile and search -->
                     </ul>
@@ -77,23 +77,27 @@
             <div class="d-flex no-block nav-text-box align-items-center">
                 <span><img src="../assets/images/UAlogo.png" alt="elegant admin template">ECOURSES</span>
                 <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
-                        class="fa fa-bars"></i></a>
+                        class="fa fa-bars fa-lg"></i></a>
                 <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
-                        class="fa fa-bars ti-close"></i></a>
+                        class="ti-menu ti-close"></i></a>
             </div>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="adminDashboard.html" aria-expanded="false"><i
-                            class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.html" aria-expanded="false"><i
-                            class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses.html" aria-expanded="false"><i
-                            class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
-                            class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
+                                    class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                    class="fa fa-home"></i><span class="hide-menu">Site Home</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                    class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                    class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                    class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                    class="fa fa-book"></i><span class="hide-menu"></span>My Courses</a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -102,6 +106,8 @@
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 
+
+
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Container fluid  -->
@@ -109,13 +115,13 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Page Name</h4>
+                        <h4 class="text-themecolor">Calendar</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Page Name</li>
+                                <li class="breadcrumb-item active">Calendar</li>
                             </ol>
                         </div>
                     </div>
@@ -123,33 +129,11 @@
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div class="row d-flex justify-content-center">
-                                <img src=../assets/images/addTeacher.png class="dashboardActionImage">
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <a href="../views/adminUserAdd.html" class="btn btn-success">Add User</a>
-                        </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="response"></div>
+                        <div id='calendar'></div>
                     </div>
-                    <div class="col-xs-12 col-md-6">
-                        <div class="row d-flex justify-content-center">
-                                <img src=../assets/images/addStudent.png class="dashboardActionImage">
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <a href="#" class="btn btn-success">Edit student</a>
-                        </div>
-                    </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="row d-flex justify-content-center">
-                                    <img src=../assets/images/addTeacher.png class="dashboardActionImage">
-                            </div>
-                            <div class="row d-flex justify-content-center">
-                                <a href="#" class="btn btn-success">Edit Teacher</a>
-                            </div>
-                        
-                    </div>
-
                 </div>
                 <!-- End Page Content -->
             </div>
@@ -182,7 +166,10 @@
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
-
+    <script src="../assets/fullcalendar/lib/jquery.min.js"></script>
+    <script src="../assets/fullcalendar/lib/moment.min.js"></script>
+    <script src="../assets//fullcalendar/fullcalendar.min.js"></script>
+    <script src="../scripts/calendar.js"></script>
 </body>
 
 
