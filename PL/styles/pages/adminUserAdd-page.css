@@ -6,7 +6,7 @@
 
   input[type="radio"]:checked ~ .reveal-if-active{
   opacity: 1;
-  max-height: 120px;
+  max-height: 0;
   overflow: visible;
 }
 
