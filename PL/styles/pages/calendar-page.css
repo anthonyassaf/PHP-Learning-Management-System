@@ -1,0 +1,15 @@
+#calendar {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.response {
+    height: 60px;
+}
+
+.success {
+    background: #cdf3cd;
+    padding: 10px 60px;
+    border: #c3e6c3 1px solid;
+    display: inline-block;
+}
