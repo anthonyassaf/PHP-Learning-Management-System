@@ -1,0 +1,28 @@
+.reveal-if-active {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  input[type="radio"]:checked ~ .reveal-if-active{
+  opacity: 1;
+  max-height: 120px;
+  overflow: visible;
+}
+
+.reveal-if-active {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: scale(0.8);
+    transition: 0.5s;
+  }
+
+.addActionTable{
+    background-color: white;
+    height:max-content;
+}
+
+h4{
+    margin: 0 auto;
+}
