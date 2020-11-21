@@ -1,3 +1,5 @@
+<?php include('login.php'); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,10 +61,24 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown"> Hanna Gover
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
+                        <li class="nav-item dropdown">  <?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <span class="with-arrow"><span class="bg-primary"></span></span>
+                                <div class="d-flex no-block align-items-center p-15  m-b-10">
+                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
+                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-book"></i> Grades</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-envelope"></i> Messages</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                            </div>
                         </li>
                         <!-- User profile and search -->
                     </ul>
@@ -74,28 +90,28 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
-                <span><img src="../assets/images/UAlogo.png" alt="elegant admin template">ECOURSES</span>
+                <span style="font-family: 'Lucida Console', Courier, monospace;"><img src="../assets/images/UAlogo.png" alt="elegant admin template">ECOURSES</span>
                 <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
                         class="fa fa-bars fa-lg"></i></a>
                 <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
-                        class="ti-menu ti-close"></i></a>
+                        class="fa fa-close"></i></a>
             </div>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i
                                     class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                    class="fa fa-home"></i><span class="hide-menu">Site Home</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i
+                                    class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i
                                     class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i
                                     class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="studentProfile.html" aria-expanded="false"><i
                                     class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="#" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="studentCourses.html" aria-expanded="false"><i
                                     class="fa fa-book"></i><span class="hide-menu"></span>My Courses</a></li>
                     </ul>
                 </nav>
@@ -138,7 +154,7 @@
                                             <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
                                         </div>
                                         <div class="col-12-col-md-9">
-                                            <h4 class="card-title m-t-10">Hanna Gover</h4>
+                                            <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
                                             <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
                                             <button class="btn btn-primary">Message</button>
                                         </div>
