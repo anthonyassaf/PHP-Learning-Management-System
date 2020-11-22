@@ -46,10 +46,10 @@ function selectFaculty($id){
 
 function selectStudentCourses($studentId){
     GLOBAL $con;
-    $query = "SELECT * FROM `studentEnrollment` WHERE `id`='$idStudent'";
+    $query = "SELECT * FROM `studentEnrolment` WHERE `id`='$idStudent'";
     $results = mysqli_query($con, $query);
-    if (mysqli_num_rows($results) == 1) {
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    if (mysqli_num_rows($results) > 0) {
+        $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
         return $row;
     }
     return NULL;

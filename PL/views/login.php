@@ -15,6 +15,8 @@ $imageProfileURL = "";
 $studentGpa = "";
 $faculty = "";
 $teacherAcademicRank = "";
+$courses = array();
+
 
 $_SESSION['success'] = "";
 
@@ -50,6 +52,8 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['studentGpa'] = $row['studentGpa'];
                 $_SESSION['studentStatus'] = getStudentStatus($id);
                 $_SESSION['faculty'] = getFaculty($id);
+            
+                $_SESSION['courses'] = getStudentCourses($_SESSION['id']);
             }
 
             if($row['role'] == "2"){
