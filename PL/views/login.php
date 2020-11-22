@@ -16,7 +16,7 @@ $studentGpa = "";
 $faculty = "";
 $teacherAcademicRank = "";
 $courses = array();
-
+$userId = "";
 
 $_SESSION['success'] = "";
 
@@ -40,7 +40,7 @@ if (isset($_POST['login_user'])) {
         if($row != NULL){
             $_SESSION['id'] = $row['id'];
             $id = $_SESSION['id'];
-            $_SESSION['userId'] = $row['userId'];
+            $_SESSION['userId'] = $row['userID'];
             $_SESSION['fname'] = $row["firstname"];
             $_SESSION['lname'] = $row["lastname"];
             $_SESSION['password'] = $row["password"];
@@ -48,12 +48,12 @@ if (isset($_POST['login_user'])) {
             $_SESSION['imageProfileURL'] = $row['profileImageURL'];
             $_SESSION['role'] = $row['idRole'];
 
+            $_SESSION['courses'] = getStudentCourses($_SESSION['userId']);
+
             if($row['role'] == "3"){
                 $_SESSION['studentGpa'] = $row['studentGpa'];
                 $_SESSION['studentStatus'] = getStudentStatus($id);
                 $_SESSION['faculty'] = getFaculty($id);
-            
-                $_SESSION['courses'] = getStudentCourses($_SESSION['id']);
             }
 
             if($row['role'] == "2"){

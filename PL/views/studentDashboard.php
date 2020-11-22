@@ -1,6 +1,4 @@
-<?php include('login.php'); 
-
-?>
+<?php include('login.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -188,19 +186,18 @@
                                 <h3>Course Overview</h3>
                                 <center>
                                 <div class="row">
-                               
-                        <?php foreach ($courses as $course) : ?>
-                            <p><?php echo "joe" ?>
-                            <div class="col-12 col-md-4">
+                                <?php $courses = getStudentCourses($_SESSION['userId']); 
+                                foreach ($courses as $course) : ?>
+                                    <div class="col-12 col-md-4">
                                         <div class="card card-class" style="width: 18rem;">
-                                            <img class="card-img-top" src="../assets/images/grad.jpg" alt="Card image cap">
+                                            <img class="card-img-top" src="../assets/images/grad.jpg" alt="grad image">
                                             <div class="card-body">
-                                              <h3><?php echo $course['idStudent'] ?></h3>
-                                              <a href="#" class="btn btn-success">Browse</a>
+                                                <h3><?php echo $course['className'] ?></h3>
+                                                <a href="#" class="btn btn-success">Browse</a>
                                             </div>
                                         </div>
                                     </div>
-                        <?php endforeach ?>     
+                                <?php endforeach ?>     
                                 </div>
                                 </center>
                             </div>
@@ -208,7 +205,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End PAge Content -->
+            <!-- End Page Content -->
         </div>
         <!-- End Container fluid  -->
     </div>
