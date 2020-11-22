@@ -3,13 +3,13 @@
 
 	if (!isset($_SESSION['username'])) {
 		$_SESSION['msg'] = "You must log in first";
-		header('location: PL\Views\loginForm.php');
+		header('location: loginForm.php');
 	}
 
 	if (isset($_GET['logout'])) {
 		session_destroy();
 		unset($_SESSION['username']);
-		header("location: PL\Views\loginForm.php");
+		header("location: loginForm.php");
 	}
 
 ?>
@@ -39,17 +39,13 @@
 		<?php endif ?>
 
 		<!-- logged in user information -->
-		<?php  if (isset($_SESSION['user']) == "student") : ?>
-            <?php
-            header("location: studentDashboard.html");
-            ?>
-        <?php endif ?>
-        
-        <?php  if (isset($_SESSION['user']) == "admin") : ?>
+		<?php  if (isset($_SESSION['role']) == '3') : ?>
             <?php
             header("location: studentDashboard.php");
             ?>
         <?php endif ?>
+        
+    
 	</div>
 		
 </body>

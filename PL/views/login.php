@@ -10,32 +10,53 @@ $fname = "";
 $lname = "";
 $email    = "";
 $errors = array(); 
-$user = "";
+$role = "";
+$imageProfileURL = "";
+$studentGpa = "";
+$faculty = "";
+$teacherAcademicRank = "";
+
 $_SESSION['success'] = "";
 
-if (isset($_POST['login_user'])) { 
-    $email = $_POST['email'];
-    $_SESSION["email"] = $email;
-    $password = $_POST['password'];
-    $_SESSION["user"] = "admin";
-
+function validateSignIn($email, $password){ 
     if (empty($email)) {
         array_push($errors, "Username is required");
     }
     if (empty($password)) {
         array_push($errors, "Password is required");
     }
-    
+}
+
+if (isset($_POST['login_user'])) { 
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    validateSignIn($email, $password);
+
     if (count($errors) == 0) {
-        //$salt = 's+(_a*';
-        //$password = md5($salt.$password.$salt);
         $row = signIn($email, $password);
         if($row != NULL){
+            $_SESSION['id'] = $row['id'];
+            $id = $_SESSION['id'];
+            $_SESSION['userId'] = $row['userId'];
             $_SESSION['fname'] = $row["firstname"];
             $_SESSION['lname'] = $row["lastname"];
             $_SESSION['password'] = $row["password"];
             $_SESSION['email'] = $row["email"];
-            $_SESSION['id'] = $row["id"];
+            $_SESSION['imageProfileURL'] = $row['profileImageURL'];
+            $_SESSION['role'] = $row['idRole'];
+
+            if($row['role'] == "3"){
+                $_SESSION['studentGpa'] = $row['studentGpa'];
+                $_SESSION['studentStatus'] = getStudentStatus($id);
+                $_SESSION['faculty'] = getFaculty($id);
+            }
+
+            if($row['role'] == "2"){
+                $_SESSION['faculty'] = getFaculty($id);
+                $_SESSION['teacherAcademicRank'] = getTeacherAcademicRank($id);
+            }
+
             $_SESSION['success'] = "You are now logged in";
             header('location: index.php');
         }
