@@ -1,5 +1,3 @@
-<?php include('login.php'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +15,7 @@
 <body>
 
     <div class="login-form">
-        <form method="post" id="contactForm" name="contactForm" autocomplete="off" action="loginForm.php">
+        <form method="post" id="contactForm" name="contactForm" autocomplete="off" action="login.php">
        <center style="color: red"><?php include('errors.php'); ?></center> 
             <h2>Login</h2>
             <div class="form-group">
