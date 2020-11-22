@@ -39,11 +39,13 @@
 		<?php endif ?>
 
 		<!-- logged in user information -->
-		<?php  if (isset($_SESSION['role']) == '3') : ?>
-            <?php
+		<?php  if ($_SESSION['role'] == '3') : 
             header("location: studentDashboard.php");
-            ?>
-        <?php endif ?>
+			endif ?>
+		<?php  if ($_SESSION['role'] == '1') : 
+            header("location: adminDashboard.php");
+        	endif ?>
+		
         
     
 	</div>

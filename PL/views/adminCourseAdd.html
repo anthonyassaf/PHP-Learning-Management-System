@@ -7,13 +7,13 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Manage Courses</title>
+    <title>Add Course</title>
     <!-- Favicon icon -->
-    <link rel="stylesheet" href="../../assets/icons/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../../styles/pages/manageUsers-page.css">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/UAlogo.png">
+    <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../styles/pages/adminDashboard-page.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
-    <link href="../../styles/style.css" rel="stylesheet">
+    <link href="../styles/style.css" rel="stylesheet">
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -21,11 +21,12 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Manage Courses</p>
+            <p class="loader__label">Add Course</p>
         </div>
     </div>
 
     <!-- Main wrapper - style you can find in pages.scss -->
+
     <div id="main-wrapper">
 
         <!-- Topbar header - style you can find in pages.scss -->
@@ -37,11 +38,10 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../../assets/images/UAlogoName.png" alt="homepage" class="dark-logo"/>
+                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo" />
                         </b>
                     </a>
                 </div>
-
                 <!-- End Logo -->
                 <div class="navbar-collapse">
                     <!-- toggle and nav items -->
@@ -60,10 +60,10 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown"> fname lname
+                        <li class="nav-item dropdown"> David Ghoul
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="../../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
+                                    src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
                         </li>
                         <!-- User profile and search -->
                     </ul>
@@ -75,7 +75,7 @@
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
-                <span><img src="../../assets/images/UAlogo.png" alt="elegant admin template">ECOURSES</span>
+                <span><img src="../assets/images/UAlogo.png" alt="elegant admin template">Admin Panel</span>
                 <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
                         class="fa fa-bars"></i></a>
                 <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
@@ -86,11 +86,11 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="adminDashboard.html" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminDashboard.php" aria-expanded="false"><i
                             class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.html" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.php" aria-expanded="false"><i
                             class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses.html" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminManageCourses.php" aria-expanded="false"><i
                             class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
                     </ul>
                 </nav>
@@ -107,7 +107,7 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Page Name</h4>
+                        <h4 class="text-themecolor">Add Course</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
@@ -121,43 +121,70 @@
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div class="row d-flex justify-content-center">
-                                <img src=../../assets/images/addCourse.png class="dashboardActionImage">
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <a href="adminCourseAdd.html" class="btn btn-success">Add course</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <div class="row d-flex justify-content-center">
-                                <img src=../../assets/images/addCourse.png class="dashboardActionImage">
-                        </div>
-                        <div class="row d-flex justify-content-center">
-                            <a href="#" class="btn btn-success">Edit course</a>
-                        </div>
-                    </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="row d-flex justify-content-center">
-                                    <img src=../../assets/images/addTeacher.png class="dashboardActionImage">
+                <div class="card">
+                    <!-- Tab panes -->
+                    <div class="card-body">
+                        <form class="form-horizontal form-material">
+                            <div class="form-group">
+                                <label class="col-md-12">Course name</label>
+                                <div class="col-md-12">
+                                    <input type="text" placeholder=""
+                                        class="form-control form-control-line">
+                                </div>
                             </div>
-                            <div class="row d-flex justify-content-center">
-                                <a href="#" class="btn btn-success">Edit course Teacher</a>
+                            <div class="form-group">
+                                <label class="col-sm-12">Faculty</label>
+                                <div class="col-sm-12">
+                                    <select class="form-control form-control-line">
+                                        <option>Engineering</option>
+                                        <option>Public Health</option>
+                                        <option>Information and Communication</option>
+                                        <option>Sports Science</option>
+                                        <option>Music and Musicology</option>
+                                        <option>Theological Sciences and Pastoral Studies</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="row d-flex justify-content-center">
-                                    <img src=../../assets/images/addTeacher.png class="dashboardActionImage">
+                            <div class="form-group">
+                                <label class="col-md-12">Capacity</label>
+                                <div class="col-md-12">
+                                    <input type="text"
+                                        class="form-control form-control-line">
+                                </div>
                             </div>
-                            <div class="row d-flex justify-content-center">
-                                <a href="#" class="btn btn-success">Edit course students </a>
+                            <div class="form-group">
+                                <label class="col-md-12">Number of sections</label>
+                                <div class="col-md-12">
+                                    <input type="text"
+                                        class="form-control form-control-line">
+                                </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-12">Semester</label>
+                                <div class="col-sm-12">
+                                    <select class="form-control form-control-line">
+                                        <option>Fall</option>
+                                        <option>Spring</option>
+                                        <option>Summer</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
+                            
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <a href="adminCourseSectionAdd.php" class="btn btn-success">Add Course</a>
+                                </div>
+                            </div>
+
+                        </form>
                         
                     </div>
+                </div>
+            </div>
 
                 </div>
-                <!-- End Page Content -->
+                <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
         </div>
@@ -173,21 +200,21 @@
     <!-- End Wrapper -->
 
     <!-- All Jquery -->
-    <script src="../../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="../../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/node_modules/popper/popper.min.js"></script>
+    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="../../scripts/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../scripts/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
-    <script src="../../scripts/waves.js"></script>
+    <script src="../scripts/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="../../scripts/sidebarmenu.js"></script>
+    <script src="../scripts/sidebarmenu.js"></script>
     <!--stickey kit -->
-    <script src="../../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="../../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <script src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
-    <script src="../../scripts/custom.min.js"></script>
+    <script src="../scripts/custom.min.js"></script>
 
 </body>
 
