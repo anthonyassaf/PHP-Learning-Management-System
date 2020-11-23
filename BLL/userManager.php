@@ -39,12 +39,12 @@ function generatedUserId(){
     return rand($generatedMin,$generatedMax);
 
 }
-
+201720101
 function signUp($firstname,$lastname,$userType,$studentFaculty,$studentStatus,$teacherRank){
     $userId=generatedUserId();
     $salt=randomizedSalt();
     $email=$userId.'@ua.edu.lb';
-    $password=mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,0,4);
+    $password=mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,5,4);
     $password= md5($salt.$password.$salt);
     
     if($userType == 'createStudent'){
