@@ -13528,3 +13528,12 @@ File: scss
     text-align: center;
     margin-top: 10px;
     overflow: hidden; } }
+
+    @media only screen and (max-width: 600px) {
+      
+      .navbar-brand .dark-logo{
+        width: 70px;
+        height: 45px;
+        margin-right: 25px;
+      }
+    }

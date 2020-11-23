@@ -40,9 +40,8 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <!-- Logo -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon --><b>
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
                             <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo" />
                         </b>
@@ -54,7 +53,7 @@
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
                         <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light"
-                                href="javascript:void(0)"><i class="ti-menu"></i></a></li>
+                                href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
                         <!-- Search -->
                         <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="fa fa-search"></i></a>
