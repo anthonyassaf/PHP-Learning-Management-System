@@ -76,7 +76,7 @@
                                         <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="studentProfile.php""><i class="fa fa-user" ></i> My Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-book"></i> Grades</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-envelope"></i> Messages</a>
                                 <div class="dropdown-divider"></div>

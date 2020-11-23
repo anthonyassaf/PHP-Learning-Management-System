@@ -139,4 +139,17 @@ function createTeacher($userId,$firstname,$lastname,$teacherRankId,$email,$passw
 
 }
 
+function updateUser($column, $x, $id){
+    GLOBAL $con;
+    $query = "UPDATE `user` SET `$column`= '$x' WHERE `id`='$id'";
+    $results = mysqli_query($con, $query);
+    if($results){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
 ?>

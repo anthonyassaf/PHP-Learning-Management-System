@@ -69,4 +69,10 @@ function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatu
         createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
     }
 }
+
+
+function update($column, $x, $id){
+    return updateUser($column, $x, $id);
+}
+
 ?>
