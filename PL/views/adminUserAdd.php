@@ -1,5 +1,6 @@
 <?php
 include('login.php');
+include('userAdd.php')
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,11 +126,11 @@ include('login.php');
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-
+                <center style="color: red"><?php include('errors.php'); ?></center> 
                 <div class="card">
                     <!-- Tab panes -->
                     <div class="card-body">
-                        <form class="form-horizontal form-material" method=post action="userAdd.php">
+                        <form class="form-horizontal form-material" method = "post" action="adminUserAdd.php">
                             <div class="form-group">
                                 <label class="col-md-12">First Name</label>
                                 <div class="col-md-12">
@@ -148,7 +149,7 @@ include('login.php');
    
                            
                                 <div>
-                                    <input type="radio" id="radioCreateStudent" name="createUser" value="createStudent">
+                                    <input type="radio" id="radioCreateStudent" name="createUser" value="createStudent" checked>
                                     <label for="radioStudent">Student</label>
                                     <div class="reveal-if-active">
                                         <div class="form-group">
@@ -198,7 +199,7 @@ include('login.php');
                             <br><br><br><br><br><br><br>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-success">Add user</button>
+                                    <button type="submit" class="btn btn-success" name="add_user">Add user</button>
                                 </div>
                             </div>
 
