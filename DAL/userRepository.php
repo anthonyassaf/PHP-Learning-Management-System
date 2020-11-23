@@ -139,9 +139,9 @@ function createTeacher($userId,$firstname,$lastname,$teacherRankId,$email,$passw
 
 }
 
-function updateUser($column, $x, $id){
+function updateUser($column, $x, $email){
     GLOBAL $con;
-    $query = "UPDATE `user` SET `$column`= '$x' WHERE `id`='$id'";
+    $query = "UPDATE `user` SET `$column`= '$x' WHERE `email`='$email'";
     $results = mysqli_query($con, $query);
     if($results){
         return true;

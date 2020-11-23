@@ -3,7 +3,7 @@
 include('../../DAL/userRepository.php');
 
 function signIn($email, $pass){
-    $row = selectSalt($email);
+    $row = getSalt($email);
     if(verifyEmail($email)){
         $salt = $row['salt'];
         $password = md5($salt.$pass.$salt);
@@ -12,6 +12,10 @@ function signIn($email, $pass){
     else{
         return NULL;
     }
+}
+
+function getSalt($email){
+    return selectSalt($email);
 }
 
 function verifyEmail($email){
@@ -71,8 +75,16 @@ function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatu
 }
 
 
-function update($column, $x, $id){
-    return updateUser($column, $x, $id);
+function update($column, $x, $email){
+    if($column == "password"){
+        $row = getSalt($email);
+        $salt = $row['salt'];
+        $password = md5($salt.$x.$salt);
+        return updateUser($column, $password, $email);
+    }
+    else {
+        return updateUser($column, $x, $email);
+    }
 }
 
 ?>

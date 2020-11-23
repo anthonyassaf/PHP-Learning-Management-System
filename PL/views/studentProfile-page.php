@@ -173,14 +173,14 @@
                                         <label class="col-md-12">First Name</label>
                                         <div class="col-md-12">
                                             <input type="text" name = "firstname"
-                                                class="form-control form-control-line" value="<?php echo $_SESSION['fname'];?>">
+                                                class="form-control form-control-line" required value="<?php echo $_SESSION['fname'];?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Last Name</label>
                                         <div class="col-md-12">
                                             <input type="text" name = "lastname"
-                                                class="form-control form-control-line" value="<?php echo $_SESSION['lname'];?>">
+                                                class="form-control form-control-line" required value="<?php echo $_SESSION['lname'];?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -196,14 +196,14 @@
                                         <div class="col-md-12">
                                             <input type="email" readonly
                                                 class="form-control form-control-line" name="email"
-                                                id="example-email" value="<?php echo $_SESSION['email'];?>">
+                                                id="example-email" value="<?php echo $_SESSION['email'];?>" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-12">Current Password</label>
                                         <div class="col-md-12">
-                                            <input type="password" value="password" name ="currentPassword" value="<?php echo $_SESSION['password'];?>"
-                                                class="form-control form-control-line">
+                                            <input type="password" name ="currentPassword" 
+                                                class="form-control form-control-line" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
