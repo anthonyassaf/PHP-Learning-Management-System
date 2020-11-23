@@ -190,6 +190,7 @@ include('userAdd.php')
                                                     <option>Assistant Professor</option>
                                                     <option>Associate Professor</option>
                                                     <option>Professor</option>
+                                                    <option>Part-Time Instructor</option>
                                                 </select>
                                             </div>
                                         </div>

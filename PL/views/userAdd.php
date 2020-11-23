@@ -5,8 +5,8 @@ $errors = array();
 
 function validateForm($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank){
    GLOBAL $errors;
-    if (empty($fname)) { array_push($errors, "First Name is required"); }
-    if (empty($lname)) { array_push($errors, "Last Name is required"); }
+    if (empty($firstname)) { array_push($errors, "First Name is required"); }
+    if (empty($lastname)) { array_push($errors, "Last Name is required"); }
     if (!isset($userType)) { array_push($errors, "one of the two options of the user types must be selected"); }
     else {
         if($userType=='createStudent'){
@@ -37,6 +37,7 @@ if (isset($_POST['add_user'])){
 
     if(count($errors) == 0){
         signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank);
+        echo '<script type="text/javascript"> alert("User successfully added")</script>';
     }
     
 }
