@@ -17,7 +17,7 @@ $faculty = "";
 $teacherAcademicRank = "";
 $courses = array();
 $userId = "";
-
+$isLoggedIn;
 $_SESSION['success'] = "";
 
 function validateSignIn($email, $password){ 
@@ -62,6 +62,7 @@ if (isset($_POST['login_user'])) {
             }
 
             $_SESSION['success'] = "You are now logged in";
+            $_SESSION['isLoggedIn'] = true;
             header('location: index.php');
         }
         else {

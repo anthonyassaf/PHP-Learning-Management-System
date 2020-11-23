@@ -4,9 +4,18 @@ include('../../DAL/userRepository.php');
 
 function signIn($email, $pass){
     $row = selectSalt($email);
-    $salt = $row['salt'];
-    $password = md5($salt.$pass.$salt);
-    return selectUser($email, $password);
+    if(verifyEmail($email)){
+        $salt = $row['salt'];
+        $password = md5($salt.$pass.$salt);
+        return selectUser($email, $password);
+    }
+    else{
+        return NULL;
+    }
+}
+
+function verifyEmail($email){
+    return selectEmail($email);
 }
 
 function getStudentStatus($id){
@@ -19,6 +28,10 @@ function getFaculty($id){
 
 function getStudentCourses($id){
     return selectStudentCourses($id);
+}
+
+function getTeacherAcademicRank($id){
+    return selectAcademicRank($id);
 }
 
 function randomizedSalt(){
@@ -36,25 +49,24 @@ function randomizedSalt(){
 function generatedUserId(){
     $generatedMin = idate("Y")*pow(10,5);
     $generatedMax  = (idate("Y")+1)*pow(10,5)-1;
-    return rand($generatedMin,$generatedMax);
-
+    return rand($generatedMin, $generatedMax);
 }
-201720101
-function signUp($firstname,$lastname,$userType,$studentFaculty,$studentStatus,$teacherRank){
-    $userId=generatedUserId();
-    $salt=randomizedSalt();
-    $email=$userId.'@ua.edu.lb';
-    $password=mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,5,4);
-    $password= md5($salt.$password.$salt);
+
+function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank){
+    $userId = generatedUserId();
+    $salt = randomizedSalt();
+    $email = $userId.'@ua.edu.lb';
+    $password = mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,5,4);
+    $password = md5($salt.$password.$salt);
     
     if($userType == 'createStudent'){
-        $studentStatusId=getStudentStatusId($studentStatus);
-        $studentFacultyId=getFacultyId($studentFaculty);
-        return createStudent($userId,$firstname,$lastname,$studentFacultyId,$studentStatusId,$email,$password,$salt);
+        $studentStatusId = getStudentStatusId($studentStatus);
+        $studentFacultyId = getFacultyId($studentFaculty);
+        return createStudent($userId, $firstname, $lastname, $studentFacultyId, $studentStatusId, $email, $password, $salt);
     }
     else if($userType == 'createTeacher'){
         $teacherRankId = getTeacherAcademicRankId($teacherRank);
-        createTeacher($userId,$firstname,$lastname,$teacherRankId,$email,$password,$salt);
+        createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
     }
 }
 ?>

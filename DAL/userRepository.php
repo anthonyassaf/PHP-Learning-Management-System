@@ -16,7 +16,7 @@ function selectUser($email, $password){
 
 function selectSalt($email){
     GLOBAL $con;
-    $query = "SELECT salt FROM `user` WHERE `email`='$email'";
+    $query = "SELECT `salt` FROM `user` WHERE `email`='$email'";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) == 1) {
         return mysqli_fetch_assoc($results);;
@@ -24,9 +24,19 @@ function selectSalt($email){
     return NULL;
 }
 
+function selectEmail($email){
+    GLOBAL $con;
+    $query = "SELECT `email` FROM `user` WHERE `email`='$email'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return true;
+    }
+    return false;
+} 
+
 function selectStudentStatus($id){
     GLOBAL $con;
-    $query = "SELECT studentStatus FROM `studentStatus` WHERE `id`='$id'";
+    $query = "SELECT `studentStatus` FROM `studentStatus` WHERE `id`='$id'";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) == 1) {
         return mysqli_fetch_assoc($results);;
@@ -44,9 +54,19 @@ function selectFaculty($id){
     return NULL;
 }
 
+function selectAcademicRank($id){
+    GLOBAL $con;
+    $query = "SELECT `academicrank` FROM `academicrank` WHERE `id`='$id'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);;
+    }
+    return NULL;
+}
+
 function selectStudentCourses($studentId){
     GLOBAL $con;
-    $query = "SELECT `class`.* FROM `class`, `studentenrolment` WHERE `studentenrolment`.idStudent= '201720145' AND `studentenrolment`.idClass= `class`.id;";
+    $query = "SELECT `class`.* FROM `class`, `studentenrolment` WHERE `studentenrolment`.idStudent= '$studentId' AND `studentenrolment`.idClass= `class`.id;";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) > 0 ) {
         $courses = array();
@@ -55,7 +75,7 @@ function selectStudentCourses($studentId){
         }
         return $courses;
     }
-    return NULL ;
+    return array();
 }
 
 function getStudentStatusId($statusName){
@@ -93,8 +113,8 @@ function getTeacherAcademicRankId($rankName){
 
 function createStudent($userId,$firstname,$lastname,$studentFacultyId,$studentStatusId,$email,$password,$salt){
     GLOBAL $con;
-    $firstname =mysqli_real_escape_string($con,$firstname);
-    $lastname =mysqli_real_escape_string($con,$lastname);
+    $firstname = mysqli_real_escape_string($con,$firstname);
+    $lastname = mysqli_real_escape_string($con,$lastname);
     $studentFacultyId = implode($studentFacultyId);
     $studentStatusId = implode($studentStatusId);
     $query = "INSERT INTO `user`(`userID`,`idRole`,`idStudentStatus`,`idFaculty`,`email`,`password`,`firstname`,`lastname`,`profileImageURL`,`salt`) VALUES('$userId','3','$studentStatusId','$studentFacultyId','$email','$password','$firstname','$lastname','1','$salt');";

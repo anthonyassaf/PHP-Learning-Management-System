@@ -1,4 +1,9 @@
-<?php include('login.php'); ?>
+<?php include_once('login.php'); 
+	if (($_SESSION['isLoggedIn']) != true) {
+		$_SESSION['msg'] = "You must log in first";
+		header('location: loginForm.php');
+	}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
