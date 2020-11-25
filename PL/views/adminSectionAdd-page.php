@@ -138,10 +138,10 @@ if (($_SESSION['isLoggedIn']) != true) {
                             for ($i = 1; $i <= $_SESSION['courseSection']; $i++) : ?>
                                 <div class="row">
                                     <div class ="col-6 col-md-3">
-                                        <label style="margin-top:10px" name='classSection[<?php echo $i ?>][0]'>Section No. <?php echo($i)?></label>
+                                        <label style="margin-top:10px">Section No. <?php echo($i)?></label>
                                     </div>
                                     <div class ="col-6 col-md-3">
-                                        <input list='test' name='classTeacher[<?php echo $i ?>][1]'>
+                                        <input list='test' name='classTeacher[]'>
                                       <datalist id='test'>
                                         <?php 
                                                 $teachers=getTeachers();
@@ -151,7 +151,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         </datalist>
                                     </div>
                                     <div class="col-6 col-md-3">
-                                        <select class="form-control form-control-line" name='classDay[<?php echo $i ?>][2]'>
+                                        <select class="form-control form-control-line" name='classDay[]'>
                                             <option>Monday</option>
                                             <option>Tuesday </option>
                                             <option>Wednesday</option>
@@ -162,7 +162,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         </select>
                                     </div>
                                     <div class="col-6 col-md-3">
-                                        <select class="form-control form-control-line" name='classSession[<?php echo $i ?>][3]'>
+                                        <select class="form-control form-control-line" name='classSession[]'>
                                             <option>S1-S2</option>
                                             <option>S3-S4 </option>
                                             <option>S5-S6</option>

@@ -14,6 +14,15 @@ function selectUser($email, $password){
     return NULL;
 }
 
+function selectId($idUser){
+    GLOBAL $con;
+    $query = "SELECT `id` FROM `user` WHERE `userID`= '$idUser' AND `isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);;
+    }
+    return NULL;
+}
 function selectSalt($email){
     GLOBAL $con;
     $query = "SELECT `salt` FROM `user` WHERE `email`='$email'";
