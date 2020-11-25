@@ -64,12 +64,12 @@ function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatu
     $password = md5($salt.$password.$salt);
     
     if($userType == 'createStudent'){
-        $studentStatusId = getStudentStatusId($studentStatus);
-        $studentFacultyId = getFacultyId($studentFaculty);
+        $studentStatusId = selectStudentStatusId($studentStatus);
+        $studentFacultyId = selectFacultyId($studentFaculty);
         return createStudent($userId, $firstname, $lastname, $studentFacultyId, $studentStatusId, $email, $password, $salt);
     }
     else if($userType == 'createTeacher'){
-        $teacherRankId = getTeacherAcademicRankId($teacherRank);
+        $teacherRankId = selectTeacherAcademicRankId($teacherRank);
         createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
     }
 }
@@ -87,4 +87,11 @@ function update($column, $x, $email){
     }
 }
 
+function getTeachers(){
+    return selectTeachers();
+}
+
+function getTeacher($id){
+    return selectTeacher($id);
+}
 ?>

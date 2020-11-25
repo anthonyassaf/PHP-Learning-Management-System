@@ -1,5 +1,9 @@
 <?php
-include_once('login.php')
+include_once('login.php');
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,7 +135,7 @@ include_once('login.php')
                                 <img src=../assets/images/addTeacher.png class="dashboardActionImage">
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <a href="adminUserAdd.php" class="btn btn-success">Add User</a>
+                            <a href="adminUserAdd-page.php" class="btn btn-success">Add User</a>
                         </div>
                     </div>
 
@@ -140,7 +144,7 @@ include_once('login.php')
                             <img src=../assets/images/addCourse.png class="dashboardActionImage">
                         </div>
                         <div class="row d-flex justify-content-center">
-                            <a href="adminCourseAdd.php" class="btn btn-success">Add course</a>
+                            <a href="adminCourseAdd-page.php" class="btn btn-success">Add course</a>
                         </div>
                     </div>
 

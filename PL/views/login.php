@@ -47,13 +47,14 @@ if (isset($_POST['login_user'])) {
             $_SESSION['email'] = $row["email"];
             $_SESSION['imageProfileURL'] = $row['profileImageURL'];
             $_SESSION['role'] = $row['idRole'];
-
-            $_SESSION['courses'] = getStudentCourses($_SESSION['userId']);
+            $_SESSION['success'] = "You are now logged in";
+            $_SESSION['isLoggedIn'] = true;
 
             if($row['role'] == "3"){
                 $_SESSION['studentGpa'] = $row['studentGpa'];
                 $_SESSION['studentStatus'] = getStudentStatus($id);
                 $_SESSION['faculty'] = getFaculty($id);
+                $_SESSION['courses'] = getStudentCourses($_SESSION['userId']);
             }
 
             if($row['role'] == "2"){
@@ -61,8 +62,7 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['teacherAcademicRank'] = getTeacherAcademicRank($id);
             }
 
-            $_SESSION['success'] = "You are now logged in";
-            $_SESSION['isLoggedIn'] = true;
+         
             header('location: index.php');
         }
         else {

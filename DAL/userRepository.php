@@ -1,6 +1,6 @@
 <?php
 
-include('connection.php');
+include_once('connection.php');
 
 $con = openCon();
 
@@ -78,7 +78,7 @@ function selectStudentCourses($studentId){
     return array();
 }
 
-function getStudentStatusId($statusName){
+function selectStudentStatusId($statusName){
     GLOBAL $con;
     $statusName =mysqli_real_escape_string($con,$statusName);
     $query = "SELECT id FROM `studentStatus` WHERE `studentStatus`='$statusName'";
@@ -89,7 +89,7 @@ function getStudentStatusId($statusName){
     return NULL;
 }
 
-function getFacultyId($facultyName){
+function selectFacultyId($facultyName){
     GLOBAL $con;
     $facultyName =mysqli_real_escape_string($con,$facultyName);
     $query = "SELECT id FROM `faculty` WHERE `facultyName`='$facultyName'";
@@ -100,7 +100,7 @@ function getFacultyId($facultyName){
     return NULL;
 }
 
-function getTeacherAcademicRankId($rankName){
+function selectTeacherAcademicRankId($rankName){
     GLOBAL $con;
     $rankName =mysqli_real_escape_string($con,$rankName);
     $query = "SELECT id FROM `AcademicRank` WHERE `academicRank`='$rankName'";
@@ -139,9 +139,9 @@ function createTeacher($userId,$firstname,$lastname,$teacherRankId,$email,$passw
 
 }
 
-function updateUser($column, $x, $email){
+function updateUser($column, $value, $email){
     GLOBAL $con;
-    $query = "UPDATE `user` SET `$column`= '$x' WHERE `email`='$email'";
+    $query = "UPDATE `user` SET `$column`= '$value' WHERE `email`='$email'";
     $results = mysqli_query($con, $query);
     if($results){
         return true;
@@ -151,5 +151,28 @@ function updateUser($column, $x, $email){
     }
 }
 
+function selectTeachers(){
+    GLOBAL $con;
+    $query = "SELECT * FROM `user` WHERE `idRole`='2' AND `isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $teachers = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($teachers, $row);
+        }
+        return $teachers;
+    }
+    return array();
+}
+
+function selectTeacher($id){
+    GLOBAL $con;
+    $query = "SELECT * FROM `user` WHERE `idRole`='2' AND `userID`= '$id' AND `isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);;
+    }
+    return NULL;
+}
 
 ?>

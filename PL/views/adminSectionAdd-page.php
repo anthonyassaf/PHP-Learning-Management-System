@@ -1,3 +1,12 @@
+<?php
+include_once('login.php');
+include_once('adminSectionAdd.php');
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,109 +132,52 @@
                 <div class="card">
                     <center>
                     <div class = card-body>
-                        <div class="row">
-                            <div class ="col-3">
-                                <label>Section No. 1</label>
-                            </div>
-                            <div class ="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>David</option>
-                                    <option>Anthony </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>Monday</option>
-                                    <option>Tuesday </option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday </option>
-                                    <option>Friday </option>
-                                    <option>Saturday </option>
-                                    <option>Sunday </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>S1-S2</option>
-                                    <option>S3-S4 </option>
-                                    <option>S5-S6</option>
-                                    <option>S6-S7 </option>
-                                </select>
-                            </div>
-                        </div>
-                        <br><br>
-                        <div class="row">
-                            <div class ="col-3">
-                                <label>Section No. 1</label>
-                            </div>
-                            <div class ="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>David</option>
-                                    <option>Anthony </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>Monday</option>
-                                    <option>Tuesday </option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday </option>
-                                    <option>Friday </option>
-                                    <option>Saturday </option>
-                                    <option>Sunday </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>S1-S2</option>
-                                    <option>S3-S4 </option>
-                                    <option>S5-S6</option>
-                                    <option>S6-S7 </option>
-                                </select>
-                            </div>
-                        </div>
-                        <br><br>
-                        <div class="row">
-                            <div class ="col-3">
-                                <label>Section No. 1</label>
-                            </div>
-                            <div class ="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>David</option>
-                                    <option>Anthony </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>Monday</option>
-                                    <option>Tuesday </option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday </option>
-                                    <option>Friday </option>
-                                    <option>Saturday </option>
-                                    <option>Sunday </option>
-                                </select>
-                            </div>
-                            <div class="col-3">
-                                <select class="form-control form-control-line">
-                                    <option>S1-S2</option>
-                                    <option>S3-S4 </option>
-                                    <option>S5-S6</option>
-                                    <option>S6-S7 </option>
-                                </select>
-                            </div>
-                            <br><br><br><br><br>
-                            <div class="form-group" style="margin-left: 44%;">
-                                <div class="col-sm-12">
-                                    <button class="btn btn-success">Add</button>
+                    <center style="color: red"><?php include('errors.php'); ?></center> 
+                        <form method="POST" action="adminSectionAdd-page.php">
+                            <?php
+                            for ($i = 1; $i <= $_SESSION['courseSection']; $i++) : ?>
+                                <div class="row">
+                                    <div class ="col-6 col-md-3">
+                                        <label style="margin-top:10px" name='classSection[<?php echo $i ?>][0]'>Section No. <?php echo($i)?></label>
+                                    </div>
+                                    <div class ="col-6 col-md-3">
+                                        <input list='test' name='classTeacher[<?php echo $i ?>][1]'>
+                                      <datalist id='test'>
+                                        <?php 
+                                                $teachers=getTeachers();
+                                                foreach($teachers as $teacher) : ?>
+                                            <option value="<?php echo $teacher['userID']?>,<?php echo $teacher['firstname'] ?>,<?php echo $teacher['lastname']?>"></option>
+                                            <?php endforeach ?>
+                                        </datalist>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <select class="form-control form-control-line" name='classDay[<?php echo $i ?>][2]'>
+                                            <option>Monday</option>
+                                            <option>Tuesday </option>
+                                            <option>Wednesday</option>
+                                            <option>Thursday </option>
+                                            <option>Friday </option>
+                                            <option>Saturday </option>
+                                            <option>Sunday </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <select class="form-control form-control-line" name='classSession[<?php echo $i ?>][3]'>
+                                            <option>S1-S2</option>
+                                            <option>S3-S4 </option>
+                                            <option>S5-S6</option>
+                                            <option>S6-S7 </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                                <hr>
+                                <br><br>
+                            <?php endfor ?>   
+                            <button type="submit" name="add_section" class='btn btn-success'>Add Sections</button>
+                        </form>  
                     </div>
-                </center>
+                    </center>
                 </div>
-
-                
                 <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->

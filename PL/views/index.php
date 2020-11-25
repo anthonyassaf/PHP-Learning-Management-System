@@ -1,7 +1,7 @@
 <?php 
 	include_once('login.php');
 	
-	if (($_SESSION['isloggedIn']) != true) {
+	if (($_SESSION['isLoggedIn']) != true) {
 		$_SESSION['msg'] = "You must log in first";
 		header('location: loginForm.php');
 	}
@@ -23,7 +23,7 @@
             header("location: studentDashboard.php");
 			endif ?>
 		<?php  if ($_SESSION['role'] == '1') : 
-            header("location: adminDashboard.php");
+            header("location: adminDashboard-page.php");
 			endif ?>
 		<?php  if ($_SESSION['role'] == '2') : 
             header("location: teacherDashboard.php");
