@@ -75,7 +75,7 @@ function selectAcademicRank($id){
 
 function selectStudentCourses($studentId){
     GLOBAL $con;
-    $query = "SELECT `class`.* FROM `class`, `studentenrolment` WHERE `studentenrolment`.idStudent= '$studentId' AND `studentenrolment`.idClass= `class`.id;";
+    $query = "SELECT `class`.* FROM `class`, `studentenrollment` WHERE `studentenrollment`.idStudent= '$studentId' AND `studentenrollment`.idClass= `class`.id;";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) > 0 ) {
         $courses = array();
@@ -189,6 +189,32 @@ function selectUserRow($userId){
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) == 1) {
         return mysqli_fetch_assoc($results);;
+    }
+    return NULL;
+}
+
+function selectFacultyStudents($idFaculty){
+    GLOBAL $con;
+    $idFaculty=implode($idFaculty);
+    $query = "SELECT * FROM `user` WHERE `idFaculty`= '$idFaculty' AND `idRole`=3 AND `isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) >0) {
+        $students = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($students, $row);
+        }
+        return $students;
+    }
+    return array();
+}
+
+function selectStudent($userId){
+    GLOBAL $con;
+    $userId=mysqli_real_escape_string($con,$userId);
+    $query = "SELECT `id` FROM `user` WHERE `userID`= '$userId' AND `idRole`=3 AND`isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);
     }
     return NULL;
 }

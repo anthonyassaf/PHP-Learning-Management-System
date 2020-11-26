@@ -88,9 +88,12 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="adminDashboard.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.php" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses.php" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i
+                            class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.php" aria-expanded="false"><i
+                            class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i
+                            class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -126,6 +129,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="card-body">
 
                             <label>Teacher Name : </label> <?php echo $_GET['teacherName'] ?>
+                            <a style="float:right; margin-bottom:10px" href="adminCourseStudentsAdd-page.php?classNumber=<?php echo $_GET['classNumber'];?>" class="btn btn-success">Add Students</a>
                             <br>
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
                                 <table id="myTable">

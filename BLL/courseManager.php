@@ -1,7 +1,7 @@
 <?php
 include('../../DAL/courseRepository.php');
-
 include_once('userManager.php');
+
 $generatedClassNumber;
 
 function createCourse($idTeacher,$semester,$faculty,$className,$maxCapacity,$classDay,$session,$sectionNum){
@@ -28,5 +28,17 @@ function getCourses(){
 
 function getClassStudents($classNumber){
     return selectClassStudents($classNumber);
+}
+
+function getCourseNumberFaculty($classNumber){
+    return selectCourseNumberFaculty($classNumber);
+}
+
+function assignStudentToCourse($classId,$studentId){
+    return insertStudentToCourse($classId,$studentId);
+}
+
+function getClassIdFromNumber($classNumber){
+    return selectClassIdFromNumber($classNumber);
 }
 ?>

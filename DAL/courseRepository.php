@@ -41,7 +41,7 @@ function selectCourses(){
 
 function selectClassStudents($classNumber){
     GLOBAL $con;
-    $query = "SELECT user.* FROM user, studentenrolment, class WHERE user.userID = studentenrolment.idStudent AND studentenrolment.idClass = class.id AND class.classNumber = '$classNumber'";
+    $query = "SELECT user.* FROM user, studentenrollment, class WHERE user.id = studentenrollment.idStudent AND studentenrollment.idClass = class.id AND class.classNumber = '$classNumber'";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) > 0 ) {
         $students = array();
@@ -53,4 +53,39 @@ function selectClassStudents($classNumber){
     return array();
 }
 
+function selectCourseNumberFaculty($classNumber){
+    GLOBAL $con;
+    $classNumber = mysqli_real_escape_string($con,$classNumber);
+    $query = "SELECT idFaculty FROM `class` where classNumber='$classNumber'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) ==1) {
+       return mysqli_fetch_assoc($results);
+    }
+    return null;
+}
+
+function selectClassIdFromNumber($classNumber){
+    GLOBAL $con;
+    $classNumber = mysqli_real_escape_string($con,$classNumber);
+    $query = "SELECT `id` FROM `class` where classNumber='$classNumber'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) ==1) {
+       return mysqli_fetch_assoc($results);
+    }
+    return null;
+}
+
+function insertStudentToCourse($classId,$studentId){
+    GLOBAL $con;
+    $classId= implode($classId);
+    $classId = mysqli_real_escape_string($con,$classId);
+    $studentId = implode($studentId);
+    $studentId = mysqli_real_escape_string($con,$studentId);
+    $query = "INSERT INTO `studentenrollment`(`idClass`,`idStudent`) values($classId,$studentId);";
+    $results = mysqli_query($con,$query);
+    if ($results == 1) :
+        return true;
+    endif;
+    return false;
+}
 ?>
