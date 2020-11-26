@@ -24,4 +24,33 @@ function selectCourseSemester($semester){
     }
     return Null; 
 }
+
+function selectCourses(){
+    GLOBAL $con;
+    $query = "SELECT * FROM `class`";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $courses = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($courses, $row);
+        }
+        return $courses;
+    }
+    return array();
+}
+
+function selectClassStudents($classNumber){
+    GLOBAL $con;
+    $query = "SELECT user.* FROM user, studentenrolment, class WHERE user.userID = studentenrolment.idStudent AND studentenrolment.idClass = class.id AND class.classNumber = '$classNumber'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $students = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($students, $row);
+        }
+        return $students;
+    }
+    return array();
+}
+
 ?>

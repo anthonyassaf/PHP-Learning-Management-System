@@ -176,7 +176,7 @@ function selectTeachers(){
 
 function selectTeacher($id){
     GLOBAL $con;
-    $query = "SELECT * FROM `user` WHERE `idRole`='2' AND `userID`= '$id' AND `isDeleted`=0";
+    $query = "SELECT * FROM `user` WHERE `idRole`='2' AND `id`= '$id' AND `isDeleted`=0";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) == 1) {
         return mysqli_fetch_assoc($results);;

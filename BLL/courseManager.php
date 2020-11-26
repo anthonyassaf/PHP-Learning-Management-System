@@ -1,7 +1,9 @@
 <?php
-include_once('D:\Xampp\htdocs\LEAD Team Project\DAL\courseRepository.php');
+include('../../DAL/courseRepository.php');
+
 include_once('userManager.php');
 $generatedClassNumber;
+
 function createCourse($idTeacher,$semester,$faculty,$className,$maxCapacity,$classDay,$session,$sectionNum){
     $idFaculty = selectFacultyId($faculty);
     $idSemester = selectCourseSemester($semester);
@@ -18,5 +20,13 @@ function generateClassNumber($className,$sectionNum){
     else $generatedClassNumber = mb_substr($generatedClassNumber,0,-1).$sectionNum;
 
     return $generatedClassNumber;
+}
+
+function getCourses(){
+    return selectCourses();
+}
+
+function getClassStudents($classNumber){
+    return selectClassStudents($classNumber);
 }
 ?>

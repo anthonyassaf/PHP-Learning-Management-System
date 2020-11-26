@@ -133,14 +133,29 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <center>
                     <div class = card-body>
                     <center style="color: red"><?php include('errors.php'); ?></center> 
+                    <div class="row">
+                                    <div class ="col-6 col-md-1">
+                                        <label style="margin-top:10px">Section No.</label>
+                                    </div>
+                                    <div class ="col-6 col-md-5">
+                                    <label style="margin-top:10px">Teacher</label>       
+                                </div>
+                                <div class ="col-6 col-md-3">
+                                    <label style="margin-top:10px">Day</label>       
+                                </div>
+                                <div class ="col-6 col-md-3">
+                                    <label style="margin-top:10px">Time</label>       
+                                </div>
+                                </div>
+                                <hr><br>
                         <form method="POST" action="adminSectionAdd-page.php">
                             <?php
                             for ($i = 1; $i <= $_SESSION['courseSection']; $i++) : ?>
                                 <div class="row">
-                                    <div class ="col-6 col-md-3">
-                                        <label style="margin-top:10px">Section No. <?php echo($i)?></label>
+                                    <div class ="col-6 col-md-1">
+                                        <label style="margin-top:10px">No. <?php echo($i)?></label>
                                     </div>
-                                    <div class ="col-6 col-md-3">
+                                    <div class ="col-6 col-md-5">
                                         <input list='test' name='classTeacher[]'>
                                       <datalist id='test'>
                                         <?php 
@@ -170,6 +185,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         </select>
                                     </div>
                                 </div>
+                                <br>
                                 <hr>
                                 <br><br>
                             <?php endfor ?>   
