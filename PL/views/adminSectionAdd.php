@@ -48,7 +48,7 @@ function validateForm($teacher,$day,$session){
     $lastnameTeacher = implode(array_slice($teacher,-1,1));
      if (!isset($teacher)) { array_push($errors, "Teacher required"); }
      else {
-         if($firstnameTeacher != getTeacher($idTeacher)['firstname'] || $lastnameTeacher !=getTeacher($idTeacher)['lastname']){
+         if($firstnameTeacher != getUserRow($idTeacher)['firstname'] || $lastnameTeacher !=getUserRow($idTeacher)['lastname']){
             array_push($errors, "Undefined Teacher Selection");
          }
      }

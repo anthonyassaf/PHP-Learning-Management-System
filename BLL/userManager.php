@@ -94,4 +94,8 @@ function getTeachers(){
 function getTeacher($id){
     return selectTeacher($id);
 }
+
+function getUserRow($userId){
+    return selectUserRow($userId);
+}
 ?>
