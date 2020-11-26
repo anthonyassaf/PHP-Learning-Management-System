@@ -183,5 +183,14 @@ function selectTeacher($id){
     }
     return NULL;
 }
+function selectUserRow($userId){
+    GLOBAL $con;
+    $query = "SELECT * FROM `user` WHERE `userID`= '$userId' AND `isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);;
+    }
+    return NULL;
+}
 
 ?>
