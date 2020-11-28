@@ -190,14 +190,14 @@
                                 <h3>Course Overview</h3>
                                 <center>
                                 <div class="row">
-                                <?php $courses = getStudentCourses($_SESSION['userId']); 
+                                <?php $courses = getStudentCourses($_SESSION['id']); 
                                 foreach ($courses as $course) : ?>
                                     <div class="col-12 col-md-4">
                                         <div class="card card-class" style="width: 18rem;">
                                             <img class="card-img-top" src="../assets/images/grad.jpg" alt="grad image">
                                             <div class="card-body">
                                                 <h3><?php echo $course['className'] ?></h3>
-                                                <a href="#" class="btn btn-success">Browse</a>
+                                                <a href="studentCourseMaterial-page.php?classId=<?php echo $course['id']?>" class="btn btn-success">Browse</a>
                                             </div>
                                         </div>
                                     </div>
