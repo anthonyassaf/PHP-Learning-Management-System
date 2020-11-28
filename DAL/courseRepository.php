@@ -17,7 +17,7 @@ function insertCourse($idTeacher,$idSemester,$idFaculty,$className,$classNumber,
 function selectCourseSemester($semester){
     GLOBAL $con;
     $semester = mysqli_real_escape_string($con,$semester);
-    $query = "Select id From `semester` where semester='$semester'";
+    $query = "SELECT id FROM `semester` WHERE semester='$semester'";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) == 1) {
         return mysqli_fetch_assoc($results);
@@ -88,4 +88,15 @@ function insertStudentToCourse($classId,$studentId){
     endif;
     return false;
 }
+
+function insertClassMaterial($classId, $materialUrl, $title){
+    GLOBAL $con;
+    $query = "INSERT INTO `classmaterial`(`idClass`, `idType`, `materialUrl`, `description`) VALUES ('$classId', 1, '$materialUrl', '$title')";
+    $results = mysqli_query($con, $query);
+    if ($results == 1) {
+        return true;
+    }
+    return false; 
+}
+
 ?>

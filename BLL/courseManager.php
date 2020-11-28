@@ -41,4 +41,8 @@ function assignStudentToCourse($classId,$studentId){
 function getClassIdFromNumber($classNumber){
     return selectClassIdFromNumber($classNumber);
 }
+
+function addClassMaterial($classId, $materialUrl, $title){
+    return insertClassMaterial($classId, $materialUrl, $title);
+}
 ?>
