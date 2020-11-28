@@ -1,6 +1,7 @@
 <?php
 
 include('../../DAL/userRepository.php');
+
 function signIn($email, $pass){
     $row = getSalt($email);
     if(verifyEmail($email)){
@@ -29,8 +30,8 @@ function getFaculty($id){
     return selectFaculty($id);
 }
 
-function getStudentCourses($id){
-    return selectStudentCourses($id);
+function getStudentCourses($userId){
+    return selectStudentCourses($userId);
 }
 
 function getTeacherAcademicRank($id){
@@ -110,5 +111,9 @@ function checkName($userId){
 
 function getStudent($userId){
     return selectStudent($userId);
+}
+
+function getTeacherCourses($userId){
+    return selectTeacherCourses($userId);
 }
 ?>

@@ -23,6 +23,7 @@ function selectId($idUser){
     }
     return NULL;
 }
+
 function selectSalt($email){
     GLOBAL $con;
     $query = "SELECT `salt` FROM `user` WHERE `email`='$email'";
@@ -183,6 +184,7 @@ function selectTeacher($id){
     }
     return NULL;
 }
+
 function selectUserRow($userId){
     GLOBAL $con;
     $query = "SELECT * FROM `user` WHERE `userID`= '$userId' AND `isDeleted`=0";
@@ -217,6 +219,21 @@ function selectStudent($userId){
         return mysqli_fetch_assoc($results);
     }
     return NULL;
+}
+
+function selectTeacherCourses($teacherId){
+    GLOBAL $con;
+    $id = implode(selectId($teacherId));
+    $query = "SELECT * FROM `class` WHERE `idTeacher`= '$id'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $courses = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($courses, $row);
+        }
+        return $courses;
+    }
+    return array();
 }
 
 ?>

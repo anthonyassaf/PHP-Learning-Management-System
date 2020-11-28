@@ -20,13 +20,13 @@
 
 		<!-- logged in user information -->
 		<?php  if ($_SESSION['role'] == '3') : 
-            header("location: studentDashboard.php");
+            header("location: studentDashboard-page.php");
 			endif ?>
 		<?php  if ($_SESSION['role'] == '1') : 
             header("location: adminDashboard-page.php");
 			endif ?>
 		<?php  if ($_SESSION['role'] == '2') : 
-            header("location: teacherDashboard.php");
+            header("location: teacherDashboard-page.php");
         	endif ?>
 		
 	</div>
