@@ -1,5 +1,5 @@
 <?php
-include('../../DAL/courseRepository.php');
+include_once('../../DAL/courseRepository.php');
 include_once('userManager.php');
 
 $generatedClassNumber;
@@ -48,5 +48,9 @@ function addClassMaterial($classId, $materialUrl, $title){
 
 function getClassMaterial($classId){
     return selectClassMaterial($classId);
+}
+
+function removeClassMaterial($id){
+    return deleteClassMaterial($id);
 }
 ?>

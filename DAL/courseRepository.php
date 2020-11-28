@@ -113,4 +113,14 @@ function selectClassMaterial($classId){
     return array();
 }
 
+function deleteClassMaterial($id){
+    GLOBAL $con;
+    $query = "DELETE FROM `classmaterial` WHERE `id`='$id'";
+    $results = mysqli_query($con, $query);
+    if ($results == 1) {
+        return true;
+    }
+    return false; 
+}
+
 ?>

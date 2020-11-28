@@ -23,4 +23,9 @@ if (isset($_POST["add_material"]))
 
 }
 
+if(isset($_POST["delete"])){
+    $materialId = $_POST['materialId'];
+    removeClassMaterial($materialId);
+}
+
 ?>

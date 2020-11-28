@@ -162,10 +162,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <input type="text" name="title">
                                     <br><br>
                                     <input type="File" name="file">
-<<<<<<< HEAD
                                     <input type="hidden" name="cid" value="<?php echo $_GET['classId'];?>">
-=======
->>>>>>> e27478dcef338833dac7689bffbec61da03f413f
                                     <input type="submit" class="btn btn-success" name="add_material">
                                 </form>
                             </div>
@@ -184,8 +181,12 @@ if (($_SESSION['isLoggedIn']) != true) {
                         foreach ($materials as $material) : ?>
                             <div class="card">
                                 <div class="card-body">
+                                    <form action="teacherCourseMaterial-page.php" method="post">
                                     <h5><b><?php echo $material['description'] ?></b></h5>
                                     <a href="<?php echo "../assets/material/".$material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
+                                    <input type="hidden" value="<?php echo $material['id']?>" name="materialId">
+                                    <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
+                                    </form>
                                 </div>
                             </div>
                             <hr>
