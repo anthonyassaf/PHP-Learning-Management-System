@@ -162,7 +162,10 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <input type="text" name="title">
                                     <br><br>
                                     <input type="File" name="file">
+<<<<<<< HEAD
                                     <input type="hidden" name="cid" value="<?php echo $_GET['classId'];?>">
+=======
+>>>>>>> e27478dcef338833dac7689bffbec61da03f413f
                                     <input type="submit" class="btn btn-success" name="add_material">
                                 </form>
                             </div>
