@@ -45,4 +45,8 @@ function getClassIdFromNumber($classNumber){
 function addClassMaterial($classId, $materialUrl, $title){
     return insertClassMaterial($classId, $materialUrl, $title);
 }
+
+function getClassMaterial($classId){
+    return selectClassMaterial($classId);
+}
 ?>

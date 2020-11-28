@@ -99,4 +99,18 @@ function insertClassMaterial($classId, $materialUrl, $title){
     return false; 
 }
 
+function selectClassMaterial($classId){
+    GLOBAL $con;
+    $query = "SELECT * FROM `classmaterial` WHERE `idClass` = '$classId'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $material = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($material, $row);
+        }
+        return $material;
+    }
+    return array();
+}
+
 ?>

@@ -1,4 +1,4 @@
-<?php include_once('teacherCourseMaterial.php'); 
+<?php include_once('teacherCourseMaterial.php');
 include_once('login.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -138,86 +138,58 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <div class="row">
-                    <div class="col-12">
-                        <center>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 col-md-3">
-                                            <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
-                                        </div>
-                                        <div class="col-12-col-md-9">
-                                            <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
-                                            <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                                            <button class="btn btn-primary">Message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </center>
-                    </div>
+
+
+                <div style="float:right;">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                        Add new material
+                    </button>
                 </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <center>
-                                    <ul class="feeds p-b-20">
-                                        <li>
-                                            <div class="bg-info"><i class="fa fa-home fa-lg"></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-success"><i class="fa fa-calendar fa-lg"></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-warning"><i class="fa fa-book fa-lg"></i></div>
-                                        </li>
-                                    </ul>
-                                </center>
-                                <hr>
-                                <h3>Course Overview</h3>
-                                <center>
-                                    <div class="row">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                                    Add new material
-                                                </button>
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Add Material</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form method="post" enctype="multipart/form-data" action="teacherCourseMaterial-page.php">
-                                                                    <label>Title</label>
-                                                                    <input type="text" name="title">
-                                                                    <br><br>
-                                                                    <input type="File" name="file" class="btn">
-                                                                    <input type="submit" name="add_material">
-                                                                </form>
-                                                            </div>
-                                                           
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </center>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Add Material</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <div class="modal-body">
+                                <form method="post" enctype="multipart/form-data" action="teacherCourseMaterial-page.php">
+                                    <label>Title</label>
+                                    <input type="text" name="title">
+                                    <br><br>
+                                    <input type="File" name="file">
+                                    <input type="hidden" name="cid" value="<?php echo $_GET['classId'];?>">
+                                    <input type="submit" class="btn btn-success" name="add_material">
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
+                <br><Br><br>
+
+                <div class="row">
+                    <div class="col-12">
+                        <?php
+                        $classId = $_GET['classId'];
+                        $materials = getClassMaterial($classId);
+                        foreach ($materials as $material) : ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5><b><?php echo $material['description'] ?></b></h5>
+                                    <a href="<?php echo "../assets/material/".$material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
+                                </div>
+                            </div>
+                            <hr>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+
             </div>
             <!-- End Page Content -->
         </div>
@@ -252,4 +224,5 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/custom.min.js"></script>
 
 </body>
+
 </html>

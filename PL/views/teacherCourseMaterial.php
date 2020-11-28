@@ -14,17 +14,13 @@ if (isset($_POST["add_material"]))
     $tname = $_FILES["file"]["tmp_name"];
    
     #upload directory path
-    $uploads_dir = '../assets/materials';
+    $uploads_dir = '../assets/material';
     #TO move the uploaded file to specific location
     move_uploaded_file($tname, $uploads_dir.'/'.$materialUrl);
  
-    $classId = 1;
-    if(addClassMaterial($classId, $materialUrl, $title)){
-        echo "Added";
-    }
-    else{
-        echo "Not added";
-    }
+    $cid=  $_POST['cid'];
+    addClassMaterial($cid, $materialUrl, $title);
+
 }
 
 ?>
