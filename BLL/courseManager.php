@@ -53,4 +53,8 @@ function getClassMaterial($classId){
 function removeClassMaterial($id){
     return deleteClassMaterial($id);
 }
+
+function getTeacherClassStudents($id){ //same as getClassStudents
+    return selectTeacherClassStudents($id);
+}
 ?>

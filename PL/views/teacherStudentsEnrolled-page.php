@@ -15,12 +15,13 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Course Material</title>
+    <title>Students Enrolled</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
+    <link href="../styles/pages/adminManageCourses-page.css" rel="stylesheet">
     <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
 </head>
 
@@ -101,7 +102,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Course Material</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Students Enrolled</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
@@ -124,13 +125,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Course Material</h4>
+                        <h4 class="text-themecolor">Students Enrolled</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Course Material</li>
+                                <li class="breadcrumb-item active">Students Enrolled</li>
                             </ol>
                         </div>
                     </div>
@@ -138,68 +139,31 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <div style="float:left;">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary">
-                        <a href="teacherStudentsEnrolled-page.php?classId=<?php echo $_GET['classId'];?>" style="color :white;">View Students Enrolled</a>
-                    </button>
-                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
+                                <table id="myTable">
+                                    <tr class="header">
+                                        <th style="width:25%;">Student ID</th>
+                                        <th style="width:25%">Student Name</th>
+                                    </tr>
+                                    <?php
+                                    $classId = $_GET['classId'];
+                                    $students = getTeacherClassStudents($classId);
+                                    foreach ($students as $student) : ?>
+                                        <tr>
+                                            <td><?php echo $student['userID'] ?></td>
+                                            <td><?php echo $student['firstname']." ".$student['lastname'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
 
-                <div style="float:right;">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-                        Add New Material
-                    </button>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Add Material</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                </table>
                             </div>
-                            <div class="modal-body">
-                                <form method="post" enctype="multipart/form-data" action="teacherCourseMaterial-page.php">
-                                    <label>Title</label>
-                                    <input type="text" name="title">
-                                    <br><br>
-                                    <input type="File" name="file">
-                                    <input type="hidden" name="cid" value="<?php echo $_GET['classId'];?>">
-                                    <input type="submit" class="btn btn-success" name="add_material">
-                                </form>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-
-                <br><Br><br>
-
-                <div class="row">
-                    <div class="col-12">
-                        <?php
-                        $classId = $_GET['classId'];
-                        $materials = getClassMaterial($classId);
-                        foreach ($materials as $material) : ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="teacherCourseMaterial-page.php" method="post">
-                                    <h5><b><?php echo $material['description'] ?></b></h5>
-                                    <a href="<?php echo "../assets/material/".$material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
-                                    <input type="hidden" value="<?php echo $material['id']?>" name="materialId">
-                                    <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
-                                    </form>
-                                </div>
-                            </div>
-                            <hr>
-                        <?php endforeach ?>
-                    </div>
-                </div>
-
-            </div>
             <!-- End Page Content -->
         </div>
         <!-- End Container fluid  -->
@@ -231,7 +195,29 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
 
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

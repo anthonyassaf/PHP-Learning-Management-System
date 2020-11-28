@@ -39,9 +39,9 @@ function selectCourses(){
     return array();
 }
 
-function selectClassStudents($classNumber){
+function selectClassStudents($classId){
     GLOBAL $con;
-    $query = "SELECT user.* FROM user, studentenrollment, class WHERE user.id = studentenrollment.idStudent AND studentenrollment.idClass = class.id AND class.classNumber = '$classNumber'";
+    $query = "SELECT user.* FROM user, studentenrollment, class WHERE user.id = studentenrollment.idStudent AND studentenrollment.idClass = class.id AND class.classNumber = '$classId'";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) > 0 ) {
         $students = array();
@@ -121,6 +121,20 @@ function deleteClassMaterial($id){
         return true;
     }
     return false; 
+}
+
+function selectTeacherClassStudents($id){
+    GLOBAL $con;
+    $query = "SELECT user.* FROM user, studentenrollment, class WHERE user.id = studentenrollment.idStudent AND studentenrollment.idClass = class.id AND class.id = '$id'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $students = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($students, $row);
+        }
+        return $students;
+    }
+    return array();
 }
 
 ?>
