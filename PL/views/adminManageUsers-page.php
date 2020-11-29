@@ -1,3 +1,10 @@
+<?php
+include_once('login.php');
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,11 +14,12 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Admin Dashboard</title>
+    <title>Manage Users</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../styles/pages/adminDashboard-page.css">
+    <link rel="stylesheet" href="../styles/pages/manageUsers-page.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
+    <link rel="stylesheet" href="../styles/pages/adminDashboard-page.css">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
 </head>
@@ -21,12 +29,11 @@
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Admin Panel</p>
+            <p class="loader__label">Manage Users</p>
         </div>
     </div>
 
     <!-- Main wrapper - style you can find in pages.scss -->
-
     <div id="main-wrapper">
 
         <!-- Topbar header - style you can find in pages.scss -->
@@ -38,10 +45,11 @@
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo" />
+                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo"/>
                         </b>
                     </a>
                 </div>
+
                 <!-- End Logo -->
                 <div class="navbar-collapse">
                     <!-- toggle and nav items -->
@@ -60,10 +68,19 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown"> David Ghoul
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
+                        <li class="nav-item dropdown">  <?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <span class="with-arrow"><span class="bg-primary"></span></span>
+                                <div class="d-flex no-block align-items-center p-15  m-b-10">
+                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
+                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                            </div>
                         </li>
                         <!-- User profile and search -->
                     </ul>
@@ -86,11 +103,11 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="adminDashboard.php" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i
                             class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.php" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminManageUsers-page.php" aria-expanded="false"><i
                             class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses.php" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i
                             class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
                     </ul>
                 </nav>
@@ -107,13 +124,13 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Admin Dashboard</h4>
+                        <h4 class="text-themecolor">Manage Users</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Page Name</li>
+                            <li class="breadcrumb-item" ><a href="adminDashboard-page.php">Admin Dashboard</a></li>
+                                <li class="breadcrumb-item active">Manage Users</li>
                             </ol>
                         </div>
                     </div>
@@ -121,10 +138,19 @@
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <div class="row">
-                    
+                <center>
+                <div class="row" id="actionTable">
+                    <div class="col-12">
+                        <div class="row d-flex justify-content-center">
+                                <img src=../assets/images/addTeacher.png class="dashboardActionImage">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <a href="adminUserAdd-page.php" class="btn btn-success">Add User</a>
+                        </div>
+                    </div>
                 </div>
-                <!-- End PAge Content -->
+                </center>
+                <!-- End Page Content -->
             </div>
             <!-- End Container fluid  -->
         </div>

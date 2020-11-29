@@ -15,7 +15,7 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Admin Dashboard</title>
+    <title>Manage Courses</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../styles/pages/adminDashboard-page.css">
@@ -30,7 +30,7 @@ if (($_SESSION['isLoggedIn']) != true) {
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Admin Panel</p>
+            <p class="loader__label">Manage Courses</p>
         </div>
     </div>
 
@@ -66,8 +66,19 @@ if (($_SESSION['isLoggedIn']) != true) {
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown"> David Ghoul
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
+                        <li class="nav-item dropdown">  <?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <span class="with-arrow"><span class="bg-primary"></span></span>
+                                <div class="d-flex no-block align-items-center p-15  m-b-10">
+                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
+                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
+                                    </div>
+                                </div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                            </div>
                         </li>
                         <!-- User profile and search -->
                     </ul>
@@ -90,7 +101,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <ul id="sidebarnav">
                         <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i
                             class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers.php" aria-expanded="false"><i
+                        <li> <a class="waves-effect waves-dark" href="adminManageUsers-page.php" aria-expanded="false"><i
                             class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i
                             class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
@@ -114,7 +125,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item" ><a href="adminDashboard-page.php">Admin Dashboard</a></li>
                                 <li class="breadcrumb-item active">Manage Courses</li>
                             </ol>
                         </div>
