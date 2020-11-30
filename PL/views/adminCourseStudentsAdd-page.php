@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('../../BLL/courseManager.php');
 include_once('login.php');
 include('adminCourseStudentsAdd.php');
@@ -32,7 +32,7 @@ if (($_SESSION['isLoggedIn']) != true) {
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Add Students</p>
+            <p class="loader__label">Admin Dashboard</p>
         </div>
     </div>
 
@@ -58,27 +58,24 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
-                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light"
-                                href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
+                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
                         <!-- Search -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
                             <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                    class="srh-btn"><i class="fa fa-times"></i></a>
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="fa fa-times"></i></a>
                             </form>
                         </li>
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown">  <?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?>
+                        <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
                                     <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
-                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><?php echo $_SESSION['email']; ?></p>
                                     </div>
                                 </div>
@@ -96,22 +93,17 @@ if (($_SESSION['isLoggedIn']) != true) {
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
                 <span><img src="../assets/images/UAlogo.png" alt="elegant admin template">Admin Panel</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
-                        class="fa fa-bars"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
-                        class="fa fa-bars ti-close"></i></a>
+                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="fa fa-bars fa-lg"></i></a>
+                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="fa fa-bars fa-close"></i></a>
             </div>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i
-                            class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers-page.php" aria-expanded="false"><i
-                            class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i
-                            class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminUserAdd-page.php" aria-expanded="false"><i class="fa fa-plus"></i><span class="hide-menu">Add Users</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Manage courses</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -125,7 +117,7 @@ if (($_SESSION['isLoggedIn']) != true) {
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Bread crumb and right sidebar toggle -->
-                <center style="color: red"><?php include('errors.php'); ?></center> 
+                <center style="color: red"><?php include('errors.php'); ?></center>
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h4 class="text-themecolor">Add Student</h4>
@@ -133,10 +125,10 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                            <li class="breadcrumb-item" ><a href="adminDashboard-page.php">Admin Dashboard</a></li>
-                            <li class="breadcrumb-item" ><a href="adminManageCourses-page.php">Manage Courses</a></li>
-                            <li class="breadcrumb-item" ><a href="adminManageCourse-page.php">Manage Course</a></li>
-                            <li class="breadcrumb-item active" >Add Students</li>
+                                <li class="breadcrumb-item"><a href="adminDashboard-page.php">Admin Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="adminManageCourses-page.php">Manage Courses</a></li>
+                                <li class="breadcrumb-item"><a href="adminManageCourse-page.php">Manage Course</a></li>
+                                <li class="breadcrumb-item active">Add Students</li>
                             </ol>
                         </div>
                     </div>
@@ -148,30 +140,32 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                            <br>
-                            <form method="POST" action="adminCourseStudentsAdd-page.php?classNumber=<?php echo $_GET['classNumber'];?>">
-                                <button style="float:right;margin-bottom:10px" type="submit" name="assign_Students" class ="btn btn-success">Add selected students</button>
-                                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
-                                <table id="myTable">
-                                    <tr class="header">
-                                        <th style="width:20%">Select</th>
-                                        <th style="width:40%;">Student ID</th>
-                                        <th style="width:40%">Student Name</th>
-                                    </tr>
-                                    <?php 
-                                    $classNumber = $_GET['classNumber'];
-                                    $students = getCourseFacultyStudents($classNumber);
-                                    $i=0;
-                                    foreach ($students as $student) :
-                                        $i=$i+1; ?>
-                                        <tr>
-                                            <td><div class="custom-control custom-checkbox"><input type="hidden" name="addStudentCheckbox[]" value="0"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value" id="tableDefaultCheck<?php echo $i ?>" class="custom-control-input"><label class="custom-control-label" for="tableDefaultCheck<?php echo $i ?>"></label></div></td>
-                                            <td> <input readonly hidden type="text" name="userId[]" class="form-control form-control-line"  value='<?php echo $student['userID'] ?>'><?php echo $student['userID'] ?></td>
-                                            <td> <input readonly hidden type="text" name="userName[]" class="form-control form-control-line" value='<?php echo $student['firstname'].",".$student['lastname']?>'><?php echo $student['firstname']." ".$student['lastname']?></td>
+                                <br>
+                                <form method="POST" action="adminCourseStudentsAdd-page.php?classNumber=<?php echo $_GET['classNumber']; ?>">
+                                    <button style="float:right;margin-bottom:10px" type="submit" name="assign_Students" class="btn btn-success">Add selected students</button>
+                                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
+                                    <table id="myTable">
+                                        <tr class="header">
+                                            <th style="width:20%">Select</th>
+                                            <th style="width:40%;">Student ID</th>
+                                            <th style="width:40%">Student Name</th>
+                                        </tr>
+                                        <?php
+                                        $classNumber = $_GET['classNumber'];
+                                        $students = getCourseFacultyStudents($classNumber);
+                                        $i = 0;
+                                        foreach ($students as $student) :
+                                            $i = $i + 1; ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="custom-control custom-checkbox"><input type="hidden" name="addStudentCheckbox[]" value="0"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value" id="tableDefaultCheck<?php echo $i ?>" class="custom-control-input"><label class="custom-control-label" for="tableDefaultCheck<?php echo $i ?>"></label></div>
+                                                </td>
+                                                <td> <input readonly hidden type="text" name="userId[]" class="form-control form-control-line" value='<?php echo $student['userID'] ?>'><?php echo $student['userID'] ?></td>
+                                                <td> <input readonly hidden type="text" name="userName[]" class="form-control form-control-line" value='<?php echo $student['firstname'] . "," . $student['lastname'] ?>'><?php echo $student['firstname'] . " " . $student['lastname'] ?></td>
                                             </tr>
-                                    <?php endforeach  ?>
-                                </table>
-                                    </form>
+                                        <?php endforeach  ?>
+                                    </table>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -71,4 +71,3 @@ function validateForm($teacher,$day,$session){
     $teacherFields = explode(',',$teacher);
     return $teacherFields;
 }
-?>

@@ -43,4 +43,3 @@ function validateForm($courseName, $faculty, $capacity, $sectionCount, $semester
         }
      }
  }
-?>
