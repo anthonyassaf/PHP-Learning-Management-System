@@ -1,6 +1,6 @@
 <?php
+session_start();
 include_once('../../BLL/courseManager.php');
-include_once('login.php');
 
 $errors = array();
 if (($_SESSION['isLoggedIn']) != true) {

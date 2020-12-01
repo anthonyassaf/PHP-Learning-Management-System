@@ -1,4 +1,9 @@
-<?php include_once('login.php'); ?>
+<?php 
+include_once('login.php'); 
+if (($_SESSION['isLoggedIn']) == true) {
+    header('location: index.php');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">

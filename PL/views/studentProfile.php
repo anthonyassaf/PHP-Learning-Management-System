@@ -1,9 +1,6 @@
 <?php
-
-    
+session_start();
 include_once('../../BLL/userManager.php');
-
-include_once('login.php');
 
 $errors = array(); 
 

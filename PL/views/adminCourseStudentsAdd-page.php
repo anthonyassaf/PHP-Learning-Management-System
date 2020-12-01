@@ -1,6 +1,6 @@
 <?php 
+session_start();
 include_once('../../BLL/courseManager.php');
-include_once('login.php');
 include('adminCourseStudentsAdd.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";

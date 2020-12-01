@@ -1,5 +1,5 @@
 <?php
-include_once('login.php');
+session_start();
 include_once('adminCourseAdd.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";

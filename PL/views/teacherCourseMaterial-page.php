@@ -1,5 +1,6 @@
-<?php include_once('teacherCourseMaterial.php');
-include_once('login.php');
+<?php 
+include_once('teacherCourseMaterial.php');
+session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');

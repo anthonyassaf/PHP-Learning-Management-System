@@ -1,4 +1,6 @@
-<?php include_once('studentProfile.php');
+<?php 
+session_start();
+include_once('studentProfile.php');
 	if (($_SESSION['isLoggedIn']) != true) {
 		$_SESSION['msg'] = "You must log in first";
 		header('location: loginForm.php');
