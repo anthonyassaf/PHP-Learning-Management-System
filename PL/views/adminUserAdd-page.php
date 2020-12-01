@@ -30,11 +30,12 @@ if (($_SESSION['isLoggedIn']) != true) {
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Add User</p>
+            <p class="loader__label">Admin Dashboard</p>
         </div>
     </div>
 
     <!-- Main wrapper - style you can find in pages.scss -->
+
     <div id="main-wrapper">
 
         <!-- Topbar header - style you can find in pages.scss -->
@@ -46,41 +47,37 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo"/>
+                            <img src="../assets/images/UAlogoName.png" alt="homepage" class="dark-logo" />
                         </b>
                     </a>
                 </div>
-
                 <!-- End Logo -->
                 <div class="navbar-collapse">
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
-                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light"
-                                href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
+                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
                         <!-- Search -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
                             <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                    class="srh-btn"><i class="fa fa-times"></i></a>
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="fa fa-times"></i></a>
                             </form>
                         </li>
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown">  <?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?>
+                        <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
                                     <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
-                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><?php echo $_SESSION['email']; ?></p>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="logout.php" ><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             </div>
                         </li>
                         <!-- User profile and search -->
@@ -94,22 +91,17 @@ if (($_SESSION['isLoggedIn']) != true) {
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
                 <span><img src="../assets/images/UAlogo.png" alt="elegant admin template">Admin Panel</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
-                        class="fa fa-bars"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
-                        class="fa fa-bars ti-close"></i></a>
+                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="fa fa-bars fa-lg"></i></a>
+                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="fa fa-bars fa-close"></i></a>
             </div>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i
-                            class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers-page.php" aria-expanded="false"><i
-                            class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i
-                            class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminUserAdd-page.php" aria-expanded="false"><i class="fa fa-plus"></i><span class="hide-menu">Add Users</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Manage courses</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -130,9 +122,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                            <li class="breadcrumb-item" ><a href="adminDashboard-page.php">Admin Dashboard</a></li>
-                            <li class="breadcrumb-item" ><a href="adminManageUsers-page.php">Manage Users</a></li>
-                            <li class="breadcrumb-item active">Add User</li>
+                                <li class="breadcrumb-item"><a href="adminDashboard-page.php">Admin Dashboard</a></li>
+                                <li class="breadcrumb-item active">Add User</li>
                             </ol>
                         </div>
                     </div>
@@ -140,77 +131,74 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <center style="color: red"><?php include('errors.php'); ?></center> 
+                <center style="color: red"><?php include('errors.php'); ?></center>
                 <div class="card">
                     <!-- Tab panes -->
                     <div class="card-body">
-                        <form class="form-horizontal form-material" method = "post" action="adminUserAdd.php">
+                        <form class="form-horizontal form-material" method="post" action="adminUserAdd.php">
                             <div class="form-group">
                                 <label class="col-md-12">First Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="firstname"
-                                        class="form-control form-control-line">
+                                    <input type="text" name="firstname" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="example-email" class="col-md-12">Last Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="lastname"
-                                        class="form-control form-control-line" name="example-email"
-                                        id="example-email">
+                                    <input type="text" name="lastname" class="form-control form-control-line" name="example-email" id="example-email">
                                 </div>
                             </div>
-   
-                           
-                                <div>
-                                    <input type="radio" id="radioCreateStudent" name="createUser" value="createStudent" checked>
-                                    <label for="radioStudent">Student</label>
-                                    <div class="reveal-if-active">
+
+
+                            <div>
+                                <input type="radio" id="radioCreateStudent" name="createUser" value="createStudent" checked>
+                                <label for="radioStudent">Student</label>
+                                <div class="reveal-if-active">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Faculty</label>
+                                        <div class="col-sm-12">
+                                            <select name="studentFaculty" class="form-control form-control-line">
+                                                <option></option>
+                                                <option>Engineering</option>
+                                                <option>Public Health</option>
+                                                <option>Sports Science</option>
+                                                <option>Business</option>
+                                            </select>
+                                        </div>
+                                    </div> <br><br>
+                                    <div class="form-group">
                                         <div class="form-group">
-                                            <label class="col-sm-12">Faculty</label>
+                                            <label class="col-sm-12">Status</label>
                                             <div class="col-sm-12">
-                                                <select name="studentFaculty" class="form-control form-control-line">
+                                                <select name="studentStatus" class="form-control form-control-line">
                                                     <option></option>
-                                                    <option>Engineering</option>
-                                                    <option>Public Health</option>
-                                                    <option>Sports Science</option>
-                                                    <option>Business</option>
-                                                </select>
-                                            </div>
-                                        </div>                                       <br><br>
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label class="col-sm-12">Status</label>
-                                                <div class="col-sm-12">
-                                                    <select name="studentStatus" class="form-control form-control-line">
-                                                        <option></option>
-                                                        <option>Graduate</option>
-                                                        <option>Undergraduate</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>                                        <br><br>
-                                    </div>
-                                </div>
-                                <div>
-                                    <input type="radio" id="radioCreateTeacher" name="createUser" value="createTeacher">
-                                    <label for="radioTeacher">Teacher</label>
-                                    <div class="reveal-if-active">
-                                        <div class="form-group">
-                                            <label class="col-sm-12">Academic Rank</label>
-                                            <div class="col-sm-12">
-                                                <select name="teacherRank" class="form-control form-control-line">
-                                                    <option></option>
-                                                    <option>Assistant Professor</option>
-                                                    <option>Associate Professor</option>
-                                                    <option>Professor</option>
-                                                    <option>Part-Time Instructor</option>
+                                                    <option>Graduate</option>
+                                                    <option>Undergraduate</option>
                                                 </select>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div> <br><br>
                                 </div>
-                            
+                            </div>
+                            <div>
+                                <input type="radio" id="radioCreateTeacher" name="createUser" value="createTeacher">
+                                <label for="radioTeacher">Teacher</label>
+                                <div class="reveal-if-active">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Academic Rank</label>
+                                        <div class="col-sm-12">
+                                            <select name="teacherRank" class="form-control form-control-line">
+                                                <option></option>
+                                                <option>Assistant Professor</option>
+                                                <option>Associate Professor</option>
+                                                <option>Professor</option>
+                                                <option>Part-Time Instructor</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <br><br><br><br><br><br><br>
                             <div class="form-group">
                                 <div class="col-sm-12">
@@ -219,23 +207,23 @@ if (($_SESSION['isLoggedIn']) != true) {
                             </div>
 
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
 
-                </div>
-                <!-- End Page Content -->
-            </div>
-            <!-- End Container fluid  -->
         </div>
-        <!-- End Page wrapper  -->
+        <!-- End Page Content -->
+    </div>
+    <!-- End Container fluid  -->
+    </div>
+    <!-- End Page wrapper  -->
 
-        <!-- footer -->
-        <footer class="footer">
-            © 2020 LEAD team</a>
-        </footer>
-        <!-- End footer -->
+    <!-- footer -->
+    <footer class="footer">
+        © 2020 LEAD team</a>
+    </footer>
+    <!-- End footer -->
 
     </div>
     <!-- End Wrapper -->

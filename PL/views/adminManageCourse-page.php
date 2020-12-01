@@ -32,7 +32,7 @@ if (($_SESSION['isLoggedIn']) != true) {
     <div class="preloader">
         <div class="loader">
             <div class="loader__figure"></div>
-            <p class="loader__label">Manage Course</p>
+            <p class="loader__label">Admin Dashboard</p>
         </div>
     </div>
 
@@ -68,14 +68,14 @@ if (($_SESSION['isLoggedIn']) != true) {
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown">  <?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?>
+                        <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
                                     <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
-                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><?php echo $_SESSION['email']; ?></p>
                                     </div>
                                 </div>
@@ -93,20 +93,17 @@ if (($_SESSION['isLoggedIn']) != true) {
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
                 <span><img src="../assets/images/UAlogo.png" alt="elegant admin template">Admin Panel</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="fa fa-bars"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="fa fa-bars ti-close"></i></a>
+                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="fa fa-bars fa-lg"></i></a>
+                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="fa fa-bars fa-close"></i></a>
             </div>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i
-                            class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageUsers-page.php" aria-expanded="false"><i
-                            class="fa fa-home"></i><span class="hide-menu">Manage Users</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i
-                            class="fa fa-calendar"></i><span class="hide-menu">Manage courses</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminUserAdd-page.php" aria-expanded="false"><i class="fa fa-plus"></i><span class="hide-menu">Add Users</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="adminManageCourses-page.php" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Manage courses</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -127,9 +124,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                            <li class="breadcrumb-item" ><a href="adminDashboard-page.php">Admin Dashboard</a></li>
-                            <li class="breadcrumb-item" ><a href="adminManageCourses-page.php">Manage Courses</a></li>
-                            <li class="breadcrumb-item active">Manage Course</li>
+                                <li class="breadcrumb-item"><a href="adminDashboard-page.php">Admin Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="adminManageCourses-page.php">Manage Courses</a></li>
+                                <li class="breadcrumb-item active">Manage Course</li>
                             </ol>
                         </div>
                     </div>
@@ -142,9 +139,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <div class="card">
                             <div class="card-body">
 
-                            <label>Teacher Name : </label> <?php echo $_GET['teacherName'] ?>
-                            <a style="float:right; margin-bottom:10px" href="adminCourseStudentsAdd-page.php?classNumber=<?php echo $_GET['classNumber'];?>" class="btn btn-success">Add Students</a>
-                            <br>
+                                <label>Teacher Name : </label> <?php echo $_GET['teacherName'] ?>
+                                <a style="float:right; margin-bottom:10px" href="adminCourseStudentsAdd-page.php?classNumber=<?php echo $_GET['classNumber']; ?>" class="btn btn-success">Add Students</a>
+                                <br>
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for student names..">
                                 <table id="myTable">
                                     <tr class="header">
@@ -157,7 +154,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     foreach ($students as $student) : ?>
                                         <tr>
                                             <td><?php echo $student['userID'] ?></td>
-                                            <td><?php echo $student['firstname']." ".$student['lastname'] ?></td>
+                                            <td><?php echo $student['firstname'] . " " . $student['lastname'] ?></td>
                                         </tr>
                                     <?php endforeach ?>
 

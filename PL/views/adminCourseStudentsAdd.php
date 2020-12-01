@@ -42,4 +42,3 @@ function validation($studentId,$studentName){
         array_push($errors, "Undefined Student of ID: '$studentId' selected"); 
     }
 }
-?>
