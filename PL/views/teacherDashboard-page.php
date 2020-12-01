@@ -1,4 +1,5 @@
 <?php 
+include_once('../../BLL/userManager.php');
 session_start();
 	if (($_SESSION['isLoggedIn']) != true) {
 		$_SESSION['msg'] = "You must log in first";
