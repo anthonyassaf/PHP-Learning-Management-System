@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('teacherCourseMaterial.php');
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
@@ -140,9 +140,8 @@ if (($_SESSION['isLoggedIn']) != true) {
 
                 <!-- Start Page Content -->
                 <div style="float:left;">
-                    <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary">
-                        <a href="teacherStudentsEnrolled-page.php?classId=<?php echo $_GET['classId'];?>" style="color :white;">View Students Enrolled</a>
+                        <a href="teacherStudentsEnrolled-page.php?classId=<?php echo $_GET['classId']; ?>" style="color :white;">View Students Enrolled</a>
                     </button>
                 </div>
 
@@ -168,8 +167,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <input type="text" name="title">
                                     <br><br>
                                     <input type="File" name="file">
-                                    <input type="hidden" name="cid" value="<?php echo $_GET['classId'];?>">
-                                    <input type="submit" class="btn btn-success" name="add_material">
+                                    <input type="hidden" name="cid" value="<?php echo $_GET['classId']; ?>">
+                                    <br><br>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-success" name="add_material">
+                                    </div>
                                 </form>
                             </div>
 
@@ -188,16 +190,23 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="card">
                                 <div class="card-body">
                                     <form action="teacherCourseMaterial-page.php" method="post">
-                                    <h5><b><?php echo $material['description'] ?></b></h5>
-                                    <a href="<?php echo "../assets/material/".$material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
-                                    <input type="hidden" value="<?php echo $material['id']?>" name="materialId">
-                                    <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
+                                        <h5><b><?php echo $material['description'] ?></b></h5>
+                                        <a href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
+                                        <input type="hidden" value="<?php echo $material['id'] ?>" name="materialId">
+                                        <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
                                     </form>
                                 </div>
                             </div>
                             <hr>
                         <?php endforeach ?>
                     </div>
+                </div>
+
+                
+                <div>
+                    <button type="button" class="btn btn-warning">
+                        <a href="teacherCreateQuiz-page.php" style="color :white;">Create Exam</a>
+                    </button>
                 </div>
 
             </div>

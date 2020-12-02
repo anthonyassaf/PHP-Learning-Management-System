@@ -1,5 +1,5 @@
-<?php 
-include_once('login.php'); 
+<?php
+include_once('login.php');
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ include_once('login.php');
 
     <div class="login-form">
         <form method="post" autocomplete="off" action="loginForm.php">
-       <center style="color: red"><?php include('errors.php'); ?></center> 
+            <center style="color: red"><?php include('errors.php'); ?></center>
             <h2>Login</h2>
             <div class="form-group">
                 <input type="email" class="form-control" name="email" placeholder="Email*" required>
@@ -32,7 +32,9 @@ include_once('login.php');
             <div class="form-group">
                 <input type="submit" id="btn" class="btn btn-success btn-lg btn-block" value="Login" name="login_user">
             </div>
-            <center><p>If you do not know your login information or having problems signing in, please contact IT HelpDesk at 05 927 000 ext. 1398 or by email at ithelpdesk@ua.edu.lb</p></center>
+            <center>
+                <p>If you do not know your login information or having problems signing in, please contact IT HelpDesk at 05 927 000 ext. 1398 or by email at ithelpdesk@ua.edu.lb</p>
+            </center>
         </form>
     </div>
 

@@ -18,11 +18,10 @@ if (($_SESSION['isLoggedIn']) != true) {
     <title>Add User</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="../styles/pages/adminUserAdd-page.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
-    <script src="../scripts/adminStudentAdd-page.js"></script>
+    <link rel="stylesheet" href="../styles/pages/adminUserAdd-page.css">
 </head>
 
 <body class="skin-default-dark fixed-layout">

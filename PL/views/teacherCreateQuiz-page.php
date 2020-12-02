@@ -1,5 +1,4 @@
 <?php
-include_once('../../BLL/userManager.php');
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -16,13 +15,14 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Dashboard</title>
+    <title>Create quiz</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
-    <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/pages/adminUserAdd-page.css">
+
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -125,13 +125,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Dashboard</h4>
+                        <h4 class="text-themecolor">Create Quiz</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">Create Quiz</li>
                             </ol>
                         </div>
                     </div>
@@ -139,24 +139,14 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
+
                 <div class="row">
                     <div class="col-12">
-                        <center>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 col-md-3">
-                                            <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
-                                        </div>
-                                        <div class="col-12-col-md-9">
-                                            <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
-                                            <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
-                                            <button class="btn btn-primary">Message</button>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <b><i>Database Programming</i></b>
                             </div>
-                        </center>
+                        </div>
                     </div>
                 </div>
 
@@ -164,53 +154,68 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <center>
-                                    <ul class="feeds p-b-20">
-                                        <li>
-                                            <div class="bg-info"><i class="fa fa-home fa-lg"></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-success"><i class="fa fa-calendar fa-lg"></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-warning"><i class="fa fa-book fa-lg"></i></div>
-                                        </li>
-                                    </ul>
-                                </center>
-                                <hr>
-                                <h3>Course Overview</h3>
-                                <center>
-                                    <div class="row">
-                                        <?php $courses = getStudentCourses($_SESSION['id']);
-                                        foreach ($courses as $course) : ?>
-                                            <div class="col-12 col-md-4">
-                                                <div class="card card-class" style="width: 18rem;">
-                                                    <img class="card-img-top" src="../assets/images/grad.jpg" alt="grad image">
-                                                    <div class="card-body">
-                                                        <h3><?php echo $course['className'] ?></h3>
-                                                        <a href="studentCourseMaterial-page.php?classId=<?php echo $course['id'] ?>" class="btn btn-success">Browse</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach ?>
+                                <form method="get" action="teacherQuizQA-page.php">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Quiz Title</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="quizTitle" class="form-control" placeholder="Title">
+                                        </div>
                                     </div>
-                                </center>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Date</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" name="date" class="form-control" placeholder="Date">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Start Time</label>
+                                        <div class="col-sm-10">
+                                            <input type="time" name="duration" class="form-control" placeholder="Duration">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">End Time</label>
+                                        <div class="col-sm-10">
+                                            <input type="time" name="duration" class="form-control" placeholder="Duration">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Weight</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="weight" class="form-control" placeholder="Weight">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Number of Questions</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="numbOfQues" class="form-control" placeholder="Number of Questions">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <button type="submit"class="btn btn-primary">Create</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- End Page Content -->
-        </div>
-        <!-- End Container fluid  -->
-    </div>
-    <!-- End Page wrapper  -->
 
-    <!-- footer -->
-    <footer class="footer">
-        © 2020 LEAD team</a>
-    </footer>
-    <!-- End footer -->
+     
+
+                <!-- End Page Content -->
+
+            </div>
+            <!-- End Container fluid  -->
+        </div>
+        <!-- End Page wrapper  -->
+
+        <!-- footer -->
+        <footer class="footer">
+            © 2020 LEAD team</a>
+        </footer>
+        <!-- End footer -->
 
     </div>
     <!-- End Wrapper -->
@@ -226,11 +231,12 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/waves.js"></script>
     <!--Menu sidebar -->
     <script src="../scripts/sidebarmenu.js"></script>
-    <!--stickey kit -->
+    <!-- stickey kit -->
     <script src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
+    <script src="../scripts/adminStudentAdd-page.js"></script>
 
 </body>
 

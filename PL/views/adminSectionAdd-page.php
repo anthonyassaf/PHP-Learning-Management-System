@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once('adminSectionAdd.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
