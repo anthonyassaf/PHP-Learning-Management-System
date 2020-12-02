@@ -158,42 +158,42 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Quiz Title</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="quizTitle" class="form-control" placeholder="Title">
+                                            <input type="text" name="quizTitle" class="form-control" placeholder="Title" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Date</label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="date" class="form-control" placeholder="Date">
+                                            <input type="date" name="date" class="form-control" placeholder="Date" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Start Time</label>
                                         <div class="col-sm-10">
-                                            <input type="time" name="duration" class="form-control" placeholder="Duration">
+                                            <input type="time" name="startTime" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">End Time</label>
                                         <div class="col-sm-10">
-                                            <input type="time" name="duration" class="form-control" placeholder="Duration">
+                                            <input type="time" name="endTime" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Weight</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="weight" class="form-control" placeholder="Weight">
+                                            <input type="number" name="weight" class="form-control" placeholder="Weight" required> 
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Number of Questions</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="numbOfQues" class="form-control" placeholder="Number of Questions">
+                                            <input type="number" name="numbOfQues" class="form-control" placeholder="Number of Questions" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-10">
-                                            <button type="submit"class="btn btn-primary">Create</button>
+                                            <button type="submit" name="create_quiz" class="btn btn-primary">Create</button>
                                         </div>
                                     </div>
                                 </form>
