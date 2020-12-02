@@ -205,7 +205,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 
                 <div>
                     <button type="button" class="btn btn-warning">
-                        <a href="teacherCreateQuiz-page.php" style="color :white;">Create Exam</a>
+                        <a href="teacherCreateQuiz-page.php?classId=<?php echo $_GET['classId']?>" style="color :white;">Create Exam</a>
                     </button>
                 </div>
 

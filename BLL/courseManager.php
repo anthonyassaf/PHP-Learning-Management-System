@@ -34,8 +34,8 @@ function getCourseNumberFaculty($classNumber){
     return selectCourseNumberFaculty($classNumber);
 }
 
-function assignStudentToCourse($classId,$studentId){
-    return insertStudentToCourse($classId,$studentId);
+function assignStudentToCourse($classId, $studentId){
+    return insertStudentToCourse($classId, $studentId);
 }
 
 function getClassIdFromNumber($classNumber){
@@ -57,4 +57,5 @@ function removeClassMaterial($id){
 function getTeacherClassStudents($id){ //same as getClassStudents
     return selectTeacherClassStudents($id);
 }
+
 ?>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+$classId = 1;
+include_once('teacherCreateQuiz.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
@@ -154,7 +156,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="get" action="teacherQuizQA-page.php">
+                                <form method="post" action="teacherCreateQuiz-page.php">
+                                <center style="color: red"><?php include('errors.php'); ?></center>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Quiz Title</label>
                                         <div class="col-sm-10">
@@ -162,27 +165,27 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Date</label>
+                                        <label class="col-sm-2 col-form-label">Start Date</label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="date" class="form-control" placeholder="Date" required>
+                                            <input type="datetime-local" name="startDate" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Start Time</label>
+                                        <label class="col-sm-2 col-form-label">End Date</label>
                                         <div class="col-sm-10">
-                                            <input type="time" name="startTime" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">End Time</label>
-                                        <div class="col-sm-10">
-                                            <input type="time" name="endTime" class="form-control" required>
+                                            <input type="datetime-local" name="endDate" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Weight</label>
                                         <div class="col-sm-10">
                                             <input type="number" name="weight" class="form-control" placeholder="Weight" required> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Total Grade</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="totalGrade" class="form-control" placeholder="Total Grade" required> 
                                         </div>
                                     </div>
                                     <div class="form-group row">
