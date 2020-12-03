@@ -180,7 +180,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                 </div>
 
                 <br><Br><br>
+                
+    
 
+ 
+                       <h4><?phpecho$_GET['className'] ?></h4>
+    
+    
                 <div class="row">
                     <div class="col-12">
                         <?php

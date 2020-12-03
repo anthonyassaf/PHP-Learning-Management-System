@@ -146,7 +146,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <b><i>Database Programming</i></b>
+                                <b><i><?php echo $_GET['className'] ?></i></b>
                             </div>
                         </div>
                     </div>
