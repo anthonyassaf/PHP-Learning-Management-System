@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-<?php 
-session_start();
+<?php
 include_once('../../BLL/courseManager.php');
 include('adminCourseStudentsAdd.php');
 if (($_SESSION['isLoggedIn']) != true) {

@@ -139,6 +139,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
+                
                 <div style="float:left;">
                     <button type="button" class="btn btn-primary">
                         <a href="teacherStudentsEnrolled-page.php?classId=<?php echo $_GET['classId']; ?>" style="color :white;">View Students Enrolled</a>
@@ -181,6 +182,8 @@ if (($_SESSION['isLoggedIn']) != true) {
 
                 <br><Br><br>
 
+                <h4><?php echo $_GET['className'] ?></h4>
+
                 <div class="row">
                     <div class="col-12">
                         <?php
@@ -205,7 +208,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 
                 <div>
                     <button type="button" class="btn btn-warning">
-                        <a href="teacherCreateQuiz-page.php?classId=<?php echo $_GET['classId']?>" style="color :white;">Create Exam</a>
+                        <a href="teacherCreateQuiz-page.php?classId=<?php echo $_GET['classId']?>&className=<?php echo $_GET['className']?>" style="color :white;">Create Exam</a>
                     </button>
                 </div>
 

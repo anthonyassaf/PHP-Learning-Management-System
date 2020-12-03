@@ -1,7 +1,6 @@
-<?php
+<?php 
+include_once("../../BLL/quizManager.php");
 session_start();
-$classId = 1;
-include_once('teacherCreateQuiz.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
@@ -17,14 +16,13 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Create quiz</title>
+    <title>Quiz</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/pages/adminUserAdd-page.css">
-
+    <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -104,7 +102,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Quiz</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
@@ -127,98 +125,46 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Create Quiz</h4>
+                        <h4 class="text-themecolor">Quiz</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Create Quiz</li>
+                                <li class="breadcrumb-item active">Quiz</li>
                             </ol>
                         </div>
                     </div>
                 </div>
+
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
+             <div class="row">
+                 <div class="col-12">
+                     <div class="card">
+                         <div class="card-body">
+                             <?php $exam = getExamDetails($_GET['examId']) ?>
+                             <h3><?php echo $exam['quizTitle'] ?></h3>
+                             <p>This quiz open on <?php echo $exam['startDate'] ?> and will be closed on <?php echo $exam['endDate'] ?> </p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <b><i><?php echo $_GET['className'] ?></i></b>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <form method="post" action="teacherCreateQuiz-page.php">
-                                <center style="color: red"><?php include('errors.php'); ?></center>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Quiz Title</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" name="quizTitle" class="form-control" placeholder="Title" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Start Date</label>
-                                        <div class="col-sm-10">
-                                            <input type="datetime-local" name="startDate" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">End Date</label>
-                                        <div class="col-sm-10">
-                                            <input type="datetime-local" name="endDate" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Weight</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="weight" class="form-control" placeholder="Weight" required> 
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Total Grade</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="totalGrade" class="form-control" placeholder="Total Grade" required> 
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Number of Questions</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="numbOfQues" class="form-control" placeholder="Number of Questions" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-10">
-                                            <button type="submit" name="create_quiz" class="btn btn-primary">Create</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-     
-
-                <!-- End Page Content -->
 
             </div>
-            <!-- End Container fluid  -->
+            <!-- End Page Content -->
         </div>
-        <!-- End Page wrapper  -->
+        <!-- End Container fluid  -->
+    </div>
+    <!-- End Page wrapper  -->
 
-        <!-- footer -->
-        <footer class="footer">
-            © 2020 LEAD team</a>
-        </footer>
-        <!-- End footer -->
+    <!-- footer -->
+    <footer class="footer">
+        © 2020 LEAD team</a>
+    </footer>
+    <!-- End footer -->
 
     </div>
     <!-- End Wrapper -->
@@ -234,14 +180,12 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/waves.js"></script>
     <!--Menu sidebar -->
     <script src="../scripts/sidebarmenu.js"></script>
-    <!-- stickey kit -->
+    <!--stickey kit -->
     <script src="../assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
-    <script src="../scripts/adminStudentAdd-page.js"></script>
 
 </body>
-
 
 </html>

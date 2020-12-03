@@ -1,5 +1,6 @@
 <?php 
-include_once('teacherCourseMaterial.php');
+include_once("../../BLL/courseManager.php");
+include_once("../../BLL/quizManager.php");
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -147,10 +148,26 @@ if (($_SESSION['isLoggedIn']) != true) {
                         foreach ($materials as $material) : ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="teacherCourseMaterial-page.php" method="post">
                                     <h5><b><?php echo $material['description'] ?></b></h5>
                                     <a target="_blank" href="<?php echo "../assets/material/".$material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
-                                    </form>
+                                </div>
+                            </div>
+                            <hr>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+
+                <h3 style="color: #5cb85c">Quizes</h3>
+
+                <div class="row">
+                    <div class="col-12">
+                        <?php
+                        $classId = $_GET['classId'];
+                        $exams = getClassExams($classId);
+                        foreach ($exams as $exam) : ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5><b><a href="studentStartQuiz-page.php?examId=<?php echo $exam['id']?>"><?php echo $exam['quizTitle'] ?></a></b></h5>
                                 </div>
                             </div>
                             <hr>

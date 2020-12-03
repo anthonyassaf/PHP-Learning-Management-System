@@ -199,7 +199,7 @@ session_start();
                                             <img class="card-img-top" src="../assets/images/grad.jpg" alt="grad image">
                                             <div class="card-body">
                                                 <h3><?php echo $course['className'] ?></h3>
-                                                <a href="teacherCourseMaterial-page.php?classId=<?php echo $course['id']?>" class="btn btn-success">Browse</a>
+                                                <a href="teacherCourseMaterial-page.php?classId=<?php echo $course['id']?>&className=<?php echo $course['className']?>" class="btn btn-success">Browse</a>
                                             </div>
                                         </div>
                                     </div>

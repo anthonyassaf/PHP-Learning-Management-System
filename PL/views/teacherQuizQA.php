@@ -1,9 +1,13 @@
 <?php
-/*
-function validateForm($title, $grade, $createQuestion)
+
+include_once('../../BLL/quizManager.php');
+
+$errors = array();
+
+function validateForm($question, $grade, $createQuestion)
 {
     global $errors;
-    if (empty($title)) {
+    if (empty($question)) {
         array_push($errors, "First Name is required");
     }
     if (empty($grade)) {
@@ -12,30 +16,31 @@ function validateForm($title, $grade, $createQuestion)
     if (!isset($createQuestion)) {
         array_push($errors, "one of the four options of the question types must be selected");
     } else {
-        if ($createQuestion == 'createStudent') {
-            if ($studentFaculty == '') {
-                array_push($errors, "one of the options of the student faculties must be selected");
-            }
-            if ($studentStatus == '') {
-                array_push($errors, "one of the options of the student statuses must be selected");
-            }
-        } elseif ($createQuestion == 'createTeacher') {
-            if ($teacherRank == '') {
-                array_push($errors, "one of the options of the teacher ranks must be selected");
-            }
+        if ($createQuestion == 'mcq') {
+
+        } 
+        elseif ($createQuestion == 'upload') {
+           
+        }
+        elseif ($createQuestion == 'text'){
+
+        }
+        elseif ($createQuestion == 'trueFalse'){
+
         }
     }
 }
-*/
+
 
 if (isset($_POST['add_question'])){
-    $title = $_POST['title'];
+    $question = $_POST['question'];
     $grade = $_POST['grade'];
     $createQuestion = $_POST['createQuestion'];
 
-    //validateForm($title, $grade, $createQuestion);
+    validateForm($question, $grade, $createQuestion);
 
-    //createQuestion();
+    //addQuestion(14, $question, $grade, $createQuestion);
+
 }
 
 

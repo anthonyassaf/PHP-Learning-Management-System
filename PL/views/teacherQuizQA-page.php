@@ -1,4 +1,5 @@
 <?php
+include_once('teacherQuizQA.php');
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -146,10 +147,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="card">
                                 <!-- Tab panes -->
                                 <div class="card-body">
+                                <center style="color: red"><?php include('errors.php'); ?></center>
                                     <form class="form-horizontal form-material" method="post" action="teacherQuizQA-page.php">
                                         <div class="form-group">
-                                            <label for="comment"><u>Question <?php echo $i ?> :</u></label><BR><BR>
-                                            <textarea class="form-control" rows="3" name="title"></textarea>
+                                            <label><u>Question <?php echo $i ?> :</u></label><BR><BR>
+                                            <textarea class="form-control" rows="3" name="question"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="comment">Grade (per points):</label>
@@ -211,7 +213,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-success" name="add_question">Add Question</button>
+                                                <input type="submit" class="btn btn-success" name="add_question" value="Add Question">
                                             </div>
                                         </div>
 

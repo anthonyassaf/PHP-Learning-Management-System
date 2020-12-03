@@ -9,4 +9,17 @@ function createQuiz($classId, $quizTitle, $startDate, $endDate, $weight, $totalG
     return insertQuiz($classId, $quizTitle, $startDate, $endDate, $weight, $totalGrade);
 }
 
+function addQuestion($examId, $question, $grade, $type){
+    $idType = 3;
+    return insertQuestion($examId, $question, $grade, $idType);
+}
+
+function getClassExams($classId){
+    return selectClassExams($classId);
+}
+
+function getExamDetails($examId){
+    return selectExam($examId);
+}
+
 ?>
