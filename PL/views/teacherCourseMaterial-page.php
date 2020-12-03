@@ -181,6 +181,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                 </div>
 
                 <br><Br><br>
+                
+    
 
                 <h4><?php echo $_GET['className'] ?></h4>
 

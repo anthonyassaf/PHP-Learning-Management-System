@@ -26,7 +26,7 @@ function insertQuestion($examId, $question, $grade, $idType){
     $question = mysqli_real_escape_string($con, $question);
     $grade = mysqli_real_escape_string($con, $grade);
     $idType = mysqli_real_escape_string($con, $idType);
-
+ 
     $query = "INSERT INTO `question`(`idExam`, `idType`, `description`, `grade`) VALUES ('$examId', '$idType', '$question', '$grade')";
     $results = mysqli_query($con, $query);
     if ($results == 1) {

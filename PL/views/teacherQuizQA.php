@@ -4,18 +4,20 @@ include_once('../../BLL/quizManager.php');
 
 $errors = array();
 
+/*
 function validateForm($question, $grade, $createQuestion)
 {
     global $errors;
     if (empty($question)) {
         array_push($errors, "First Name is required");
-    }
-    if (empty($grade)) {
+    }​​​​​​​
+    if (empty($grade)) {​​​​​​​
         array_push($errors, "Last Name is required");
-    }
-    if (!isset($createQuestion)) {
+    }​​​​​​​
+    if (!isset($createQuestion)) {​​​​​​​
         array_push($errors, "one of the four options of the question types must be selected");
-    } else {
+    } 
+    else {
         if ($createQuestion == 'mcq') {
 
         } 
@@ -39,10 +41,10 @@ if (isset($_POST['add_question'])){
 
     validateForm($question, $grade, $createQuestion);
 
-    //addQuestion(14, $question, $grade, $createQuestion);
+    addQuestion(14, $question, $grade, $createQuestion);
 
 }
 
-
+*/
 
 ?>
