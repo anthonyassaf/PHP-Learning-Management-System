@@ -1,5 +1,5 @@
-<?php 
-include_once("../../BLL/quizManager.php");
+<?php
+include_once('../../BLL/quizManager.php');
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -16,13 +16,31 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Quiz</title>
+    <title>Dashboard</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
-    <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
+    <style>
+        .footer {
+            margin-left: 0px;
+        }
+
+        .navbar-brand {
+            margin-left: 0px
+        }
+
+        .container-fluid {
+            padding-right: 75px;
+        }
+
+        @media only screen and (max-width: 1000px) {
+            .container-fluid {
+            padding-right: 15px;
+        }
+        }
+    </style>
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -52,15 +70,12 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Logo -->
                 <div class="navbar-collapse">
                     <!-- toggle and nav items -->
-                    <ul class="navbar-nav mr-auto">
-                        <!-- This is  -->
-                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
-                        <!-- Search -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="fa fa-times"></i></a>
-                            </form>
-                        </li>
+                    <ul class="navbar-nav mr-auto ml-auto mt-1">
+                        <center>
+                            <b><span style="color : black; text-shadow: 2px 2px #ffcccb;">You still have :</span>
+                                <p style="color:black; text-shadow: 2px 2px #ffcccb;" id="demo"></p>
+                            </b>
+                        </center>
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
@@ -90,81 +105,68 @@ if (($_SESSION['isLoggedIn']) != true) {
         </header>
         <!-- End Topbar header -->
 
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <aside class="left-sidebar">
-            <div class="d-flex no-block nav-text-box align-items-center">
-                <span style="font-family: 'Lucida Console', Courier, monospace;"><img src="../assets/images/UAlogo.png" alt="elegant admin template">ECOURSES</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="fa fa-bars fa-lg"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="fa fa-close"></i></a>
-            </div>
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Quiz</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="studentProfile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="studentCourses.html" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu"></span>My Courses</a></li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-
-
-
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Container fluid  -->
             <div class="container-fluid">
-                <!-- Bread crumb and right sidebar toggle -->
-                <div class="row page-titles">
-                    <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Quiz</h4>
-                    </div>
-                    <div class="col-md-7 align-self-center text-right">
-                        <div class="d-flex justify-content-end align-items-center">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Quiz</li>
-                            </ol>
-                        </div>
+                <!-- Start Page Content -->
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-12">
+
+                        <?php
+                        $examId = 13;
+                        $i = 1;
+                        $questions = getExamQuestions($examId);
+                        foreach ($questions as $question) :
+                        ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title"><?php echo $i++ . ") " . $question['description'] ?></div>
+                                    <?php $questionId = $question['id'];
+                                    $answers = getQuestionAnswers($questionId);
+                                    ?>
+                                    <?php if ($question['idType'] == 1) : ?>
+                                        <?php foreach ($answers as $answer) : ?>
+                                            <div>
+                                                <input type="radio" id="defaultUnchecked" name="defaultExampleRadios" mdbInput>
+                                                <label for="defaultUnchecked"><?php echo $answer['description'] ?></label>
+                                            </div>
+                                        <?php endforeach ?>
+                                    <?php elseif ($question['idType'] == 2) : ?>
+                                        <div>
+                                            <input type="radio" id="true" name="bool" value="true">
+                                            <label for="true">True</label><br>
+                                            <input type="radio" id="false" name="bool" value="false">
+                                            <label for="false">False</label><br>
+                                        </div>
+                                    <?php elseif ($question['idType'] == 3) : ?>
+                                        <input type="File" name="file">
+                                        <input type="hidden" name="cid" value="">
+                                    <?php elseif ($question['idType'] == 4) : ?>
+                                        <div class="form-group">
+                                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="20"></textarea>
+                                        </div>
+                                    <?php endif ?>
+                                </div>
+                            </div>
+                            <hr>
+                        <?php endforeach ?>
+                        <input class="btn btn-success float-center btn-block" value="Submit All" type="submit">
                     </div>
                 </div>
-
-                <!-- End Bread crumb and right sidebar toggle -->
-
-                <!-- Start Page Content -->
-             <div class="row">
-                 <div class="col-12">
-                     <div class="card">
-                         <div class="card-body">
-                             <?php $exam = getExamDetails($_GET['examId']) ?>
-                             <h3><?php echo $exam['quizTitle'] ?></h3>
-                             <p>This quiz opens on <?php echo $exam['startDate'] ?> and will be closed on <?php echo $exam['endDate'] ?> </p>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-
-
+                <!-- End Page Content -->
             </div>
-            <!-- End Page Content -->
+            <!-- End Container fluid  -->
         </div>
-        <!-- End Container fluid  -->
-    </div>
-    <!-- End Page wrapper  -->
+        <!-- End Page wrapper  -->
 
-    <!-- footer -->
-    <footer class="footer">
-        © 2020 LEAD team</a>
-    </footer>
-    <!-- End footer -->
+        <!-- footer -->
+        <footer class="footer">
+            <a>© 2020 LEAD team</a>
+        </footer>
+        <!-- End footer -->
 
     </div>
     <!-- End Wrapper -->
@@ -185,7 +187,37 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
 
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("demo").innerHTML = hours + "h " +
+                minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
 </body>
+
 
 </html>

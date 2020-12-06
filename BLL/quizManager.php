@@ -22,4 +22,12 @@ function getExamDetails($examId){
     return selectExam($examId);
 }
 
+function getExamQuestions($examId){
+    return selectExamQuestions($examId);
+}
+
+function getQuestionAnswers($questionId){
+    return selectQuestionAnswers($questionId);
+}
+
 ?>
