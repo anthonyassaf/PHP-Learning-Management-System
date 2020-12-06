@@ -189,7 +189,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-success">Start Quiz</button>
+                                                    <?php if ($exam['startDate'] <= date("Y-m-d h:i:sa", time()) && $exam['endDate'] >= date("Y-m-d h:i:sa", time())): ?>
+                                                    <button type="button" class="btn btn-success"><a style="color: white;" href="studentQuiz-page.php?examId=<?php echo $exam['id']?>">Start Quiz</a></button>
+                                                    <?php else : ?>
+                                                        <button type="button" class="btn btn-success">Start Quiz</button>
+                                                    <?php endif ?>
                                                 </div>
                                             </div>
                                         </div>
