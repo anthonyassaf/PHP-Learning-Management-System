@@ -116,4 +116,15 @@ function getStudent($userId){
 function getTeacherCourses($userId){
     return selectTeacherCourses($userId);
 }
+function addStudentFile($id, $fileUrl, $description){
+    return insertStudentFile($id, $fileUrl, $description);
+}
+ 
+function getStudentFiles($id){
+    return selectStudentFiles($id);
+}
+ 
+function removeStudentFile($fileId){
+    return deleteStudentFile($fileId);
+}
 ?>
