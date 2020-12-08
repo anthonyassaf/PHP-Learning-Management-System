@@ -78,5 +78,33 @@ function selectQuestionTypeId($type){
     }
     return NULL;
 }
+function selectExamQuestions($examId){
+    GLOBAL $con;
+    $query = "SELECT * FROM `question` WHERE `idExam`='$examId'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0) {
+        $questions = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($questions, $row);
+        }
+        return $questions;
+    }
+    return array();
+}
+
+function selectQuestionAnswers($questionId){
+    GLOBAL $con;
+    $query = "SELECT * FROM `answer` WHERE `idQuestion`='$questionId'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0) {
+        $answers = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($answers, $row);
+        }
+        return $answers;
+    }
+    return array();
+}
+
 ?>
 

@@ -24,4 +24,12 @@ function createQuestion($idExam,$type,$grade,$description){
     $typeRow=selectQuestionTypeId($type);
     return insertQuestion($idExam,$description,$grade,$typeRow['id']);
 }
+function getExamQuestions($examId){
+    return selectExamQuestions($examId);
+}
+
+function getQuestionAnswers($questionId){
+    return selectQuestionAnswers($questionId);
+}
+
 ?>

@@ -235,5 +235,39 @@ function selectTeacherCourses($teacherId){
     }
     return array();
 }
-
+function insertStudentFile($id, $fileUrl, $description){
+    GLOBAL $con;
+    $fileUrl = mysqli_real_escape_string($con, $fileUrl);
+    $description = mysqli_real_escape_string($con, $description);
+    $query = "INSERT INTO `studentfile`(`idStudent`, `fileUrl`, `description`) VALUES ('$id', '$fileUrl', '$description')";
+    $results = mysqli_query($con, $query);
+    if ($results == 1) {
+        return TRUE;
+    }
+    return FALSE; 
+}
+ 
+function selectStudentFiles($id){
+    GLOBAL $con;
+    $query = "SELECT * FROM `studentfile` WHERE `idStudent` = '$id'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0) {
+        $files = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($files, $row);
+        }
+        return $files;
+    }
+    return array();
+}
+ 
+function deleteStudentFile($id){
+    GLOBAL $con;
+    $query = "DELETE FROM `studentfile` WHERE `id`='$id'";
+    $results = mysqli_query($con, $query);
+    if ($results == 1) {
+        return true;
+    }
+    return false; 
+}
 ?>

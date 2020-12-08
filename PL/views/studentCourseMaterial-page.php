@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once("../../BLL/courseManager.php");
 include_once("../../BLL/quizManager.php");
 session_start();
@@ -149,7 +149,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="card">
                                 <div class="card-body">
                                     <h5><b><?php echo $material['description'] ?></b></h5>
-                                    <a target="_blank" href="<?php echo "../assets/material/".$material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
+                                    <a target="_blank" href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
                                 </div>
                             </div>
                             <hr>
@@ -167,7 +167,38 @@ if (($_SESSION['isLoggedIn']) != true) {
                         foreach ($exams as $exam) : ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <h5><b><a href="studentStartQuiz-page.php?examId=<?php echo $exam['id']?>"><?php echo $exam['quizTitle'] ?></a></b></h5>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        <?php echo $exam['quizTitle'] ?>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $exam['quizTitle'] ?></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <?php $exam = getExamDetails($exam['id']) ?>
+                                                    <p>This quiz opens on <?php echo $exam['startDate'] ?> and will be closed on <?php echo $exam['endDate'] ?> </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <?php if ($exam['startDate'] <= date("Y-m-d h:i:sa", time()) && $exam['endDate'] >= date("Y-m-d h:i:sa", time())): ?>
+                                                    <button type="button" class="btn btn-success"><a style="color: white;" href="studentQuiz-page.php?examId=<?php echo $exam['id']?>">Start Quiz</a></button>
+                                                    <?php else : ?>
+                                                        <button type="button" class="btn btn-success">Start Quiz</button>
+                                                    <?php endif ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <hr>
