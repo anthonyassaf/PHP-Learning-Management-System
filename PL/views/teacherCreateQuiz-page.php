@@ -1,6 +1,5 @@
 <?php
 session_start();
-$classId = 1;
 include_once('teacherCreateQuiz.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -156,11 +155,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" action="teacherCreateQuiz-page.php">
+                                <form method="post" action="teacherCreateQuiz-page.php?classId=<?php $_GET['classId']?>&className=<?php $_GET['className']?>">
                                 <center style="color: red"><?php include('errors.php'); ?></center>
+                                
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Quiz Title</label>
                                         <div class="col-sm-10">
+                                        <input type="hidden" value="<?php echo $_GET['classId']?>" name="idClass">
                                             <input type="text" name="quizTitle" class="form-control" placeholder="Title" required>
                                         </div>
                                     </div>
@@ -180,18 +181,6 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         <label class="col-sm-2 col-form-label">Weight</label>
                                         <div class="col-sm-10">
                                             <input type="number" name="weight" class="form-control" placeholder="Weight" required> 
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Total Grade</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="totalGrade" class="form-control" placeholder="Total Grade" required> 
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Number of Questions</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="numbOfQues" class="form-control" placeholder="Number of Questions" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">

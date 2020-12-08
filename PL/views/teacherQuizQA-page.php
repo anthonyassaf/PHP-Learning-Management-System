@@ -6,7 +6,6 @@ if (($_SESSION['isLoggedIn']) != true) {
     header('location: loginForm.php');
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,20 +64,25 @@ if (($_SESSION['isLoggedIn']) != true) {
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
-                        <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
+                        <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?>
+                            <?php echo $_SESSION['lname']; ?>
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
                                     <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
-                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
-                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
+                                        <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>
+                                            <?php echo $_SESSION['lname']; ?></h4>
+                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f">
+                                                <?php echo $_SESSION['email']; ?></a></p>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="studentProfile.php""><i class=" fa fa-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="studentProfile.php""><i class=" fa fa-user"></i> My
+                                    Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-book"></i> Grades</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-envelope"></i> Messages</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-envelope"></i>
+                                    Messages</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
@@ -140,94 +144,89 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-
                 <div class="row">
                     <div class="col-12">
-                        <?php for ($i = 1; $i <= 2; $i++) : ?>
+                        <form class="form-horizontal form-material" method="POST" action="teacherQuizQA-page.php?quizTitle=<?php echo $_GET['quizTitle'] ?>&exam=<?php echo $_GET['exam'] ?>">
+                            <center style="color: red"><?php include('errors.php'); ?></center>
+                            <input type='hidden' name='idExam' value=<?php echo $_GET['exam'] ?>>
                             <div class="card">
                                 <!-- Tab panes -->
                                 <div class="card-body">
-                                <center style="color: red"><?php include('errors.php'); ?></center>
-                                    <form class="form-horizontal form-material" method="post" action="teacherQuizQA-page.php">
-                                        <div class="form-group">
-                                            <label><u>Question <?php echo $i ?> :</u></label><BR><BR>
-                                            <textarea class="form-control" rows="3" name="question"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="comment">Grade (per points):</label>
-                                            <input type="number" class="form-control" name="grade"></input>
-                                        </div>
-                                        Question Type :
-                                        <br>
+                                    <div class="form-group">
+                                        <label><u>Question</u></label><BR><BR>
+                                        <textarea class="form-control" rows="3" name="description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment">Grade (points):</label>
+                                        <input type="number" class="form-control" name="grade"></input>
+                                    </div>
+                                    Question Type :
+                                    <br>
+                                    <div>
+
                                         <div>
+                                            <input type="radio" name="questionType" value="Text">
+                                            <label>Text</label>
+                                        </div>
 
-                                            <div>
-                                                <input type="radio" id="radioCreateTeacher" name="createQuestion" value="text">
-                                                <label for="radioTeacher">Text</label>
+                                        <div>
+                                            <input type="radio" name="questionType" value="Upload">
+                                            <label>Upload</label>
+                                        </div>
+
+                                        <input type="radio" name="questionType" value="MCQ">
+                                        <label>MCQ</label>
+                                        <div class="reveal-if-active">
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Number of Answers : </label>
+                                                <div class="col-sm-1">
+                                                    <input type="number" id="numberAnswer" class="form-control" name="number">
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input class="btn btn-success" id="btnNumAns" name="confirm" value="confirm">
+                                                </div>
                                             </div>
 
-                                            <div>
-                                                <input type="radio" id="radioCreateTeacher" name="createQuestion" value="upload">
-                                                <label for="radioTeacher">Upload</label>
+                                            <div class="form-group row">
+
+                                                <div class="col-sm-12" id="add">
+
+                                                </div>
                                             </div>
 
-                                            <input type="radio" id="radioCreateStudent" name="createQuestion" value="mcq">
-                                            <label for="radioStudent">MCQ</label>
+
+                                        </div>
+
+                                        <div>
+                                            <input type="radio" name="questionType" value="True/False">
+                                            <label>True/False</label>
                                             <div class="reveal-if-active">
+                                                <input type="radio" id="true" name="bool" value="true">
+                                                <label for="true">True</label><br>
+                                                <input type="radio" id="false" name="bool" value="false">
+                                                <label for="false">False</label><br>
 
-                                                <div class="form-group row">
-                                                    <label class="col-sm-2 col-form-label">Number of Answers : </label>
-                                                    <div class="col-sm-1">
-                                                        <input type="number" id="numberAnswer" class="form-control" name="number">
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input class="btn btn-success" id="btnNumAns" name="confirm" value="confirm">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-
-                                                    <div class="col-sm-12" id="add">
-
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-                                            <div>
-                                                <input type="radio" id="radioCreateTeacher" name="createQuestion" value="trueFalse">
-                                                <label for="radioTeacher">True/False</label>
-                                                <div class="reveal-if-active">
-                                                    <form method="post" action="">
-                                                        <input type="radio" id="true" name="bool" value="true">
-                                                        <label for="true">True</label><br>
-                                                        <input type="radio" id="false" name="bool" value="false">
-                                                        <label for="false">False</label><br>
-                                                    </form>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <input type="submit" class="btn btn-success" name="add_question" value="Add Question">
                                             </div>
                                         </div>
 
-                                    </form>
-
+                                    </div>
+                                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                                 </div>
                             </div>
-                            <hr>
-                        <?php endfor ?>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="submit" class=" btn btn-success" name="addQuestion" value="Add Question">
+                                    <input type="submit" class="btn btn-warning" name="finishAddQuestion" value="Add Last Question">
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+
+
+
                     </div>
                 </div>
-
                 <!-- End Page Content -->
-
             </div>
             <!-- End Container fluid  -->
         </div>
@@ -260,11 +259,16 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/custom.min.js"></script>
     <script src="../scripts/adminStudentAdd-page.js"></script>
     <script>
+        function clearDiv(elementID) {
+            document.getElementById(elementID).innerHTML = "";
+        }
+
         $("#btnNumAns").click(function() {
+            clearDiv("add");
             var $item = $("#numberAnswer").val();
-            var $counter = 1;
+            var $counter = 0;
             while ($item > 0) {
-                $("#add").append('<input type="text" name="answer[]" class="form-control" placeholder = ' + $counter + '>');
+                $("#add").append('<div class="input-group"><input type="radio" name="isTrue" value =' + $counter + '> <input type="text" class="form-control" name="answer[]" placeholder = ' + ($counter + 1) + '></div>');
                 $counter = $counter + 1;
                 $item = $item - 1;
             }
