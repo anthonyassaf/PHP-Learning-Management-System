@@ -148,7 +148,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         </div>
                                         <div class="col-12-col-md-9">
                                             <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
-                                            <h6 class="card-subtitle">Engineering Student</h6>
+                                            <h6 class="card-subtitle"><?php echo $_SESSION['faculty']. " ".$_SESSION['roleName'] ?></h6>
                                             <button type="button" class="btn btn-primary" data-toggle="popover" data-content="Sorry, this functionality is not available at this moment">Messages</button>
                                         </div>
                                     </div>

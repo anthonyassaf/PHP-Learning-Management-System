@@ -18,8 +18,8 @@ $teacherAcademicRank = "";
 $courses = array();
 $userId = "";
 $ppURL = "";
+$roleName = "";
 $isLoggedIn;
-$_SESSION['success'] = "";
 
 function validateSignIn($email, $password){ 
     if (empty($email)) {
@@ -49,18 +49,16 @@ if (isset($_POST['login_user'])) {
             $_SESSION['imageProfileURL'] = $row['profileImageURL'];
             $_SESSION['role'] = $row['idRole'];
             $_SESSION['ppURL'] = $row['profileImageURL'];
-            $_SESSION['success'] = "You are now logged in";
             $_SESSION['isLoggedIn'] = true;
 
-            if($row['role'] == "3"){
-                $_SESSION['studentGpa'] = $row['studentGpa'];
+            if($row['idRole'] == "3"){
+                $_SESSION['faculty'] = implode(getFaculty($row['idFaculty']));
+                $_SESSION['roleName'] = "student";
                 $_SESSION['studentStatus'] = getStudentStatus($id);
-                $_SESSION['faculty'] = getFaculty($id);
-                $_SESSION['courses'] = getStudentCourses($_SESSION['userId']);
             }
 
-            if($row['role'] == "2"){
-                $_SESSION['faculty'] = getFaculty($id);
+            if($row['idRole'] == "2"){
+                $_SESSION['roleName'] = "teacher";
                 $_SESSION['teacherAcademicRank'] = getTeacherAcademicRank($id);
             }
 
