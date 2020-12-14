@@ -17,6 +17,7 @@ $faculty = "";
 $teacherAcademicRank = "";
 $courses = array();
 $userId = "";
+$ppURL = "";
 $isLoggedIn;
 $_SESSION['success'] = "";
 
@@ -47,6 +48,7 @@ if (isset($_POST['login_user'])) {
             $_SESSION['email'] = $row["email"];
             $_SESSION['imageProfileURL'] = $row['profileImageURL'];
             $_SESSION['role'] = $row['idRole'];
+            $_SESSION['ppURL'] = $row['profileImageURL'];
             $_SESSION['success'] = "You are now logged in";
             $_SESSION['isLoggedIn'] = true;
 

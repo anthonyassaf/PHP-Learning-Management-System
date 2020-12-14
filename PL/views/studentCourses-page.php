@@ -1,5 +1,6 @@
 <?php
 include_once('../../BLL/userManager.php');
+include_once('../../BLL/courseManager.php');
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -65,10 +66,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
                         <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/usersImages/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
+                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
@@ -124,13 +126,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Dashboard</h4>
+                        <h4 class="text-themecolor">My Courses</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
+                                <li class="breadcrumb-item active">My Courses</li>
                             </ol>
                         </div>
                     </div>
@@ -140,76 +142,48 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-                        <center>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12 col-md-3">
-                                            <img src="../assets/usersImages/<?php echo $_SESSION['ppURL']?>" class="img-circle" width="150" />
-                                        </div>
-                                        <div class="col-12-col-md-9">
-                                            <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
-                                            <h6 class="card-subtitle">Engineering Student</h6>
-                                            <button type="button" class="btn btn-primary" data-toggle="popover" data-content="Sorry, this functionality is not available at this moment">Messages</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </center>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <center>
-                                    <ul class="feeds p-b-20">
-                                        <li>
-                                            <div class="bg-info"><a href="#" style="color: white;"><i class="fa fa-home fa-lg"></i></a></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-success"><a href="calendar.html" style="color: white;"><i class="fa fa-calendar fa-lg"></a></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-warning"><i class="fa fa-book fa-lg"></i></div>
-                                        </li>
-                                    </ul>
-                                </center>
-                                <hr>
-                                <h3>Course Overview</h3>
-                                <center>
-                                    <div class="row">
-                                        <?php $courses = getStudentCourses($_SESSION['id']);
-                                        foreach ($courses as $course) : ?>
-                                            <div class="col-12 col-md-4">
-                                                <div class="card card-class" style="width: 18rem;">
-                                                    <img class="card-img-top" src="../assets/images/grad.jpg" alt="grad image">
-                                                    <div class="card-body">
-                                                        <h3><?php echo $course['className'] ?></h3>
-                                                        <a href="studentCourseMaterial-page.php?classId=<?php echo $course['id'] ?>" class="btn btn-success">Browse</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php endforeach ?>
-                                    </div>
-                                </center>
+                                <table class='table table-bordered table-condensed table-striped table-hover'>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Number</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Teacher</th>
+                                        <th scope="col">Day</th>
+                                        <th scope="col">Session</th>
+                                    </tr>
+                                    <?php
+                                    $courses = getStudentCourses($_SESSION['id']);
+                                    $i = 1;
+                                    foreach ($courses as $course) : ?>
+                                        <tr class="clickable"
+                                        onclick="window.location='studentCourseMaterial-page.php?classId=<?php echo $course['id'] ?>'">
+                                            <th><?php echo $i++ ?></th>
+                                            <td><?php echo $course['classNumber'] ?></td>
+                                            <td><?php echo $course['className'] ?></td>
+                                            <td><?php $teacher = getClassTeacher($course['classNumber']);
+                                                echo $teacher['firstname'] . " " . $teacher['lastname'] ?></td>
+                                            <td><?php echo $course['classDay'] ?></td>
+                                            <td><?php echo $course['session'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- End Page Content -->
             </div>
-            <!-- End Page Content -->
+            <!-- End Container fluid  -->
         </div>
-        <!-- End Container fluid  -->
-    </div>
-    <!-- End Page wrapper  -->
+        <!-- End Page wrapper  -->
 
-    <!-- footer -->
-    <footer class="footer">
-        © 2020 LEAD team</a>
-    </footer>
-    <!-- End footer -->
+        <!-- footer -->
+        <footer class="footer">
+            © 2020 LEAD team</a>
+        </footer>
+        <!-- End footer -->
 
     </div>
     <!-- End Wrapper -->
@@ -231,6 +205,13 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
 
+    <script>
+        $(document).ready(function($) {
+            $(".table-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
 </body>
 
 

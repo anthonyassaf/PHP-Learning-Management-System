@@ -58,4 +58,8 @@ function getTeacherClassStudents($id){ //same as getClassStudents
     return selectTeacherClassStudents($id);
 }
 
+function getClassTeacher($classNumber){
+    return selectClassTeacher($classNumber);
+}
+
 ?>

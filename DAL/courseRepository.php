@@ -55,7 +55,6 @@ function selectClassStudents($classId){
 
 function selectCourseNumberFaculty($classNumber){
     GLOBAL $con;
-    $classNumber = mysqli_real_escape_string($con,$classNumber);
     $query = "SELECT idFaculty FROM `class` where classNumber='$classNumber'";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) ==1) {
@@ -135,6 +134,16 @@ function selectTeacherClassStudents($id){
         return $students;
     }
     return array();
+}
+
+function selectClassTeacher($classNumber){
+    GLOBAL $con;
+    $query = "SELECT user.* FROM `user` , `class` WHERE user.id = class.idTeacher AND  class.classNumber='$classNumber'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) ==1) {
+       return mysqli_fetch_assoc($results);
+    }
+    return null;
 }
 
 ?>
