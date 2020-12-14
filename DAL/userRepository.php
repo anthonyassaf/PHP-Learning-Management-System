@@ -6,12 +6,25 @@ $con = openCon();
 
 function selectUser($email, $password){
     GLOBAL $con;
-    $query = "SELECT * FROM `user` WHERE `email`='$email' AND `password`= '$password' AND `isDeleted`=0";
-    $results = mysqli_query($con, $query);
-    if (mysqli_num_rows($results) == 1) {
-        return mysqli_fetch_assoc($results);;
+    if(checkPassword($email, $password)){
+        $query = "SELECT * FROM `user` WHERE `email`='$email' AND `isDeleted`=0";
+        $results = mysqli_query($con, $query);
+        if (mysqli_num_rows($results) == 1) {
+            return mysqli_fetch_assoc($results);;
+        }
     }
     return NULL;
+}
+
+function checkPassword($email, $password){
+    global $con;
+    $query = "SELECT `password` FROM `user` WHERE `email`='$email' AND `isDeleted`=0";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        $row = mysqli_fetch_assoc($results);
+        return password_verify($password, $row['password']);
+    }
+    return false;
 }
 
 function selectId($idUser){
@@ -270,4 +283,3 @@ function deleteStudentFile($id){
     }
     return false; 
 }
-?>

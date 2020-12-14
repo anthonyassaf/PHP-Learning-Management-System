@@ -14,6 +14,16 @@ function signIn($email, $pass){
     }
 }
 
+function rand_str($length) {
+    $chars = "0123456789./qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+    //only allowed chars in the blowfish salt.
+    $size = strlen($chars);
+    $str = "";
+    for ($i = 0; $i < $length; $i++)
+        $str .= $chars[rand(0, $size - 1)]; // hello zend and C.
+    return $str;
+}
+
 function getSalt($email){
     return selectSalt($email);
 }
@@ -62,7 +72,7 @@ function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatu
     $email = $userId.'@ua.edu.lb';
     $password = mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,5,4);
     $password = md5($salt.$password.$salt);
-    
+    $password = password_hash($password, PASSWORD_BCRYPT);
     if($userType == 'createStudent'){
         $studentStatusId = selectStudentStatusId($studentStatus);
         $studentFacultyId = selectFacultyId($studentFaculty);
@@ -73,7 +83,6 @@ function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatu
         createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
     }
 }
-
 
 function update($column, $x, $email){
     if($column == "password"){
