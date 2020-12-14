@@ -78,8 +78,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-book"></i> Grades</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-envelope"></i> Messages</a>
                                 <div class="dropdown-divider"></div>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             </div>
                         </li>
                         <!-- User profile and search -->
