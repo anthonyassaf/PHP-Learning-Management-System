@@ -134,13 +134,14 @@ function selectTeacherAcademicRankId($rankName){
     return NULL;
 }
 
-function createStudent($userId,$firstname,$lastname,$studentFacultyId,$studentStatusId,$email,$password,$salt){
+function createStudent($userId, $firstname, $lastname, $studentFacultyId, $studentStatusId, $email, $password, $salt){
     GLOBAL $con;
-    $firstname = mysqli_real_escape_string($con,$firstname);
-    $lastname = mysqli_real_escape_string($con,$lastname);
+    $firstname = mysqli_real_escape_string($con, $firstname);
+    $lastname = mysqli_real_escape_string($con, $lastname);
     $studentFacultyId = implode($studentFacultyId);
     $studentStatusId = implode($studentStatusId);
-    $query = "INSERT INTO `user`(`userID`,`idRole`,`idStudentStatus`,`idFaculty`,`email`,`password`,`firstname`,`lastname`,`profileImageURL`,`salt`) VALUES('$userId','3','$studentStatusId','$studentFacultyId','$email','$password','$firstname','$lastname','1','$salt');";
+    $password = password_hash($password, PASSWORD_BCRYPT);
+    $query = "INSERT INTO `user`(`userID`,`idRole`,`idStudentStatus`,`idFaculty`,`email`,`password`,`firstname`,`lastname`,`salt`) VALUES('$userId','3','$studentStatusId','$studentFacultyId','$email','$password','$firstname','$lastname', $salt');";
     $results = mysqli_query($con, $query);
     if ($results == 1) {
         return true;
@@ -148,12 +149,13 @@ function createStudent($userId,$firstname,$lastname,$studentFacultyId,$studentSt
     return false; 
 }
 
-function createTeacher($userId,$firstname,$lastname,$teacherRankId,$email,$password,$salt){
+function createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt){
     GLOBAL $con;
-    $firstname =mysqli_real_escape_string($con,$firstname);
-    $lastname =mysqli_real_escape_string($con,$lastname);
-    $teacherRankId=implode($teacherRankId);
-    $query = "INSERT INTO user(`userID`,`idRole`,`idTeacherAcademicRank`,`email`,`password`,`firstname`,`lastname`,`profileImageURL`,`salt`) VALUES('$userId','2','$teacherRankId','$email','$password','$firstname','$lastname','1','$salt');";
+    $firstname = mysqli_real_escape_string($con, $firstname);
+    $lastname = mysqli_real_escape_string($con, $lastname);
+    $teacherRankId = implode($teacherRankId);
+    $password = password_hash($password, PASSWORD_BCRYPT);
+    $query = "INSERT INTO user(`userID`,`idRole`,`idTeacherAcademicRank`,`email`,`password`,`firstname`,`lastname`,`salt`) VALUES('$userId','2','$teacherRankId','$email','$password','$firstname','$lastname','$salt');";
     $results = mysqli_query($con, $query);
     if ($results == 1) {
         return true;

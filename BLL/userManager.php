@@ -14,14 +14,21 @@ function signIn($email, $pass){
     }
 }
 
-function rand_str($length) {
-    $chars = "0123456789./qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-    //only allowed chars in the blowfish salt.
-    $size = strlen($chars);
-    $str = "";
-    for ($i = 0; $i < $length; $i++)
-        $str .= $chars[rand(0, $size - 1)]; // hello zend and C.
-    return $str;
+function addUser($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank){
+    $userId = generatedUserId();
+    $salt = randomizedSalt();
+    $email = $userId.'@ua.edu.lb';
+    $password = mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,5,4);
+    $password = md5($salt.$password.$salt);
+    if($userType == 'createStudent'){
+        $studentStatusId = selectStudentStatusId($studentStatus);
+        $studentFacultyId = selectFacultyId($studentFaculty);
+        return createStudent($userId, $firstname, $lastname, $studentFacultyId, $studentStatusId, $email, $password, $salt);
+    }
+    else if($userType == 'createTeacher'){
+        $teacherRankId = selectTeacherAcademicRankId($teacherRank);
+        createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
+    }
 }
 
 function getSalt($email){
@@ -64,24 +71,6 @@ function generatedUserId(){
     $generatedMin = idate("Y")*pow(10,5);
     $generatedMax  = (idate("Y")+1)*pow(10,5)-1;
     return rand($generatedMin, $generatedMax);
-}
-
-function signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank){
-    $userId = generatedUserId();
-    $salt = randomizedSalt();
-    $email = $userId.'@ua.edu.lb';
-    $password = mb_substr(strtoupper($firstname),0,2).mb_substr(strtoupper($lastname),0,2).substr($userId,5,4);
-    $password = md5($salt.$password.$salt);
-    $password = password_hash($password, PASSWORD_BCRYPT);
-    if($userType == 'createStudent'){
-        $studentStatusId = selectStudentStatusId($studentStatus);
-        $studentFacultyId = selectFacultyId($studentFaculty);
-        return createStudent($userId, $firstname, $lastname, $studentFacultyId, $studentStatusId, $email, $password, $salt);
-    }
-    else if($userType == 'createTeacher'){
-        $teacherRankId = selectTeacherAcademicRankId($teacherRank);
-        createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
-    }
 }
 
 function update($column, $x, $email){
@@ -136,4 +125,3 @@ function getStudentFiles($id){
 function removeStudentFile($fileId){
     return deleteStudentFile($fileId);
 }
-?>

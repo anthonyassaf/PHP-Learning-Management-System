@@ -41,7 +41,7 @@ if (isset($_POST['add_user'])) {
     validateForm($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank);
 
     if (count($errors) == 0) {
-        signUp($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank);
+        addUser($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank);
         echo '<script type="text/javascript"> alert("User successfully added")</script>';
     }
 }
