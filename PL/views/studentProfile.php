@@ -11,7 +11,7 @@ function passStrength($password) {
     }
     if ( !preg_match("#[0-9]+#", $password) ) {
         $returnVal = False;
-    }/*
+    }
     if ( !preg_match("#[a-z]+#", $password) ) {
         $returnVal = False;
     }
@@ -20,7 +20,7 @@ function passStrength($password) {
     }
     if ( !preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $password) ) {
         $returnVal = False;
-    }*/
+    }
     return $returnVal;
 }
 
@@ -44,18 +44,35 @@ function passStrength($password) {
 		if (count($errors) == 0) {
 			if($new_fname != $_SESSION['fname']){
 				$_SESSION['fname'] = $new_fname;
-				$result = update('firstname', $new_fname, $email);
+				$result = edit('firstname', $new_fname, $email);
 			}
 			if($new_lname != $_SESSION['lname']){
 				$_SESSION['lname'] = $new_lname;
-				$result = update('lastname', $new_lname, $email);
+				$result = edit('lastname', $new_lname, $email);
 			}
 	
 			if($new_password != NULL){
-				$result =update('password', $new_password, $email);
+				$result = edit('password', $new_password, $email);
 			}
-			if($result != null )
-			  echo '<script type="text/javascript"> alert("User successfully updated")</script>';
+
+			 #file name with a random number so that similar dont get replaced
+			 $ppUrl = rand(1000,10000)."-".$_FILES["file"]["name"];
+
+			 #temporary file name to store file
+			 $tname = $_FILES["file"]["tmp_name"];
+			
+			 #upload directory path
+			 $uploads_dir = '../assets/usersImages';
+			 #TO move the uploaded file to specific location
+			 move_uploaded_file($tname, $uploads_dir.'/'.$ppUrl);
+
+			 $result = edit('profileImageURL', $ppUrl, $email);
+			 
+
+			if($result != null ) {
+				$_SESSION['ppURL'] = $ppUrl;
+				echo '<script type="text/javascript"> alert("User successfully updated")</script>';
+			}
 			else 
 			  echo '<script type="text/javascript"> alert("Error")</script>';
 		

@@ -73,15 +73,15 @@ function generatedUserId(){
     return rand($generatedMin, $generatedMax);
 }
 
-function update($column, $x, $email){
+function edit($column, $x, $email){
     if($column == "password"){
         $row = getSalt($email);
         $salt = $row['salt'];
         $password = md5($salt.$x.$salt);
-        return updateUser($column, $password, $email);
+        return updateUser($column, $password, $email, true);
     }
     else {
-        return updateUser($column, $x, $email);
+        return updateUser($column, $x, $email, false);
     }
 }
 
@@ -125,3 +125,5 @@ function getStudentFiles($id){
 function removeStudentFile($fileId){
     return deleteStudentFile($fileId);
 }
+
+

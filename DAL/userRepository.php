@@ -164,8 +164,11 @@ function createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $
 
 }
 
-function updateUser($column, $value, $email){
+function updateUser($column, $value, $email, $bool){
     GLOBAL $con;
+    if($bool){
+        $value =  password_hash($value, PASSWORD_BCRYPT);
+    }
     $query = "UPDATE `user` SET `$column`= '$value' WHERE `email`='$email'";
     $results = mysqli_query($con, $query);
     if($results){
