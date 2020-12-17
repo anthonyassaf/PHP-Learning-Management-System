@@ -142,7 +142,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-                        <?php
+                    <h3 style="color: #5cb85c">Materials</h3>
+                    <?php
                         $classId = $_GET['classId'];
                         $materials = getClassMaterial($classId);
                         foreach ($materials as $material) : ?>
@@ -156,55 +157,35 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <?php endforeach ?>
                     </div>
                 </div>
-
-                <h3 style="color: #5cb85c">Quizes</h3>
-
-                <div class="row">
-                    <div class="col-12">
-                        <?php
-                        $classId = $_GET['classId'];
-                        $exams = getClassExams($classId);
-                        foreach ($exams as $exam) : ?>
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                        <?php echo $exam['quizTitle'] ?>
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $exam['quizTitle'] ?></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <?php $exam = getExamDetails($exam['id']) ?>
-                                                    <p>This quiz opens on <?php echo $exam['startDate'] ?> and will be closed on <?php echo $exam['endDate'] ?> </p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <?php if ($exam['startDate'] <= date("Y-m-d h:i:sa", time()) && $exam['endDate'] >= date("Y-m-d h:i:sa", time())): ?>
-                                                    <button type="button" class="btn btn-success"><a style="color: white;" href="studentQuiz-page.php?examId=<?php echo $exam['id']?>">Start Quiz</a></button>
-                                                    <?php else : ?>
-                                                        <button type="button" class="btn btn-success">Start Quiz</button>
-                                                    <?php endif ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                        <h3 style="color: #5cb85c">Quizes</h3>
+                        <div class="card">
+                            <div class="card-body">
+                                <table id="myTable">
+                                    <tr class="header">
+                                        <th style="width:25%">Quiz Title</th>
+                                        <th style="width:25%">Start Date</th>
+                                        <th style="width:25%">End Date</th>
+                                        <th style="width:25%">Grade</th>
+                                    </tr>
+                                    <?php
+                                    $classId = $_GET['classId'];
+                                    $myQuizs = selectQuizsByClass($_GET['classId']);
+                                    foreach ($myQuizs as $myQuiz) : ?>
+                                        <tr>
+                                            <td> <a href="studentQuiz-page.php?quizId=<?php echo $myQuiz['id']?>" type="button" class="btn btn-primary">
+                                            <?php echo $myQuiz['quizTitle'] ?></button></td>
+                                            <td><?php echo $myQuiz['startDate'] ?></td>
+                                            <td><?php echo $myQuiz['endDate'] ?></td>
+                                            <td><?php echo $myQuiz['Grade'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </table>
                             </div>
-                            <hr>
-                        <?php endforeach ?>
+                        </div>
                     </div>
                 </div>
+               
+
 
             </div>
             <!-- End Page Content -->

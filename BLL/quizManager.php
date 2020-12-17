@@ -32,4 +32,7 @@ function getQuestionAnswers($questionId){
     return selectQuestionAnswers($questionId);
 }
 
+function createStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer){
+    return insertStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer);
+}
 ?>

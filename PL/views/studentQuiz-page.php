@@ -37,8 +37,8 @@ if (($_SESSION['isLoggedIn']) != true) {
 
         @media only screen and (max-width: 1000px) {
             .container-fluid {
-            padding-right: 15px;
-        }
+                padding-right: 15px;
+            }
         }
     </style>
 </head>
@@ -116,57 +116,64 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
 
                         <?php
-                        $examId = 13;
                         $i = 1;
-                        $questions = getExamQuestions($examId);
+                        $exam = getExamDetails($_GET['quizId']);
+                        $questions = getExamQuestions($_GET['quizId']);
+                        ?>
+                        <input type="hidden" name="examId" value="<?php echo $_GET['quizId'] ?>">
+                        <input type="hidden" name="classId" value="<?php echo $exam['idClass'] ?>">
+                        <?php
                         foreach ($questions as $question) :
                         ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><?php echo $i++ . ") " . $question['description'] ?></div>
-                                    <?php $questionId = $question['id'];
-                                    $answers = getQuestionAnswers($questionId);
-                                    ?>
-                                    <?php if ($question['idType'] == 1) : ?>
-                                        <?php foreach ($answers as $answer) : ?>
-                                            <div>
-                                                <input type="radio" id="defaultUnchecked" name="defaultExampleRadios" mdbInput>
-                                                <label for="defaultUnchecked"><?php echo $answer['description'] ?></label>
-                                            </div>
-                                        <?php endforeach ?>
-                                    <?php elseif ($question['idType'] == 2) : ?>
-                                        <div>
-                                            <input type="radio" id="true" name="bool" value="true">
-                                            <label for="true">True</label><br>
-                                            <input type="radio" id="false" name="bool" value="false">
-                                            <label for="false">False</label><br>
-                                        </div>
-                                    <?php elseif ($question['idType'] == 3) : ?>
-                                        <input type="File" name="file">
-                                        <input type="hidden" name="cid" value="">
-                                    <?php elseif ($question['idType'] == 4) : ?>
-                                        <div class="form-group">
-                                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="20"></textarea>
-                                        </div>
-                                    <?php endif ?>
+                            <div class=" card">
+                        <div class="card-body">
+                            <input type="hidden" name="questionId[]" value=<?php echo $question['id'] ?>>
+                            <input type="hidden" name="questionType[]" value=<?php echo $question['idType'] ?>>
+                            <div class="card-title"><?php echo $i++ . ") " . $question['description'] ?></div>
+                            <?php $questionId = $question['id'];
+                            $answers = getQuestionAnswers($questionId);
+                            ?>
+                            <?php if ($question['idType'] == 1) : ?>
+                                <?php foreach ($answers as $answer) : ?>
+                                    <div>
+                                        <input type="radio" name="mcq[]" value=<?php echo $answer['description'] ?> mdbInput>
+                                        <label for="defaultUnchecked"><?php echo $answer['description'] ?></label>
+                                    </div>
+                                <?php endforeach ?>
+                            <?php elseif ($question['idType'] == 2) : ?>
+                                <div>
+                                    <input type="radio" id="true" name="bool[]" value="true">
+                                    <label for="true">True</label><br>
+                                    <input type="radio" id="false" name="bool[]" value="false">
+                                    <label for="false">False</label><br>
                                 </div>
-                            </div>
-                            <hr>
-                        <?php endforeach ?>
-                        <input class="btn btn-success float-center btn-block" value="Submit All" type="submit">
-                    </div>
-                </div>
-                <!-- End Page Content -->
-            </div>
-            <!-- End Container fluid  -->
-        </div>
-        <!-- End Page wrapper  -->
+                            <?php elseif ($question['idType'] == 3) : ?>
+                                <div class="form-group">
+                                    <textarea class="form-control rounded-0" name="text[]" id="exampleFormControlTextarea1" rows="20"></textarea>
+                                </div>
+                            <?php elseif ($question['idType'] == 4) : ?>
+                                <input type="File" name="file">
+                                <input type="hidden" name="cid[]" value="">
 
-        <!-- footer -->
-        <footer class="footer">
-            <a>© 2020 LEAD team</a>
-        </footer>
-        <!-- End footer -->
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <hr>
+                <?php endforeach ?>
+                <input class="btn btn-success float-center btn-block" name="submitQuizAnswers" value="Submit All" type="submit">
+                </div>
+            </div>
+            <!-- End Page Content -->
+        </div>
+        <!-- End Container fluid  -->
+    </div>
+    <!-- End Page wrapper  -->
+
+    <!-- footer -->
+    <footer class="footer">
+        <a>© 2020 LEAD team</a>
+    </footer>
+    <!-- End footer -->
 
     </div>
     <!-- End Wrapper -->
@@ -189,7 +196,7 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/custom.min.js"></script>
     <script>
         // Set the date we're counting down to
-        var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+        var countDownDate = new Date(<?php echo strtotime($exam['endDate']) * 1000; ?>).getTime();
 
         // Update the count down every 1 second
         var x = setInterval(function() {
@@ -207,7 +214,7 @@ if (($_SESSION['isLoggedIn']) != true) {
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             // Output the result in an element with id="demo"
-            document.getElementById("demo").innerHTML = hours + "h " +
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
                 minutes + "m " + seconds + "s ";
 
             // If the count down is over, write some text 

@@ -106,5 +106,35 @@ function selectQuestionAnswers($questionId){
     return array();
 }
 
+function selectQuizsByClass($classId){
+    GLOBAL $con;
+    $query = "SELECT exam.* FROM exam WHERE exam.idClass ='$classId'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $quizs = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($quizs, $row);
+        }
+        return $quizs;
+    }
+    return array();
+}
+
+function insertStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer){
+    GLOBAL $con;
+    $idQuestion = mysqli_real_escape_string($con, $idQuestion);
+    $idExam = mysqli_real_escape_string($con, $idExam);
+    $idClass = mysqli_real_escape_string($con, $idClass);
+    $idStudent = mysqli_real_escape_string($con, $idStudent);
+    $answer = mysqli_real_escape_string($con, $answer);
+    $query="INSERT INTO studentanswer(`idQuestion`,`idExam`,`idClass`,`idStudent`,`answer`) VALUES('$idQuestion','$idExam','$idClass','$idStudent','$answer')";
+    $results = mysqli_query($con, $query);
+    if ($results == 1) {
+        return true;
+    }
+    return false; 
+}
+
+
 ?>
 

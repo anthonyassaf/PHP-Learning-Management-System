@@ -27,7 +27,7 @@ function addUser($firstname, $lastname, $userType, $studentFaculty, $studentStat
     }
     else if($userType == 'createTeacher'){
         $teacherRankId = selectTeacherAcademicRankId($teacherRank);
-        createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
+        return createTeacher($userId, $firstname, $lastname, $teacherRankId, $email, $password, $salt);
     }
 }
 
