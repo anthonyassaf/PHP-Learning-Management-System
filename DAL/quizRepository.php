@@ -74,7 +74,7 @@ function selectQuestionTypeId($type){
     $query = "SELECT * FROM `questiontype` WHERE `type`='$type'";
     $results = mysqli_query($con,$query);
     if (mysqli_num_rows($results) == 1) {
-        return mysqli_fetch_assoc($results);;
+        return mysqli_fetch_assoc($results);
     }
     return NULL;
 }
@@ -127,7 +127,7 @@ function insertStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer){
     $idClass = mysqli_real_escape_string($con, $idClass);
     $idStudent = mysqli_real_escape_string($con, $idStudent);
     $answer = mysqli_real_escape_string($con, $answer);
-    $query="INSERT INTO studentanswer(`idQuestion`,`idExam`,`idClass`,`idStudent`,`answer`) VALUES('$idQuestion','$idExam','$idClass','$idStudent','$answer')";
+    $query="INSERT INTO studentanswer(`idQuestion`,`idExam`,`idClassEnrolled`,`idStudentEnrolled`,`answer`) VALUES('$idQuestion','$idExam','$idClass','$idStudent','$answer')";
     $results = mysqli_query($con, $query);
     if ($results == 1) {
         return true;
@@ -135,6 +135,40 @@ function insertStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer){
     return false; 
 }
 
+function insertStudentExamEntry($idExam,$idClass,$idStudent){
+    GLOBAL $con;
+    $idExam = mysqli_real_escape_string($con, $idExam);
+    $idClass = mysqli_real_escape_string($con, $idClass);
+    $idStudent = mysqli_real_escape_string($con, $idStudent);
+    $query="INSERT INTO studentenrolledExam(`idExam`,`idClassEnrolled`,`idStudentEnrolled`) VALUES('$idExam','$idClass','$idStudent')";
+    $results = mysqli_query($con, $query);
+    if ($results == 1) {
+        return true;
+    }
+    return false; 
+}
 
+function selectStudentExamEntry($idExam,$idClass,$idStudent){
+    GLOBAL $con;
+    $idExam = mysqli_real_escape_string($con, $idExam);
+    $idClass = mysqli_real_escape_string($con, $idClass);
+    $idStudent = mysqli_real_escape_string($con, $idStudent);
+    $query="SELECT * from studentenrolledexam where idExam='$idExam' AND idClass='$idClass' AND idStudent='$idStudent' ";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) == 1) {
+        return true;
+    }
+    return false; 
+}
+
+function selectSystemDate(){
+    GLOBAL $con;
+    $query="SELECT NOW()";
+    $results = mysqli_query($con,$query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);
+    }
+    return NULL;
+}
 ?>
 

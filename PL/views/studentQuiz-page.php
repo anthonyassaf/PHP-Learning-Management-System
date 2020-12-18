@@ -117,9 +117,12 @@ if (($_SESSION['isLoggedIn']) != true) {
 
                         <?php
                         $i = 1;
+                        $mcqCounter=0;
+                        $booleanCounter=0;
                         $exam = getExamDetails($_GET['quizId']);
                         $questions = getExamQuestions($_GET['quizId']);
                         ?>
+                        <form method="POST" action="studentQuiz.php">
                         <input type="hidden" name="examId" value="<?php echo $_GET['quizId'] ?>">
                         <input type="hidden" name="classId" value="<?php echo $exam['idClass'] ?>">
                         <?php
@@ -134,22 +137,23 @@ if (($_SESSION['isLoggedIn']) != true) {
                             $answers = getQuestionAnswers($questionId);
                             ?>
                             <?php if ($question['idType'] == 1) : ?>
+                                <?php  $mcqCounter=$mcqCounter+1; ?>
                                 <?php foreach ($answers as $answer) : ?>
                                     <div>
-                                        <input type="radio" name="mcq[]" value=<?php echo $answer['description'] ?> mdbInput>
+                                        <input type="radio" name="mcq<?php echo $mcqCounter?>" value="<?php echo $answer['description'] ?>">
                                         <label for="defaultUnchecked"><?php echo $answer['description'] ?></label>
                                     </div>
                                 <?php endforeach ?>
                             <?php elseif ($question['idType'] == 2) : ?>
                                 <div>
-                                    <input type="radio" id="true" name="bool[]" value="true">
+                                    <input type="radio" id="true" name="bool<?php $booleanCounter=$booleanCounter+1; echo $booleanCounter?>" value="true">
                                     <label for="true">True</label><br>
-                                    <input type="radio" id="false" name="bool[]" value="false">
+                                    <input type="radio" id="false" name="bool<?php echo $booleanCounter?>" value="false">
                                     <label for="false">False</label><br>
                                 </div>
                             <?php elseif ($question['idType'] == 3) : ?>
                                 <div class="form-group">
-                                    <textarea class="form-control rounded-0" name="text[]" id="exampleFormControlTextarea1" rows="20"></textarea>
+                                    <textarea class="form-control rounded-0" name="text[]" rows="20"></textarea>
                                 </div>
                             <?php elseif ($question['idType'] == 4) : ?>
                                 <input type="File" name="file">
@@ -160,7 +164,10 @@ if (($_SESSION['isLoggedIn']) != true) {
                     </div>
                     <hr>
                 <?php endforeach ?>
+                <input type="hidden" value="<?php echo $mcqCounter?>" name="mcqCount">
+                <input type="hidden" value="<?php echo $booleanCounter?>" name="booleanCount">
                 <input class="btn btn-success float-center btn-block" name="submitQuizAnswers" value="Submit All" type="submit">
+                </form>
                 </div>
             </div>
             <!-- End Page Content -->
@@ -209,7 +216,7 @@ if (($_SESSION['isLoggedIn']) != true) {
 
             // Time calculations for days, hours, minutes and seconds
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)-1);
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 

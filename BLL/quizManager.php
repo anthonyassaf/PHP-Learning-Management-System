@@ -35,4 +35,12 @@ function getQuestionAnswers($questionId){
 function createStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer){
     return insertStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer);
 }
+
+function createStudentExamEntry($idExam,$idClass,$idStudent){
+    return insertStudentExamEntry($idExam,$idClass,$idStudent);
+}
+
+function getSystemDate(){
+    return selectSystemDate()['NOW()'];
+}
 ?>
