@@ -23,6 +23,11 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
     <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
+    <style>
+     .card-body{
+        border-bottom: 5px solid #287CDF;
+     }
+    </style>
 </head>
 
 <body class="skin-default-dark fixed-layout">

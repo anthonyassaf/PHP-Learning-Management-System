@@ -1,6 +1,5 @@
 <?php
-include_once("../../BLL/courseManager.php");
-include_once("../../BLL/quizManager.php");
+include_once('../../BLL/userManager.php');
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -17,17 +16,13 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <title>Course Material</title>
+    <title>Dashboard</title>
     <!-- Favicon icon -->
     <link rel="stylesheet" href="../assets/icons/font-awesome/css/font-awesome.css">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
-    <style>
-        .card-body {
-            border-bottom: 5px solid #287CDF;
-        }
-    </style>
+    <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -107,7 +102,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Course Material</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
@@ -130,13 +125,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Bread crumb and right sidebar toggle -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Course Material</h4>
+                        <h4 class="text-themecolor">View Exam</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li class="breadcrumb-item active">Course Material</li>
+                                <li class="breadcrumb-item active">View Exam</li>
                             </ol>
                         </div>
                     </div>
@@ -144,58 +139,77 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
+                <h3>Quiz Title</h3>
+                <h4>Student Name</h4>
+
                 <div class="row">
                     <div class="col-12">
-                        <h3 style="color: #5cb85c">Materials</h3>
-                        <?php
-                        $classId = $_GET['classId'];
-                        $materials = getClassMaterial($classId);
-                        foreach ($materials as $material) : ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5><b><?php echo $material['description'] ?></b></h5>
-                                    <a target="_blank" href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
-                                </div>
-                            </div>
-                            <hr>
-                        <?php endforeach ?>
-                    </div>
-                </div>
-                <h3 style="color: #5cb85c">Quizes</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th style="width:33.33%">Quiz Title</th>
-                                    <th style="width:33.33%">Start Date</th>
-                                    <th style="width:33.33%">End Date</th>
+                        <div class="row">
+                            <div class="col-12">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $classId = $_GET['classId'];
-                                $myQuizs = getClassExams($_GET['classId']);
-                                foreach ($myQuizs as $myQuiz) : ?>
-                                    <tr>
-                                        <td> <a href="studentQuiz-page.php?quizId=<?php echo $myQuiz['id'] ?>" type="button" class="btn btn-primary">
-                                                <?php echo $myQuiz['quizTitle'] ?></button></td>
-                                        <td><?php echo $myQuiz['startDate'] ?></td>
-                                        <td><?php echo $myQuiz['endDate'] ?></td>
-                                    </tr>
-                            </tbody>
-                        </table>
-                    <?php endforeach ?>
-                    </table>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="examId" value="15">
+                                    <input type="hidden" name="classId" value="11">
+                                    <div class=" card">
+                                        <div class="card-body">
+                                            <input type="hidden" name="questionId[]" value=5>
+                                            <input type="hidden" name="questionType[]" value=2>
+                                            <h5><b>1) HTML is a programming language (1pts)</b></h4>
+                                                <div>
+                                                <label>Student Answer : False.</label>
+                                                <br>
+                                                <label>Grade : </label> <input type="number" value="0" style="width: 50px;">
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class=" card">
+                                        <div class="card-body">
+                                            <input type="hidden" name="questionId[]" value=6>
+                                            <input type="hidden" name="questionType[]" value=1>
+                                            <h5><b>2) What is PHP? (1pts)</b></h5>
+                                            <div>
+                                                <label>Student Answer : Frontend programming language.</label>
+                                                <br>
+                                                <label>Grade : </label> <input type="number" value="1" style="width: 50px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div>
+                                                <h5><b>3) example upload (3pt)</b></h5>
+                                                <a target="_blank" href="../assets/material/3650-02-WebProgramming1-ClientSide.pdf">3650-02-WebProgramming1-ClientSide.pdf</a>
+                                                <br>
+                                                <label>Grade : </label> <input type="number" style="width: 50px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5><b>3) Example textArea (5pts)</b></h5>
+                                            <div>
+                                                <label>Student Answer :  </label>
+                                                <textarea readonly class="form-control" id="exampleFormControlTextarea1" rows="15">DHSBFHSBFKJASBFJKADBJKSAFJKBFJASBFJASBFJSABFJBAFJSBFBASJFBAJKFBASJKFBJKASBFJKASBFJKASBFJASBKFBASJKFBASJKFBASJKFBJASBFJKASBFJKASBFJKASB</textarea>
+                                                <br>
+                                                <label>Grade : </label> <input type="number" style="width: 50px;">
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-success" value="Submit" name="submit_quiz_correction">
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
     </div>
+
+
     <!-- End Page Content -->
     </div>
     <!-- End Container fluid  -->
@@ -229,5 +243,6 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/custom.min.js"></script>
 
 </body>
+
 
 </html>

@@ -45,6 +45,7 @@ function insertAnswer($idQuestion,$isCorrect,$answer){
     }
     return -1; 
 }
+
 function selectClassExams($classId){
     GLOBAL $con;
     $query = "SELECT * FROM `exam` WHERE `idClass`='$classId'";
@@ -78,6 +79,7 @@ function selectQuestionTypeId($type){
     }
     return NULL;
 }
+
 function selectExamQuestions($examId){
     GLOBAL $con;
     $query = "SELECT * FROM `question` WHERE `idExam`='$examId'";
@@ -106,19 +108,7 @@ function selectQuestionAnswers($questionId){
     return array();
 }
 
-function selectQuizsByClass($classId){
-    GLOBAL $con;
-    $query = "SELECT exam.* FROM exam WHERE exam.idClass ='$classId'";
-    $results = mysqli_query($con, $query);
-    if (mysqli_num_rows($results) > 0 ) {
-        $quizs = array();
-        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
-            array_push($quizs, $row);
-        }
-        return $quizs;
-    }
-    return array();
-}
+
 
 function insertStudentAnswer($idQuestion,$idExam,$idClass,$idStudent,$answer){
     GLOBAL $con;
