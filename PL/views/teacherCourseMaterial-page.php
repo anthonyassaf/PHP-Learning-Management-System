@@ -24,9 +24,9 @@ if (($_SESSION['isLoggedIn']) != true) {
     <link href="../styles/style.css" rel="stylesheet">
     <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
     <style>
-     .card-body{
-        border-bottom: 5px solid #287CDF;
-     }
+        .card-body {
+            border-bottom: 5px solid #287CDF;
+        }
     </style>
 </head>
 
@@ -144,7 +144,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                
+
                 <div style="float:left;">
                     <button type="button" class="btn btn-primary">
                         <a href="teacherStudentsEnrolled-page.php?classId=<?php echo $_GET['classId']; ?>" style="color :white;">View Students Enrolled</a>
@@ -155,6 +155,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
                         Add New Material
+                    </button>
+                    <button type="button" class="btn btn-warning">
+                        <a href="teacherCreateQuiz-page.php?classId=<?php echo $_GET['classId'] ?>&className=<?php echo $_GET['className'] ?>" style="color :white;">Create Exam</a>
                     </button>
                 </div>
                 <!-- Modal -->
@@ -174,6 +177,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <br><br>
                                     <input type="File" name="file">
                                     <input type="hidden" name="cid" value="<?php echo $_GET['classId']; ?>">
+                                    <input type="hidden" name="cname" value="<?php echo $_GET['className']; ?>">
                                     <br><br>
                                     <div class="modal-footer">
                                         <input type="submit" class="btn btn-success" name="add_material">
@@ -186,38 +190,57 @@ if (($_SESSION['isLoggedIn']) != true) {
                 </div>
 
                 <br><Br><br>
-                
-    
 
-                <h4><?php echo $_GET['className'] ?></h4>
 
-                <div class="row">
-                    <div class="col-12">
-                        <?php
-                        $classId = $_GET['classId'];
-                        $materials = getClassMaterial($classId);
-                        foreach ($materials as $material) : ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="teacherCourseMaterial-page.php" method="post">
-                                        <h5><b><?php echo $material['description'] ?></b></h5>
-                                        <a href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
-                                        <input type="hidden" value="<?php echo $material['id'] ?>" name="materialId">
-                                        <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
-                                    </form>
+
+                <h2><?php echo $_GET['className'] ?></h4>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <?php
+                            $classId = $_GET['classId'];
+                            $materials = getClassMaterial($classId); ?>
+                            <h3 style="color: #5cb85c">Course Material</h3>
+                            <?php foreach ($materials as $material) : ?>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="teacherCourseMaterial-page.php" method="post">
+                                            <h5><b><?php echo $material['description'] ?></b></h5>
+                                            <a href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
+                                            <input type="hidden" value="<?php echo $material['id'] ?>" name="materialId">
+                                            <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
+                                            <input type="hidden" name="cid" value="<?php echo $_GET['classId']; ?>">
+                                            <input type="hidden" name="cname" value="<?php echo $_GET['className']; ?>">
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <hr>
-                        <?php endforeach ?>
+                                <hr>
+                            <?php endforeach ?>
+                            <h3 style="color: #5cb85c">Quizs</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $myQuizs = getClassExams($classId);
+                                    foreach ($myQuizs as $myQuiz) : ?>
+                                        <tr>
+                                            <td> <a href="teacherListQuizEntries-page.php?quizId=<?php echo $myQuiz['id']?>" type="button" class="btn btn-primary">
+                                                    <?php echo $myQuiz['quizTitle']; ?></a></td>
+                                        </tr>
+                                    <?php endforeach ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-                
-                <div>
-                    <button type="button" class="btn btn-warning">
-                        <a href="teacherCreateQuiz-page.php?classId=<?php echo $_GET['classId']?>&className=<?php echo $_GET['className']?>" style="color :white;">Create Exam</a>
-                    </button>
-                </div>
+
+                    <div>
+
+                    </div>
 
             </div>
             <!-- End Page Content -->

@@ -41,6 +41,47 @@ function createStudentExamEntry($idExam,$idClass,$idStudent){
 }
 
 function getSystemDate(){
-    return selectSystemDate()['NOW()'];
+    return strtotime(selectSystemDate()["CurrentDate"]);
 }
+
+function getStudentExamEntry($idExam,$idClass,$idStudent){
+   return selectStudentExamEntry($idExam,$idClass,$idStudent);
+}
+
+function getExamEntries($idExam){
+    return selectExamEntries($idExam);
+}
+
+function getStudentAnswers($idExam,$idClass,$idStudent){
+    return selectStudentAnswers($idExam,$idClass,$idStudent);
+}
+
+function getExamEntryDetails($id){
+    return selectStudentEnrolledExam($id);
+}
+
+function getQuestion($id){
+    return selectQuestion($id);
+}
+
+function getStudentAnswer($id){
+    return selectStudentAnswer($id);
+}
+function getCorrectAnswer($idQuestion){
+    return selectCorrectAnswer($idQuestion);
+ }
+ 
+function autoCorrectAnswer($id){
+    $studentAnswer = getStudentAnswer($id);
+    $question = getQuestion($studentAnswer['idQuestion']);
+    $correctAnswer = getCorrectAnswer($question['id']);
+    if($correctAnswer['description'] == $studentAnswer['answer']){
+        updateAnswer($studentAnswer['id'],$question['grade']);
+    }
+    else {
+        updateAnswer($studentAnswer['id'],0);
+    }
+}
+
+
 ?>

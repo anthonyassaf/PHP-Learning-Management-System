@@ -126,4 +126,8 @@ function removeStudentFile($fileId){
     return deleteStudentFile($fileId);
 }
 
+function getStudentInformation($id){
+    return selectStudentInformation($id);
+}
+
 

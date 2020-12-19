@@ -1,6 +1,7 @@
 <?php
 
 include_once("../../BLL/courseManager.php");
+include_once("../../BLL/quizManager.php");
 
 if (isset($_POST["add_material"]))
  {
@@ -19,13 +20,18 @@ if (isset($_POST["add_material"]))
     move_uploaded_file($tname, $uploads_dir.'/'.$materialUrl);
  
     $cid=  $_POST['cid'];
+    $cname=$_POST['cname'];
     addClassMaterial($cid, $materialUrl, $title);
+    header("location: teacherCourseMaterial-page.php?classId=$cid&className=$cname");
 
 }
 
 if(isset($_POST["delete"])){
     $materialId = $_POST['materialId'];
     removeClassMaterial($materialId);
+    $cid=  $_POST['cid'];
+    $cname=$_POST['cname'];
+    header("location: teacherCourseMaterial-page.php?classId=$cid&className=$cname");
 }
 
 ?>

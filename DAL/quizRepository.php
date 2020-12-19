@@ -143,7 +143,7 @@ function selectStudentExamEntry($idExam,$idClass,$idStudent){
     $idExam = mysqli_real_escape_string($con, $idExam);
     $idClass = mysqli_real_escape_string($con, $idClass);
     $idStudent = mysqli_real_escape_string($con, $idStudent);
-    $query="SELECT * from studentenrolledexam where idExam='$idExam' AND idClass='$idClass' AND idStudent='$idStudent' ";
+    $query="SELECT * from studentenrolledexam where idExam='$idExam' AND idClassEnrolled='$idClass' AND idStudentEnrolled='$idStudent' ";
     $results = mysqli_query($con, $query);
     if (mysqli_num_rows($results) == 1) {
         return true;
@@ -153,12 +153,93 @@ function selectStudentExamEntry($idExam,$idClass,$idStudent){
 
 function selectSystemDate(){
     GLOBAL $con;
-    $query="SELECT NOW()";
+    $query="SELECT NOW() AS CurrentDate";
     $results = mysqli_query($con,$query);
     if (mysqli_num_rows($results) == 1) {
         return mysqli_fetch_assoc($results);
     }
     return NULL;
+}
+
+function selectExamEntries($idExam){
+    GLOBAL $con;
+    $query = "SELECT * FROM `studentenrolledexam` WHERE `idExam`='$idExam'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0) {
+        $examEntries = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($examEntries, $row);
+        }
+        return $examEntries;
+    }
+    return array();
+
+}
+
+function selectStudentAnswers($idExam,$idClass,$idStudent){
+    GLOBAL $con;
+    $query = "SELECT * FROM `studentanswer` WHERE `idExam`='$idExam' AND `idStudentEnrolled`='$idStudent' AND `idClassEnrolled`='$idClass'";
+    $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0) {
+        $studentAnswers = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($studentAnswers, $row);
+        }
+        return $studentAnswers;
+    }
+    return array();
+}
+
+function selectStudentEnrolledExam($id){
+    GLOBAL $con;
+    $query = "SELECT * FROM `studentenrolledexam` WHERE `id`='$id'";
+    $results = mysqli_query($con,$query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);
+    }
+    return NULL;
+}
+
+function selectQuestion($id){
+    GLOBAL $con;
+    $query = "SELECT * FROM `question` WHERE `id`='$id'";
+    $results = mysqli_query($con,$query);
+    if (mysqli_num_rows($results) == 1) {
+        return mysqli_fetch_assoc($results);
+    }
+    return NULL;
+}
+
+function selectStudentAnswer($id){
+    GLOBAL $con;
+    $query="SELECT * FROM `studentanswer` where `id`='$id'";
+    $results = mysqli_query($con,$query);
+    if(mysqli_num_rows($results) == 1){
+        return mysqli_fetch_assoc($results);
+    }
+    return NULL;
+}
+
+function selectCorrectAnswer($idQuestion){
+    GLOBAL $con;
+    $query="SELECT * FROM `answer` where `idQuestion`='$idQuestion' AND `isCorrect`='1'";
+    $results = mysqli_query($con,$query);
+    if(mysqli_num_rows($results) == 1){
+        return mysqli_fetch_assoc($results);
+    }
+    return NULL;
+}
+
+function  updateAnswer($id,$grade){
+    GLOBAL $con;
+    $query = "UPDATE `studentanswer` SET `grade`='$grade' WHERE `id`='$id'";
+    $results = mysqli_query($con, $query);
+    if($results){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 ?>
 

@@ -2,37 +2,55 @@
 include_once("login.php");
 include_once("../../BLL/quizManager.php");
 if (isset($_POST['submitQuizAnswers'])) {
+
     $questionType = array();
     $questionId = array();
     $mcq = array();
-    $upload = array();
-    $text = array();
     $boolean = array();
+    $text = array();
+    $upload = array();
     foreach ($_POST['questionType'] as $i => $value) {
         array_push($questionType, $value);
     }
     foreach ($_POST['questionId'] as $i => $value) {
         array_push($questionId, $value);
     }
-    for($mcqPOSTCounter=1;$mcqPOSTCounter<=$_POST['mcqCount'];$mcqPOSTCounter++){
-        array_push($mcq,$_POST["mcq".$mcqPOSTCounter]);
-    }
-    for($booleanPOSTCounter=1;$booleanPOSTCounter<=$_POST['booleanCount'];$booleanPOSTCounter++){
-        array_push($boolean,$_POST["bool".$booleanPOSTCounter]);
-    }
-    foreach ($_POST['text'] as $i => $value) {
-        array_push($text, $value);
-    }
-    foreach ($_POST['file'] as $i => $value){    
-        array_push($upload, $value);
-    }                                                
-
     $questionType = array_values($questionType);
     $questionId = array_values($questionId);
-    $text = array_values($text);
-    $mcq = array_values($mcq);
-    $boolean = array_values($boolean);
-    $upload = array_values($upload);
+
+    if($_POST['mcqCount']>0){
+        
+        for($mcqPOSTCounter=1;$mcqPOSTCounter<=$_POST['mcqCount'];$mcqPOSTCounter++){
+            if(isset($_POST["mcq".$mcqPOSTCounter]))
+            array_push($mcq,$_POST["mcq".$mcqPOSTCounter]);
+            else array_push($mcq,"");
+        }
+        $mcq = array_values($mcq);
+    }
+    if($_POST['booleanCount']>0){
+      
+        for($booleanPOSTCounter=1;$booleanPOSTCounter<=$_POST['booleanCount'];$booleanPOSTCounter++){
+            if(isset($_POST["bool".$booleanPOSTCounter]))
+            array_push($boolean,$_POST["bool".$booleanPOSTCounter]);
+            else array_push($boolean,"");
+        }
+        $boolean = array_values($boolean);
+    }
+    if($_POST['textCount']>0){
+       
+        foreach ($_POST['text'] as $i => $value) {
+            array_push($text, $value);
+        }
+        $text = array_values($text);
+    }
+    if($_POST['uploadCount']>0){
+       
+        foreach ($_POST['file'] as $i => $value){    
+            array_push($upload, $value);
+        }     
+        $upload = array_values($upload);     
+    }
+ 
     $numOfQuestions = sizeof($questionId);
 
     $idStudent = $_SESSION['id'];
@@ -43,11 +61,12 @@ if (isset($_POST['submitQuizAnswers'])) {
     $uploadCounter = 0;
     $textCounter = 0;
     $booleanCounter = 0;
-    echo "$idExam, $idClass, $idStudent<br>";
+
+
     createStudentExamEntry($idExam,$idClass,$idStudent);
     for ($questionCounter; $questionCounter < $numOfQuestions; $questionCounter++) {
         $answer;
-        if($questionType[$questionCounter] == '1'){ // mcq\
+        if($questionType[$questionCounter] == '1'){ // mcq
             $answer = $mcq[$mcqCounter];
             $mcqCounter=$mcqCounter+1;
         }
@@ -58,7 +77,7 @@ if (isset($_POST['submitQuizAnswers'])) {
         elseif($questionType[$questionCounter] =='3'){ // text
             $answer = $text[$textCounter];
             $textCounter = $textCounter + 1;
-        } elseif ($questionType[$questionCounter] == '4') {  //@Assaf, upload
+        } elseif ($questionType[$questionCounter] == '4') { // upload
             #file name with a random number so that similar dont get replaced
             $answer = rand(1000, 10000) . "-" . $_FILES["file"]["name"];
             #temporary file name to store file
