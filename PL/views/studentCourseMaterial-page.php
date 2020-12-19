@@ -184,9 +184,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         <td><?php echo $myQuiz['startDate'] ?></td>
                                         <td><?php echo $myQuiz['endDate'] ?></td>
                                     </tr>
+                                    <?php endforeach ?>
                             </tbody>
                         </table>
-                    <?php endforeach ?>
                     </table>
                     </div>
                 </div>

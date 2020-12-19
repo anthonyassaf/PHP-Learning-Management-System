@@ -23,16 +23,16 @@ if (isset($_POST['submitQuizAnswers'])) {
     foreach ($_POST['text'] as $i => $value) {
         array_push($text, $value);
     }
-    // foreach ($_POST['mcq'] as $i => $value){    
-    //     array_push($mcq, $value);
-    // }                                                @Assaf, fetch the file array
+    foreach ($_POST['file'] as $i => $value){    
+        array_push($upload, $value);
+    }                                                
 
     $questionType = array_values($questionType);
     $questionId = array_values($questionId);
     $text = array_values($text);
     $mcq = array_values($mcq);
     $boolean = array_values($boolean);
-    // $upload = array_values($upload)     @Assaf, uncomment when done
+    $upload = array_values($upload);
     $numOfQuestions = sizeof($questionId);
 
     $idStudent = $_SESSION['id'];
@@ -49,25 +49,27 @@ if (isset($_POST['submitQuizAnswers'])) {
         $answer;
         if($questionType[$questionCounter] == '1'){ // mcq\
             $answer = $mcq[$mcqCounter];
-            echo "MCQ $mcqCounter's answer is : $answer, $questionId[$questionCounter]<br>";
             $mcqCounter=$mcqCounter+1;
         }
         elseif($questionType[$questionCounter] == '2'){ // boolean
             $answer = $boolean[$booleanCounter];
-            echo "Boolean $booleanCounter's answer is : $answer, $questionId[$questionCounter]<br>";
             $booleanCounter=$booleanCounter+1;
         }
         elseif($questionType[$questionCounter] =='3'){ // text
             $answer = $text[$textCounter];
-            echo "Text $textCounter's answer is : $answer, $questionId[$questionCounter]<br>";
-            $textCounter = $textCounter+1;
+            $textCounter = $textCounter + 1;
+        } elseif ($questionType[$questionCounter] == '4') {  //@Assaf, upload
+            #file name with a random number so that similar dont get replaced
+            $answer = rand(1000, 10000) . "-" . $_FILES["file"]["name"];
+            #temporary file name to store file
+            $tname = $_FILES["file"]["tmp_name"];
+            #upload directory path
+            $uploads_dir = '../assets/studentsQuizUpload';
+            #TO move the uploaded file to specific location
+            move_uploaded_file($tname, $uploads_dir . '/' . $answer);
+            $uploadCounter = $uploadCounter + 1;
         }
-        elseif($questionType[$questionCounter] =='4'){  //@Assaf, upload
-        $answer = "Pending Assaf";
-            echo "Upload $uploadCounter's answer is : $answer, $questionId[$questionCounter]<br>";
-        $uploadCounter = $uploadCounter+1;
-        }
-        createStudentAnswer($questionId[$questionCounter],$idExam,$idClass,$idStudent,$answer);
+        createStudentAnswer($questionId[$questionCounter], $idExam, $idClass, $idStudent, $answer);
     }
 }
 ?>
