@@ -90,7 +90,7 @@ function insertStudentToCourse($classId,$studentId){
 
 function insertClassMaterial($classId, $materialUrl, $title){
     GLOBAL $con;
-    $query = "INSERT INTO `classmaterial`(`idClass`, `idType`, `materialUrl`, `description`) VALUES ('$classId', 1, '$materialUrl', '$title')";
+    $query = "INSERT INTO `classmaterial`(`idClass`, `materialUrl`, `description`) VALUES ('$classId', '$materialUrl', '$title')";
     $results = mysqli_query($con, $query);
     if ($results == 1) {
         return true;
