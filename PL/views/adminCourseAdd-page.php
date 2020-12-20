@@ -4,7 +4,7 @@ include_once('adminCourseAdd.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
-}elseif($_SESSION['role']!=1){
+}elseif($_SESSION['role']!='1'){
     header('location:index.php');
 }
 ?>
@@ -44,7 +44,7 @@ if (($_SESSION['isLoggedIn']) != true) {
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <!-- Logo -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index.php">
                         <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->

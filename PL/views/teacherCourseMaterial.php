@@ -1,5 +1,4 @@
 <?php
-
 include_once("../../BLL/courseManager.php");
 include_once("../../BLL/quizManager.php");
 if (($_SESSION['isLoggedIn']) != true) {

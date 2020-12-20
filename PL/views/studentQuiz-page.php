@@ -1,6 +1,6 @@
 <?php
-include_once('../../BLL/quizManager.php');
 session_start();
+include_once('../../BLL/quizManager.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
@@ -99,15 +99,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                                                 <?php echo $_SESSION['email']; ?></a></p>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="studentProfile.php""><i class=" fa fa-user"></i> My
-                                    Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-book"></i> Grades</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-envelope"></i>
-                                    Messages</a>
+                                <a class="dropdown-item" href="studentProfile-page.php""><i class=" fa fa-user"></i> My Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                        class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off m-r-5 m-l-5"></i>Logout</a>
                             </div>
                         </li>
                         <!-- User profile and search -->
