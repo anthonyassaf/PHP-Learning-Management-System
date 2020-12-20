@@ -3,7 +3,7 @@ session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
-}elseif($_SESSION['idRole']!=1){
+}elseif($_SESSION['role']!='1'){
     header('location:index.php');
 }
 ?>

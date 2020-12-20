@@ -3,7 +3,12 @@ session_start();
 include_once('../../BLL/userManager.php');
 
 $errors = array(); 
-
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}elseif($_SESSION['role']!=3){
+    header('location:index.php');
+}
 function passStrength($password) {
     $returnVal = True;
     if ( strlen($password) < 6) {

@@ -1,6 +1,14 @@
 <?php
 include_once("login.php");
 include_once("../../BLL/quizManager.php");
+
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}elseif($_SESSION['role']!=3){
+    header('location:index.php');
+}
+
 if (isset($_POST['submitQuizAnswers'])) {
 
     $questionType = array();

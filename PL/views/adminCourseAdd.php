@@ -2,6 +2,12 @@
 include_once('../../BLL/courseManager.php');
 
 $errors = array();
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}elseif($_SESSION['Role']!=1){
+    header("location:index.php");
+}
 
 if (isset($_POST['add_course'])){
     $courseName = $_POST['courseName'];

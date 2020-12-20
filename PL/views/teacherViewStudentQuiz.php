@@ -1,7 +1,12 @@
 <?php
 include_once("../../BLL/quizManager.php");
 $errors = array();
-
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}elseif($_SESSION['role']!=2){
+    header('location:index.php');
+}
 function validateForm($maxGrade,$grade){
     global $errors;
     if(empty($grade)){

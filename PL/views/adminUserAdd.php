@@ -2,6 +2,12 @@
 include_once('../../BLL/userManager.php');
 
 $errors = array();
+if (($_SESSION['isLoggedIn']) != true) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: loginForm.php');
+}elseif($_SESSION['role']!=1){
+    header("location:index.php");
+}
 
 function validateForm($firstname, $lastname, $userType, $studentFaculty, $studentStatus, $teacherRank)
 {
