@@ -5,6 +5,8 @@ session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
+}elseif($_SESSION['idRole']!=3){
+    header('location:index.php');
 }
 ?>
 
@@ -167,9 +169,10 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th style="width:33.33%">Quiz Title</th>
-                                    <th style="width:33.33%">Start Date</th>
-                                    <th style="width:33.33%">End Date</th>
+                                    <th style="width:25%">Quiz Title</th>
+                                    <th style="width:25%">Start Date</th>
+                                    <th style="width:25%">End Date</th>
+                                    <th style="width:25%">Quiz State</th>
 
                                 </tr>
                             </thead>
@@ -183,6 +186,21 @@ if (($_SESSION['isLoggedIn']) != true) {
                                                 <?php echo $myQuiz['quizTitle'] ?></button></td>
                                         <td><?php echo $myQuiz['startDate'] ?></td>
                                         <td><?php echo $myQuiz['endDate'] ?></td>
+                                        <td>
+                                            <?php $myQuizInfo = getStudentExamInfo($myQuiz['id'], $classId, $_SESSION['id']);
+                                            if($myQuizInfo == NULL){
+                                                ?>
+                                                <label>Not submitted yet.</label>
+                                            <?php  
+                                            }
+                                            elseif ($myQuizInfo['isCorrected'] == 0) {
+                                            ?>
+                                                <label>Not corrected yet.</label>
+                                            <?php } elseif ($myQuizInfo['isCorrected'] == 1) {
+                                            ?>
+                                                <label><?php echo $myQuizInfo['grade']."/".$myQuiz['totalGrade'];
+                                                    } ?>
+                                        </td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>

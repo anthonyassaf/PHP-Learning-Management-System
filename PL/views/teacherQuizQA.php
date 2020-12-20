@@ -103,6 +103,7 @@ function addQuestion($number)
         }
     }
     if (count($errors) == 0) {
+        updateExam($idExam,$grade);
         if ($number == 1)
             header('location: teacherDashboard-page.php');
         if ($number == 2)

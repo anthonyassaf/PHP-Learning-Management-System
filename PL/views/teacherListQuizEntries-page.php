@@ -5,6 +5,8 @@ session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
+}elseif($_SESSION['idRole']!=2){
+    header('location:index.php');
 }
 ?>
 
@@ -155,6 +157,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <thead>
                                         <tr>
                                             <th style="width:37.5%">Student Name</th>
+                                            <th style="width:37.5%">Quiz state</th> 
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -163,7 +166,12 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         foreach ($examEntries as $examEntry) : ?>
                                             <tr>
                                                 <td> <?php echo getStudentInformation($examEntry['idStudentEnrolled'])['firstname'] . " " . getStudentInformation($examEntry['idStudentEnrolled'])['lastname']; ?>
-                                                <td>
+                                        </td>
+                                               
+                                                <td> <?php if ($examEntry['isCorrected']==0) :?> <label> Not corrected yet.</label>
+                                                    <?php elseif ($examEntry['isCorrected']==1) : ?>   <label><?php echo $examEntry['grade']."/".getExamDetails($examEntry['idExam'])['totalGrade']?></label>
+                                                    <?php endif;?>
+                                                </td>
                                                 <td> <a href="teacherViewStudentQuiz-page.php?quizId=<?php echo $examEntry['id'] ?>" type="button" class="btn btn-primary">
                                                         Show Quiz Answers</a></td>
                                             </tr>

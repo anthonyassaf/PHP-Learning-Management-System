@@ -1,11 +1,13 @@
 <?php
 include_once('../../BLL/userManager.php');
 include_once('../../BLL/quizManager.php');
-//include_once("teacherViewStudentQuiz.php");
+include_once("teacherViewStudentQuiz.php");
 session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
+}elseif($_SESSION['idRole']!=2){
+    header('location:index.php');
 }
 ?>
 
@@ -56,14 +58,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <!-- toggle and nav items -->
                     <ul class="navbar-nav mr-auto">
                         <!-- This is  -->
-                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light"
-                                href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
+                        <li class="nav-item hidden-sm-up"> <a class="nav-link nav-toggler waves-effect waves-light" href="javascript:void(0)"><i class="fa fa-bars"></i></a></li>
                         <!-- Search -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-search"></i></a>
                             <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                    class="srh-btn"><i class="fa fa-times"></i></a>
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="fa fa-times"></i></a>
                             </form>
                         </li>
                     </ul>
@@ -71,19 +70,15 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <!-- User profile and search -->
                         <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?>
                             <?php echo $_SESSION['lname']; ?>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                                    src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle"
-                                            width="60"></div>
+                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>
                                             <?php echo $_SESSION['lname']; ?></h4>
-                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
-                                                data-cfemail="72041300071c32151f131b1e5c111d1f">
+                                        <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f">
                                                 <?php echo $_SESSION['email']; ?></a></p>
                                     </div>
                                 </div>
@@ -94,8 +89,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     Messages</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i
-                                        class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                             </div>
                         </li>
                         <!-- User profile and search -->
@@ -108,30 +102,21 @@ if (($_SESSION['isLoggedIn']) != true) {
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <aside class="left-sidebar">
             <div class="d-flex no-block nav-text-box align-items-center">
-                <span style="font-family: 'Lucida Console', Courier, monospace;"><img src="../assets/images/UAlogo.png"
-                        alt="elegant admin template">ECOURSES</span>
-                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i
-                        class="fa fa-bars fa-lg"></i></a>
-                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i
-                        class="fa fa-close"></i></a>
+                <span style="font-family: 'Lucida Console', Courier, monospace;"><img src="../assets/images/UAlogo.png" alt="elegant admin template">ECOURSES</span>
+                <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="fa fa-bars fa-lg"></i></a>
+                <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="fa fa-close"></i></a>
             </div>
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i
-                                    class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i
-                                    class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i
-                                    class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i
-                                    class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="studentProfile.html" aria-expanded="false"><i
-                                    class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="studentCourses.html" aria-expanded="false"><i
-                                    class="fa fa-book"></i><span class="hide-menu"></span>My Courses</a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentDashboard.html" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentFiles.html" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentProfile.html" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentCourses.html" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu"></span>My Courses</a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -174,70 +159,89 @@ if (($_SESSION['isLoggedIn']) != true) {
                 $quiz = getExamDetails($idExam);
                 $studentAnswers = getStudentAnswers($idExam, $idClass, $idStudent);
                 $questionCounter = 0;
+                $correctableAnswersCount=0;
                 ?>
                 <h3><?php echo $quiz['quizTitle'] ?></h3>
-                <h4><?php echo $student['firstname']." ".$student['lastname'] ?></h4>
+                <h4><?php echo $student['firstname'] . " " . $student['lastname'] ?></h4>
 
 
                 <div class="row">
                     <div class="col-12">
-                        <div class=" card">
-                            <div class="card-body">
-                                <?php if ($isCorrected == 0) { ?>
-                                    <form method="POST" action="teacherViewStudentQuiz-page.php?quizId=<?php echo $idExamEntry ?>">
-                                        <input type="hidden" name="examId" value="<?php echo $quiz['id'] ?>">
-                                        <input type="hidden" name="classId" value="<?php echo $idClass ?>">
-                                        <?php foreach ($studentAnswers as $studentAnswer) {
+
+                        <?php if ($isCorrected == 0) { ?>
+                            <form method="POST" action="teacherViewStudentQuiz-page.php?quizId=<?php echo $idExamEntry ?>">
+                            <center style="color: red"><?php include('errors.php'); ?></center>    
+                            <input type="hidden" name="quizId" value="<?php echo $quiz['id'] ?>">
+                            <input type="hidden" name="idStudentQuiz" value="<?php echo $idExamEntry?>">
+                                <?php foreach ($studentAnswers as $studentAnswer) {
+                                ?><div class=" card">
+                                        <div class="card-body">
+                                            <?php
                                             $questionCounter = $questionCounter + 1;
                                             $question = getQuestion($studentAnswer['idQuestion']);
                                             ?>
                                             <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
-                                            <?php 
+                                            <?php
                                             if ($question['idType'] == '1' || $question['idType'] == '2') { // mcq or boolean for auto correction
                                                 autoCorrectAnswer($studentAnswer['id']);
                                                 $updatedAnswerData = getStudentAnswer($studentAnswer['id']);
                                             ?>
-                                                <label>Answer:<?php echo $updatedAnswerData['answer'] ?> </label>
+                                                <br>
+                                                <h6>Answer:<b><?php echo $updatedAnswerData['answer'] ?></b> </h6>
+                                                <br>
                                                 <label> Grade:<?php echo $updatedAnswerData['grade'] ?> </label>
                                             <?php
                                             } elseif ($question['idType'] == '3') { // text
+                                                $correctableAnswersCount = $correctableAnswersCount+1;
                                             ?>
-                                                <label>Answer:<?php echo $studentAnswer['answer'] ?> </label>
-                                                <input type="hidden" name="questionId[]" value="<?php echo $question['id'] ?>">
-                                                <input type="hidden" name="studentAnswerId[]" value="<?php echo $studentAnswer['id']?>">
+                                                <br>
+                                                <h6>Answer:<b><?php echo $studentAnswer['answer'] ?></b> </h6>
+                                                <input type="hidden" name="studentAnswerId[]" value="<?php echo $studentAnswer['id'] ?>">
+                                                <input type="hidden" name="maxGrade[]" value="<?php echo $question['grade'] ?>">
+                                                <br>
                                                 <label>Grade :</label> <input type="number" name="grade[]" style="width: 50px;">
                                             <?php
                                             } elseif ($question['idType'] == '4') { // upload
+                                                $correctableAnswersCount = $correctableAnswersCount+1;
                                             ?>
-                                                <label>Answer:Test<?php //@Assaf ?>
-                                                <input type="hidden" name="questionId[]" value="<?php echo $question['id'] ?>">
-                                                <input type="hidden" name="studentAnswerId[]" value="<?php echo $studentAnswer['id']?>">
+                                                <br>
+                                                <h6>Answer:<b><a href="Test<?php //@Assaf 
+                                                                            ?>">Test<?php //@Assaf 
+                                                                                                    ?></a></b></h6>
+                                                <input type="hidden" name="studentAnswerId[]" value="<?php echo $studentAnswer['id'] ?>">
+                                                <input type="hidden" name="maxGrade[]" value="<?php echo $question['grade'] ?>">
+                                                <br>
                                                 <label>Grade :</label> <input type="number" name="grade[]" style="width: 50px;">
                                             <?php
                                             }
-                                        }
-                                        ?>
-                                        <button type="submit" class="btn btn-submit" name="SubmitAnswerCorrection"></button>
-                                    </form>
+                                            ?>
+                                        </div>
+                                    </div>
                                 <?php
-                                }elseif ($isCorrected == 1) { ?>
-                                    <label> You have already corrected this exam entry. </label>
-                                    <?php foreach ($studentAnswers as $studentAnswer) {
-                                        $questionCounter = $questionCounter + 1;
-                                        $question = getQuestion($studentAnswer['idQuestion']);
-                                    ?>
-                                     <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
-                                    <label>Answer:<?php echo $studentAnswer['answer'] ?> </label>
-                                    <label> Grade:<?php echo $studentAnswer['grade'] ?> </label>
-                                    <?php 
-                                    }
                                 }
                                 ?>
-                            </div>
-                        </div>
+                                <br>
+                                <input type="hidden" name="numCorrectableAnswers" value="<?php echo $correctableAnswersCount?>">
+                                <input type="submit" class="btn btn-success" name="SubmitAnswerCorrection" value="Submit Correction">
+                            </form>
+                        <?php
+                        } elseif ($isCorrected == 1) { ?>
+                            <label> You have already corrected this exam entry. </label>
+                            <?php foreach ($studentAnswers as $studentAnswer) {
+                                $questionCounter = $questionCounter + 1;
+                                $question = getQuestion($studentAnswer['idQuestion']);
+                            ?>
+                                <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
+                                <label>Answer:<?php echo $studentAnswer['answer'] ?> </label>
+                                <label> Grade:<?php echo $studentAnswer['grade'] ?> </label>
+                        <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
+
             <!-- End Page Content -->
         </div>
         <!-- End Container fluid  -->

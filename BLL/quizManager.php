@@ -3,10 +3,10 @@
 include_once('../../DAL/quizRepository.php');
 
 
-function createQuiz($classId, $quizTitle, $startDate, $endDate, $weight){
+function createQuiz($classId, $quizTitle, $startDate, $endDate){
     $startDate = date("Y-m-d H:i:s", strtotime($startDate));
     $endDate = date("Y-m-d H:i:s", strtotime($endDate));
-    return insertQuiz($classId, $quizTitle, $startDate, $endDate, $weight);
+    return insertQuiz($classId, $quizTitle, $startDate, $endDate);
 }
 
 function getClassExams($classId){
@@ -71,17 +71,30 @@ function getCorrectAnswer($idQuestion){
     return selectCorrectAnswer($idQuestion);
  }
  
+function correctAnswer($idStudentAnswer,$grade){
+    return updateAnswer($idStudentAnswer,$grade);
+}
 function autoCorrectAnswer($id){
     $studentAnswer = getStudentAnswer($id);
     $question = getQuestion($studentAnswer['idQuestion']);
     $correctAnswer = getCorrectAnswer($question['id']);
     if($correctAnswer['description'] == $studentAnswer['answer']){
-        updateAnswer($studentAnswer['id'],$question['grade']);
+        correctAnswer($studentAnswer['id'],$question['grade']);
     }
     else {
-        updateAnswer($studentAnswer['id'],0);
+        correctAnswer($studentAnswer['id'],0);
     }
 }
 
+function correctQuiz($idStudentExam){
+    return updateQuiz($idStudentExam);
+}
 
+function getStudentExamInfo($idExam,$idClass,$idStudent){
+    return selectStudentExamInfo($idExam,$idClass,$idStudent);
+}
+
+function updateExam($idExam,$grade){
+    return updateExamGrade($idExam,$grade);
+}
 ?>

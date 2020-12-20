@@ -4,6 +4,8 @@ include_once('adminCourseAdd.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
+}elseif($_SESSION['idRole']!=1){
+    header('location:index.php');
 }
 ?>
 <!DOCTYPE html>

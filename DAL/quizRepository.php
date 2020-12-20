@@ -4,13 +4,12 @@ include_once('connection.php');
 
 $con = openCon();
 
-function insertQuiz($classId, $quizTitle, $startDate, $endDate, $weight){
+function insertQuiz($classId, $quizTitle, $startDate, $endDate){
     GLOBAL $con;
     $quizTitle = mysqli_real_escape_string($con, $quizTitle);
     $startDate = mysqli_real_escape_string($con, $startDate);
     $endDate = mysqli_real_escape_string($con, $endDate);
-    $weight = mysqli_real_escape_string($con, $weight);
-    $query = "INSERT INTO `exam`(`idClass`, `quizTitle`, `weight`, `startDate`, `endDate`) VALUES ('$classId', '$quizTitle', '$weight', '$startDate', '$endDate')";
+    $query = "INSERT INTO `exam`(`idClass`, `quizTitle`, `startDate`, `endDate`) VALUES ('$classId', '$quizTitle', '$startDate', '$endDate')";
     $results = mysqli_query($con, $query);
     if ($results == 1) {
         return mysqli_insert_id($con);
@@ -241,5 +240,44 @@ function  updateAnswer($id,$grade){
         return false;
     }
 }
-?>
 
+function updateQuiz($idStudentExam){
+    GLOBAL $con;
+    $examInformation = selectStudentEnrolledExam($idStudentExam);
+    $idClass=$examInformation['idClassEnrolled'];
+    $idExam=$examInformation['idExam'];
+    $idStudent=$examInformation['idStudentEnrolled'];
+    $query= "UPDATE `studentenrolledexam` SET `isCorrected` = 1,`grade` = (SELECT SUM(`grade`) FROM `studentanswer` WHERE `idExam`=$idExam AND `idStudentEnrolled`=$idStudent AND `idClassEnrolled`=$idClass) where `id` = $idStudentExam";
+    $results = mysqli_query($con, $query);
+    if($results){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function selectStudentExamInfo($idExam,$idClass,$idStudent){
+    GLOBAL $con;
+    $idExam = mysqli_real_escape_string($con, $idExam);
+    $idClass = mysqli_real_escape_string($con, $idClass);
+    $idStudent = mysqli_real_escape_string($con, $idStudent);
+    $query="SELECT * from studentenrolledexam where idExam='$idExam' AND idClassEnrolled='$idClass' AND idStudentEnrolled='$idStudent' ";
+    $results = mysqli_query($con, $query);
+    if(mysqli_num_rows($results) == 1){
+        return mysqli_fetch_assoc($results);
+    }
+    return NULL;
+}
+
+function updateExamGrade($idExam,$grade){
+    GLOBAL $con;
+    $query="UPDATE `exam` SET `totalGrade`=`totalGrade`+'$grade' WHERE `id`='$idExam'";
+    $results = mysqli_query($con, $query);
+    if($results){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+?>

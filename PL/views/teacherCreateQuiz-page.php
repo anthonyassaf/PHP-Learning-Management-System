@@ -4,6 +4,8 @@ include_once('teacherCreateQuiz.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
+}elseif($_SESSION['idRole']!=2){
+    header('location:index.php');
 }
 ?>
 
@@ -175,12 +177,6 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         <label class="col-sm-2 col-form-label">End Date</label>
                                         <div class="col-sm-10">
                                             <input type="datetime-local" name="endDate" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">Weight</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="weight" class="form-control" placeholder="Weight" required> 
                                         </div>
                                     </div>
                                     <div class="form-group row">
