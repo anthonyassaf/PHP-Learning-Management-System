@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('../../BLL/courseManager.php');
 
 $errors = array();

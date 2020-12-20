@@ -1,7 +1,6 @@
 <?php
-session_start();
-include_once('../../BLL/userManager.php');
 include_once("teacherViewStudentQuiz.php");
+include_once('../../BLL/userManager.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
@@ -69,11 +68,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <!-- User profile and search -->
                         <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?>
                             <?php echo $_SESSION['lname']; ?>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle" width="60"></div>
+                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>
                                             <?php echo $_SESSION['lname']; ?></h4>
@@ -213,18 +212,24 @@ if (($_SESSION['isLoggedIn']) != true) {
                             </form>
                         <?php
                         } elseif ($isCorrected == 1) { ?>
+                        <div class="card">
+                            <div class="card-body">
+
+                        
                             <label> You have already corrected this exam entry. </label>
                             <?php foreach ($studentAnswers as $studentAnswer) {
                                 $questionCounter = $questionCounter + 1;
                                 $question = getQuestion($studentAnswer['idQuestion']);
                             ?>
                                 <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
-                                <label>Answer:<?php echo $studentAnswer['answer'] ?> </label>
-                                <label> Grade:<?php echo $studentAnswer['grade'] ?> </label>
+                                <br><label>Answer:<b><?php echo $studentAnswer['answer'] ?> </b></label>
+                                <br><label> Grade:<b><?php echo $studentAnswer['grade'] ?> </b></label>
                         <?php
                             }
                         }
                         ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

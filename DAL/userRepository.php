@@ -141,7 +141,7 @@ function createStudent($userId, $firstname, $lastname, $studentFacultyId, $stude
     $studentFacultyId = implode($studentFacultyId);
     $studentStatusId = implode($studentStatusId);
     $password = password_hash($password, PASSWORD_BCRYPT);
-    $query = "INSERT INTO `user`(`userID`,`idRole`,`idStudentStatus`,`idFaculty`,`email`,`password`,`firstname`,`lastname`,`salt`) VALUES('$userId','3','$studentStatusId','$studentFacultyId','$email','$password','$firstname','$lastname', $salt');";
+    $query = "INSERT INTO `user`(`userID`,`idRole`,`idStudentStatus`,`idFaculty`,`email`,`password`,`firstname`,`lastname`,`salt`) VALUES('$userId','3','$studentStatusId','$studentFacultyId','$email','$password','$firstname','$lastname', '$salt');";
     $results = mysqli_query($con, $query);
     if ($results == 1) {
         return true;

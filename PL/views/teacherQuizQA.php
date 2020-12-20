@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('../../BLL/quizManager.php');
 
 $errors = array();

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once("studentQuiz.php");
 include_once('../../BLL/quizManager.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
@@ -89,8 +89,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                    <div class=""><img src="../assets/images/users/5.jpg" alt="user" class="img-circle"
-                                            width="60"></div>
+                                <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>
                                             <?php echo $_SESSION['lname']; ?></h4>
@@ -99,7 +98,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                                 <?php echo $_SESSION['email']; ?></a></p>
                                     </div>
                                 </div>
-                                <a class="dropdown-item" href="studentProfile-page.php""><i class=" fa fa-user"></i> My Profile</a>
+                                <a class="dropdown-item" href="studentProfile-page.php"><i class=" fa fa-user"></i> My Profile</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off m-r-5 m-l-5"></i>Logout</a>
                             </div>
@@ -158,7 +157,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                            
                             $questions = getExamQuestions($_GET['quizId']);
                             ?>
-                        <form method="POST" action="studentQuiz.php">
+                        <form method="POST" action="studentQuiz-page.php">
                             <input type="hidden" name="examId" value="<?php echo $_GET['quizId'] ?>">
                             <input type="hidden" name="classId" value="<?php echo $exam['idClass'] ?>">
                             <?php

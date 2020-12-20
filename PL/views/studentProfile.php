@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('../../BLL/userManager.php');
 
 $errors = array(); 
@@ -66,7 +67,7 @@ function passStrength($password) {
 			 $tname = $_FILES["file"]["tmp_name"];
 			
 			 #upload directory path
-			 $uploads_dir = '../assets/usersImages';
+			 $uploads_dir = '../assets/images/users';
 			 #TO move the uploaded file to specific location
 			 move_uploaded_file($tname, $uploads_dir.'/'.$ppUrl);
 
