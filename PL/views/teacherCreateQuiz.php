@@ -20,6 +20,14 @@ function validateForm($quizTitle, $startDate, $endDate){
     if (empty($endDate)) {
         array_push($errors, "End Time is required");
     }
+    if(!empty($startDate) && !empty($endDate)){
+        if(strtotime($startDate)>strtotime($endDate)){
+            array_push($errors, "Start date must be prior to end date");
+        }
+        if(strtotime($startDate)<getSystemDate()){
+            array_push($errors,"Start date must be in the future.");
+        }
+    }
 }
 
 if(isset($_POST['create_quiz'])){
@@ -30,7 +38,6 @@ if(isset($_POST['create_quiz'])){
     validateForm($quizTitle, $startDate, $endDate);
     if(count($errors) == 0){
        $results = createQuiz($idClass, $quizTitle, $startDate, $endDate);
-       echo $idClass;
         if($results>0){
            header("location: teacherQuizQA-page.php?quizTitle=$quizTitle&exam=$results");
         }

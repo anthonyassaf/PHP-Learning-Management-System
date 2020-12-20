@@ -146,4 +146,25 @@ function selectClassTeacher($classNumber){
     return null;
 }
 
+function selectUnenrolledClassStudents($classNumber){
+    GLOBAL $con;
+    $query = "SELECT `user`.* 
+	FROM `user`
+    	WHERE `user`.idRole=3 
+        	AND `user`.id NOT IN (SELECT `studentenrollment`.idStudent 
+                                	FROM `studentenrollment`,`class`
+                                	WHERE `studentenrollment`.idClass = `class`.id 
+                                        AND `class`.classNumber='$classNumber')
+            AND `user`.idFaculty = (SELECT `class`.idFaculty FROM `class` WHERE `class`.classNumber='$classNumber');";
+     $results = mysqli_query($con, $query);
+    if (mysqli_num_rows($results) > 0 ) {
+        $students = array();
+        while($row = mysqli_fetch_assoc($results)){ // loop to store the data in an associative array.
+            array_push($students, $row);
+        }
+        return $students;
+    }
+    return array();
+}
+
 ?>

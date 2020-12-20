@@ -152,7 +152,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                         </tr>
                                         <?php
                                         $classNumber = $_GET['classNumber'];
-                                        $students = getCourseFacultyStudents($classNumber);
+                                        $students = getUnenrolledClassStudents($classNumber);
                                         $i = 0;
                                         foreach ($students as $student) :
                                             $i = $i + 1; ?>

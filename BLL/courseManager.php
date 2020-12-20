@@ -61,5 +61,8 @@ function getTeacherClassStudents($id){ //same as getClassStudents
 function getClassTeacher($classNumber){
     return selectClassTeacher($classNumber);
 }
+function getUnenrolledClassStudents($classNumber){
+    return selectUnenrolledClassStudents($classNumber);
+}
 
 ?>
