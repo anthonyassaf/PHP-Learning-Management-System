@@ -275,7 +275,6 @@ if (($_SESSION['isLoggedIn']) != true) {
             }
         }
             $('#form').on('submit',function(e) {
-                e.preventDefault();
                 var formData = {
                     'firstname': $('input[name=firstname]').val(),
                     'lastname': $('input[name=lastname]').val(),
@@ -297,7 +296,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                         }
                     }
                 });
-               
+                e.preventDefault();
             });
         });
     </script>

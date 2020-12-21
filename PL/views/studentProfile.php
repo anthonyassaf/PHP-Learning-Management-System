@@ -11,7 +11,7 @@ $email = $_SESSION['email'];
 $new_fname = $_POST['firstname'];
 $new_lname = $_POST['lastname'];
 $current_password = $_POST['password'];
-
+$new_password = $_POST['newpassword'];
 
 if (empty($new_fname)) {
 	$form_data['success'] = false;
@@ -28,8 +28,7 @@ if (empty($new_fname)) {
 	$form_data['message'] = "6+ lower and upper case characters / contains at least 1 special characters and 1 number";
 } else {
 	$form_data['success'] = true;
-	$result = null;
-
+	$result = NULL;
 	if ($new_fname != $_SESSION['fname']) {
 		$_SESSION['fname'] = $new_fname;
 		$result = edit('firstname', $new_fname, $email);
@@ -54,7 +53,7 @@ if (empty($new_fname)) {
 	$result = edit('profileImageURL', $ppUrl, $email);
 
 	$form_data['message'] = 'Successfully Updated';
-echo json_encode($form_data);
+	echo json_encode($form_data);
 }
 /*
 if ($result != null) {
@@ -66,22 +65,21 @@ if ($result != null) {
 
 	function passStrength($password)
 {
-	$returnVal = True;
 	if (strlen($password) < 6) {
-		$returnVal = False;
+		return False;
 	}
 	if (!preg_match("#[0-9]+#", $password)) {
-		$returnVal = False;
+		return False;
 	}
 	if (!preg_match("#[a-z]+#", $password)) {
-		$returnVal = False;
+		return False;
 	}
 	if (!preg_match("#[A-Z]+#", $password)) {
-		$returnVal = False;
+		return False;
 	}
 	if (!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $password)) {
-		$returnVal = False;
+		return False;
 	}
-	return $returnVal;
+	return true;
 }
 ?>
