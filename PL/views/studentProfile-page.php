@@ -145,7 +145,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <div class="col-lg-4 col-xlg-3 col-md-5">
                             <div class="card">
                                 <div class="card-body">
-                                    <center class="m-t-30"> <img id="pp" src="../assets/usersImages/<?php echo $_SESSION['ppURL'] ?>" class="img-circle" width="150" />
+                                    <center class="m-t-30"> <img id="pp" src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" class="img-circle" width="150" />
                                         <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <h6 class="card-subtitle"><?php echo $_SESSION['faculty'] . " " . $_SESSION['roleName'] ?></h6>
                                         <input type="File" name="file" accept="image/x-png,image/gif,image/jpeg" onchange="readURL(this);" />

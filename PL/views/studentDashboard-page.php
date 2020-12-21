@@ -115,8 +115,6 @@ if (($_SESSION['isLoggedIn']) != true) {
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 
-
-
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Container fluid  -->
@@ -145,7 +143,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 col-md-3">
-                                            <img src="../assets/usersImages/<?php echo $_SESSION['ppURL']?>" class="img-circle" width="150" />
+                                            <img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" class="img-circle" width="150" />
                                         </div>
                                         <div class="col-12-col-md-9">
                                             <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
