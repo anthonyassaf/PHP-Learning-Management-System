@@ -60,8 +60,6 @@ if (isset($_POST['login_user'])) {
                 $_SESSION['roleName'] = "teacher";
                 $_SESSION['teacherAcademicRank'] = getTeacherAcademicRank($id);
             }
-
-         
             header('location: index.php');
         }
         else {

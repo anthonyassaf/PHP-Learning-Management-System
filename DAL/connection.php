@@ -5,7 +5,7 @@ $con = "";
 function openCon(){
 // Create connection
 GLOBAL $con;
-$con = mysqli_connect('localhost:3308', 'root', '', 'test');
+$con = mysqli_connect('localhost:3307', 'root', '', 'webprog1project');
 // Check connection
 if (!$con) {
   die("Connection failed: " . mysqli_connect_error());

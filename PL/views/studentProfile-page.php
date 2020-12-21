@@ -152,34 +152,38 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
-                <!-- ============================================================== -->
                 <!-- Row -->
-                <form id="form" action="" class="form-horizontal form-material" method="post" autocomplete="off" enctype="multipart/form-data">
-                    <div class="row">
-                        <!-- Column -->
-                        <div class="col-lg-4 col-xlg-3 col-md-5">
-                            <div class="card">
-                                <div class="card-body">
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="studentProfileImage.php" method="post" enctype="multipart/form-data">
                                     <center class="m-t-30"> <img id="pp" src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" class="img-circle" width="150" />
                                         <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <h6 class="card-subtitle"><?php echo $_SESSION['faculty'] . " " . $_SESSION['roleName'] ?></h6>
                                         <input type="File" name="file" accept="image/x-png,image/gif,image/jpeg" onchange="readURL(this);" />
+                                        <br><br>
+                                        <input type="submit" name="update_pp" value="Update Profile Pic" class="btn btn-warning">
+                                        <input type="hidden" class="form-control form-control-line" name="email" value="<?php echo $_SESSION['email']; ?>">
                                     </center>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-lg-8 col-xlg-9 col-md-7">
-                            <div id="success"></div>
-                            <span class="error"></span>
+                    </div>
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <form id="form" action="" class="form-horizontal form-material" method="post" autocomplete="off" enctype="multipart/form-data">
+                            <center>
+                                <div id="success"></div>
+                            </center>
+                            <center><span class="error"></span></center>
                             <div class="card">
                                 <!-- Tab panes -->
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label class="col-md-12">First Name</label>
                                         <div class="col-md-12">
-                                            <input type="text" name="firstname" class="form-control form-control-line" required value="<?php echo $_SESSION['fname']; ?>">
+                                            <input type="text" name="firstname" class="form-control form-control-line" value="<?php echo $_SESSION['fname']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -191,13 +195,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">ID</label>
                                         <div class="col-md-12">
-                                            <input type="email" readonly class="form-control form-control-line form-control-warning" name="userId"  value="<?php echo $_SESSION['userId']; ?>">
+                                            <input type="email" readonly class="form-control form-control-line form-control-warning" name="userId" value="<?php echo $_SESSION['userId']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">Email</label>
                                         <div class="col-md-12">
-                                            <input type="email" readonly class="form-control form-control-line" name="email"  value="<?php echo $_SESSION['email']; ?>">
+                                            <input type="email" readonly class="form-control form-control-line" name="email" value="<?php echo $_SESSION['email']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -220,10 +224,11 @@ if (($_SESSION['isLoggedIn']) != true) {
 
                                 </div>
                             </div>
-                        </div>
-                        <!-- Column -->
+                        </form>
                     </div>
-                </form>
+
+                </div>
+
                 <!-- Row -->
                 <!-- End Page Content -->
             </div>
@@ -260,9 +265,7 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
     <script>
-
-        $(document).ready(function() {
-            function readURL(input) {
+        function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
@@ -274,16 +277,19 @@ if (($_SESSION['isLoggedIn']) != true) {
                 reader.readAsDataURL(input.files[0]);
             }
         }
-            $('#form').on('submit',function(e) {
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#form').on('submit', function(e) {
                 var formData = {
                     'firstname': $('input[name=firstname]').val(),
                     'lastname': $('input[name=lastname]').val(),
                     'password': $('input[name=currentPassword]').val(),
-                    'newpassword' : $('input[name=newPassword').val()
+                    'newpassword': $('input[name=newPassword').val()
                 };
                 $.ajax({
-                    type: 'POST', 
-                    url: 'studentProfile.php', 
+                    type: 'POST',
+                    url: 'studentProfile.php',
                     data: formData,
                     dataType: 'json',
                     success: function(d) {

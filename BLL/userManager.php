@@ -130,4 +130,11 @@ function getStudentInformation($id){
     return selectStudentInformation($id);
 }
 
+function samePass($email, $password){
+    $row = getSalt($email);
+    $salt = $row['salt'];
+    $password = md5($salt.$password.$salt);
+    return checkPassword($email, $password);
+}
 
+?>

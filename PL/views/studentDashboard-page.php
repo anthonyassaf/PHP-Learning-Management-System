@@ -170,7 +170,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                             <div class="bg-success"><a href="calendar.html" style="color: white;"><i class="fa fa-calendar fa-lg"></a></i></div>
                                         </li>
                                         <li>
-                                            <div class="bg-warning"><i class="fa fa-book fa-lg"></i></div>
+                                            <div class="bg-warning"><a href="studentCourses-page.php" style="color: white;"><i class="fa fa-book fa-lg"></i></a></div>
                                         </li>
                                     </ul>
                                 </center>
