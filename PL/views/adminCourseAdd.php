@@ -1,4 +1,4 @@
-<?php
+?php
 session_start();
 include_once('../../BLL/courseManager.php');
 
@@ -9,44 +9,78 @@ if (($_SESSION['isLoggedIn']) != true) {
 }elseif($_SESSION['role']!=1){
     header("location:index.php");
 }
-
-if (isset($_POST['add_course'])){
     $courseName = $_POST['courseName'];
     $faculty = $_POST['courseFaculty'];
     $capacity = $_POST['courseCapacity'];
     $sectionCount = $_POST['courseSection'];
     $semester = $_POST['courseSemester'];
 
-    validateForm($courseName, $faculty, $capacity, $sectionCount, $semester);
-    if(count($errors) == 0){
+   $form_data=validateForm($courseName, $faculty, $capacity, $sectionCount, $semester);
+   if($form_data['success']==true){
        $_SESSION['courseName']=$courseName;
        $_SESSION['courseFaculty']=$faculty;
        $_SESSION['courseCapacity']=$capacity;
        $_SESSION['courseSection']=$sectionCount;
        $_SESSION['courseSemester']=$semester;
-       header('location: adminSectionAdd-page.php');
+       
     }
-    
-}
+    echo json_encode($form_data);
 
 function validateForm($courseName, $faculty, $capacity, $sectionCount, $semester){
-    GLOBAL $errors;
-     if (empty($courseName)) { array_push($errors, "Course Name is required"); }
-     if (empty($capacity)) { array_push($errors, "Capacity required"); }
-     if (empty($sectionCount)) { array_push($errors, "Section number required"); }
+    $form_data = array();
+     if (empty($courseName)) { 
+         $form_data['success'] = false;
+         $form_data['message']  = 'Course Name is required';
+         return $form_data;
+        }
+     if (empty($capacity)) { 
+         $form_data['success'] = false;
+         $form_data['message']  = 'Capacity required';
+         return $form_data;
+        }
+    else {
+        if($capacity<=0){
+            $form_data['success'] = false;
+            $form_data['message']  = 'Capacity must be positive';
+            return $form_data;
+        }
+    }
+     if (empty($sectionCount)) { 
+         $form_data['success'] = false;
+         $form_data['message']  = 'Section number required';
+         return $form_data;
+        }
      else {
-         if($sectionCount<=0) { array_push($errors,"Section number must be positive"); }
+         if($sectionCount<=0) { 
+             $form_data['success'] = false;
+             $form_data['message']  = 'Section number must be positive';
+             return $form_data;
+            }
      }
-     if (!isset($faculty)) { array_push($errors, "Faculty required"); }
+     if (!isset($faculty)) { 
+         $form_data['success'] = false;
+         $form_data['message']  = 'Faculty required';
+         return $form_data;
+        }
      else {
          if($faculty != 'Engineering' && $faculty != 'Public Health' && $faculty!= 'Business' && $faculty!='Sports Science'){
-            array_push($errors, "Undefined Faculty Selection");
+            $form_data['success'] = false;
+            $form_data['message']  = 'Undefined Faculty Selection';
+            return $form_data;
          }
      }
-     if (!isset($semester)) { array_push($errors, "Semester required"); }
+     if (!isset($semester)) { 
+         $form_data['success'] = false;
+         $form_data['message']  = 'Semester required';
+         return $form_data;
+        }
      else {
         if($semester != 'Fall' && $semester != 'Spring' && $semester != 'Summer'){
-            array_push($errors, "Undefined Semester Selection");
+            $form_data['success'] = false;
+            $form_data['message']  = 'Undefined Semester Selection';
+            return $form_data;
         }
      }
+     $form_data['success'] = true;
+     return $form_data;
  }

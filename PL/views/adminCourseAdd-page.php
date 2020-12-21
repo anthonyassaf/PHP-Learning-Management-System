@@ -1,9 +1,10 @@
 <?php
-include_once('adminCourseAdd.php');
+session_start();
+include_once('../../BLL/courseManager.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
-}elseif($_SESSION['role']!='1'){
+} elseif ($_SESSION['role'] != '1') {
     header('location:index.php');
 }
 ?>
@@ -23,6 +24,21 @@ if (($_SESSION['isLoggedIn']) != true) {
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/UAlogo.png">
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
+    <style>
+    .error {
+        color: tomato;
+        font-size: 12px;
+        display: none;
+    }
+
+    #success {
+        display: none;
+        font-family: Arial;
+        color: green;
+        margin-left: 85px;
+        font-size: 14px;
+    }
+    </style>
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -67,11 +83,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
                         <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="60"></div>
+                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><?php echo $_SESSION['email']; ?></p>
@@ -115,7 +131,6 @@ if (($_SESSION['isLoggedIn']) != true) {
             <!-- Container fluid  -->
             <div class="container-fluid">
                 <!-- Bread crumb and right sidebar toggle -->
-                <center style="color: red"><?php include('errors.php'); ?></center>
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
                         <h4 class="text-themecolor">Add Course</h4>
@@ -135,8 +150,12 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <div class="card">
                     <!-- Tab panes -->
                     <div class="card-body">
-                        <form class="form-horizontal form-material" method=POST action='adminCourseAdd-Page.php'>
-                            <div class="form-group">
+                        <form id="form" class="form-horizontal form-material" method=POST action=''>
+                        <center>
+                    <div id="success"></div>
+                    <span class="error"></span>
+                </center>   
+                        <div class="form-group">
                                 <label class="col-md-12">Course name</label>
                                 <div class="col-md-12">
                                     <input type="text" name='courseName' class="form-control form-control-line">
@@ -145,7 +164,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="form-group">
                                 <label class="col-sm-12">Faculty</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control form-control-line" name='courseFaculty'>
+                                    <select id="facultySelection" class="form-control form-control-line" name='courseFaculty'>
                                         <option></option>
                                         <option>Engineering</option>
                                         <option>Public Health</option>
@@ -169,7 +188,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="form-group">
                                 <label class="col-sm-12">Semester</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control form-control-line" name='courseSemester'>
+                                    <select id="semesterSelection" class="form-control form-control-line" name='courseSemester'>
                                         <option></option>s
                                         <option>Fall</option>
                                         <option>Spring</option>
@@ -221,7 +240,49 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
+    <script>
+        $(document).ready(function() {
 
+            $('#form').on('submit', function(e) {
+                e.preventDefault();
+                var facultySelection = document.getElementById("facultySelection");
+                var facultyOptionValue = facultySelection.options[facultySelection.selectedIndex].text;
+                var semesterSelection = document.getElementById("semesterSelection");
+                var semesterOptionValue = semesterSelection.options[semesterSelection.selectedIndex].text;
+                var formData = {
+                    'courseName': $('input[name="courseName"]').val(),
+                    'courseFaculty': facultyOptionValue,
+                    'courseCapacity': $('input[name="courseCapacity"]').val(),
+                    'courseSection':$('input[name="courseSection"]').val(),
+                    'courseSemester': semesterOptionValue,
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: 'adminCourseAdd.php',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(d) {
+                        if (!d.success) {
+                            $('.error').empty();
+                            $('.error').fadeIn(1000).html(d.message);
+                            $('#success').empty();
+
+                        } else {
+                            $('#success').empty();
+                            $('#success').fadeIn(1000).append('<p>' + d.message + '</p>');
+                            $('.error').empty();
+                            window.location.replace("adminSectionAdd-page.php");
+
+                        }
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+
+            });
+        })
+    </script>
 </body>
 
 
