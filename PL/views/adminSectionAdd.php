@@ -37,7 +37,9 @@ if (isset($_POST['add_section'])){
         $session=$classesSession[$i];
         $idTeacher=validateForm($teacher,$day,$session);
         if(count($errors) == 0){
-            createCourse($idTeacher,$semester,$faculty,$courseName,$capacity,$day,$session,$i+1);
+            if(createCourse($idTeacher,$semester,$faculty,$courseName,$capacity,$day,$session,$i+1)){
+                header("location: adminCourseAdd-page.php");
+            }
          }
     }
 }

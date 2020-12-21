@@ -31,8 +31,8 @@ if(isset($_POST['assign_Students'])){
         if($studentsChecked[$i] ==1){
             validation($studentsID[$i],$studentsName[$i]);
             if(count($errors)==0) {
-                echo implode(getClassIdFromNumber($_GET['classNumber']))." ".implode(getStudent($studentsID[$i]));
-                assignStudentToCourse(getClassIdFromNumber($_GET['classNumber']),getStudent($studentsID[$i]));
+                if(assignStudentToCourse(getClassIdFromNumber($_GET['classNumber']),getStudent($studentsID[$i])))
+                header("Location: adminManageCourses-page.php");
             }
         }
     }
