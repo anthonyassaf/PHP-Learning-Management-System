@@ -1,6 +1,5 @@
 <?php
 include_once("studentQuiz.php");
-include_once('../../BLL/quizManager.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
@@ -132,14 +131,14 @@ if (($_SESSION['isLoggedIn']) != true) {
                             </div>
                         </div>
 
-                        <?php elseif(getSystemDate()<$exam['startDate']) : ?>
+                        <?php elseif(getSystemDate()<strtotime($exam['startDate'])) : ?>
                         <input type="hidden" id="quizStatus" value="NotStarted">
                         <div class=" card">
                             <div class="card-body">
                                 <center><label> Exam has not started yet, please wait until it starts.</label></center>
                             </div>
                         </div>
-                        <?php elseif(getSystemDate()>$exam['endDate']) : ?>
+                        <?php elseif(getSystemDate()>strtotime($exam['endDate'])) :?>
                         <input type="hidden" id="quizStatus" value="Ended">
                         <div class=" card">
                             <div class="card-body">
@@ -157,7 +156,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                            
                             $questions = getExamQuestions($_GET['quizId']);
                             ?>
-                        <form method="POST" action="studentQuiz-page.php">
+                        <form method="POST" enctype="multipart/form-data" action="studentQuiz-page.php?quizId=<?php echo $_GET['quizId'];?>">
                             <input type="hidden" name="examId" value="<?php echo $_GET['quizId'] ?>">
                             <input type="hidden" name="classId" value="<?php echo $exam['idClass'] ?>">
                             <?php
@@ -196,7 +195,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     </div>
                                     <?php elseif ($question['idType'] == 4) : ?>
                                     <?php $uploadCounter = $uploadCounter + 1; ?>
-                                    <input type="File" name="file[]">
+                                    <input type="File" name="file<?php echo $uploadCounter?>">
                                     <?php endif ?>
                                 </div>
                             </div>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once("../../BLL/quizManager.php");
-
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
@@ -16,7 +15,6 @@ if (isset($_POST['submitQuizAnswers'])) {
     $mcq = array();
     $boolean = array();
     $text = array();
-    $upload = array();
     foreach ($_POST['questionType'] as $i => $value) {
         array_push($questionType, $value);
     }
@@ -51,16 +49,7 @@ if (isset($_POST['submitQuizAnswers'])) {
         }
         $text = array_values($text);
     }
-    if($_POST['uploadCount']>0){
-       
-        foreach ($_POST['file'] as $i => $value){    
-            array_push($upload, $value);
-        }     
-        $upload = array_values($upload);     
-    }
- 
     $numOfQuestions = sizeof($questionId);
-
     $idStudent = $_SESSION['id'];
     $idClass = $_POST['classId'];
     $idExam = $_POST['examId'];
@@ -86,17 +75,23 @@ if (isset($_POST['submitQuizAnswers'])) {
             $answer = $text[$textCounter];
             $textCounter = $textCounter + 1;
         } elseif ($questionType[$questionCounter] == '4') { // upload
+            $uploadCounter = $uploadCounter + 1;
             #file name with a random number so that similar dont get replaced
-            $answer = rand(1000, 10000) . "-" . $_FILES["file"]["name"];
+            if(empty($_FILES["file".$uploadCounter]["name"])){
+                $answer="No Upload";
+            }
+            else {$answer = rand(1000, 10000) . "-" . $_FILES["file".$uploadCounter]["name"];
             #temporary file name to store file
-            $tname = $_FILES["file"]["tmp_name"];
+            $tname = $_FILES["file".$uploadCounter]["tmp_name"];
             #upload directory path
             $uploads_dir = '../assets/studentsQuizUpload';
             #TO move the uploaded file to specific location
             move_uploaded_file($tname, $uploads_dir . '/' . $answer);
-            $uploadCounter = $uploadCounter + 1;
+            }
         }
+
         createStudentAnswer($questionId[$questionCounter], $idExam, $idClass, $idStudent, $answer);
     }
+
 }
 ?>

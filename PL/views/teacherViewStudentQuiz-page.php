@@ -191,9 +191,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                                                 $correctableAnswersCount = $correctableAnswersCount+1;
                                             ?>
                                                 <br>
-                                                <h6>Answer:<b><a href="Test<?php //@Assaf 
-                                                                            ?>">Test<?php //@Assaf 
-                                                                                                    ?></a></b></h6>
+                                                <?php if($studentAnswer['answer']== "No Upload") : ?>
+                                                    <h6>Answer:<b><?php echo $studentAnswer['answer']?></b></h6>
+                                                 <?php else : ?>
+                                                <h6>Answer:<b><a href="../assets/studentsQuizUpload/<?php echo $studentAnswer['answer']?>" target="_BLANK"><?php echo $studentAnswer['answer']?></a></b></h6>
+                                                <?php endif;?>
                                                 <input type="hidden" name="studentAnswerId[]" value="<?php echo $studentAnswer['id'] ?>">
                                                 <input type="hidden" name="maxGrade[]" value="<?php echo $question['grade'] ?>">
                                                 <br>

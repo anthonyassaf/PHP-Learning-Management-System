@@ -46,7 +46,6 @@ if (isset($_POST['login_user'])) {
             $_SESSION['lname'] = $row["lastname"];
             $_SESSION['password'] = $row["password"];
             $_SESSION['email'] = $row["email"];
-            $_SESSION['imageProfileURL'] = $row['profileImageURL'];
             $_SESSION['role'] = $row['idRole'];
             $_SESSION['ppURL'] = $row['profileImageURL'];
             $_SESSION['isLoggedIn'] = true;
