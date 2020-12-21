@@ -1,9 +1,9 @@
 <?php
-include_once('studentProfile.php');
+session_start();
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
-}elseif($_SESSION['role']!=3){
+} elseif ($_SESSION['role'] != 3) {
     header('location:index.php');
 }
 ?>
@@ -24,6 +24,21 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!-- Custom CSS -->
     <link href="../styles/style.css" rel="stylesheet">
     <link href="../styles/pages/studentDashboard-page.css" rel="stylesheet">
+    <style>
+        .error {
+            color: tomato;
+            font-size: 12px;
+            display: none;
+        }
+
+        #success {
+            display: none;
+            font-family: Arial;
+            color: green;
+            margin-left: 85px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -70,9 +85,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="60"></div>
-                                       
-                                <div class="m-l-10">
+                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="60"></div>
+
+                                    <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
                                     </div>
@@ -101,13 +116,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="studentDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="studentDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
                         <!-- <li> <a class="waves-effect waves-dark" href="siteHome.html" aria-expanded="false"><i class="fa fa-home fa-lg"></i><span class="hide-menu">Site Home</span></a></li> -->
                         <li> <a class="waves-effect waves-dark" href="calendar.html" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu">Calendar</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="studentFiles-page.php" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Private Files</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="studentProfile-page.php" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
                         <li> <a class="waves-effect waves-dark" href="studentCourses-page.php" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu"></span>My Courses</a></li>
-                     </ul>
+                    </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -139,8 +154,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
-                <form class="form-horizontal form-material" method="post" autocomplete="off" action="studentProfile-page.php" enctype="multipart/form-data" >
-                <div class="row">
+                <form class="form-horizontal form-material" method="post" autocomplete="off" action="studentProfile-page.php" enctype="multipart/form-data">
+                    <div class="row">
                         <!-- Column -->
                         <div class="col-lg-4 col-xlg-3 col-md-5">
                             <div class="card">
@@ -156,7 +171,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <!-- Column -->
                         <!-- Column -->
                         <div class="col-lg-8 col-xlg-9 col-md-7">
-                            <center style="color: red"><?php include('errors.php'); ?></center>
+                            <div id="success"></div>
+                            <span class="error"></span>
                             <div class="card">
                                 <!-- Tab panes -->
                                 <div class="card-body">
@@ -175,13 +191,13 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">ID</label>
                                         <div class="col-md-12">
-                                            <input type="email" readonly class="form-control form-control-line form-control-warning" name="userId" id="example-email" value="<?php echo $_SESSION['userId']; ?>">
+                                            <input type="email" readonly class="form-control form-control-line form-control-warning" name="userId"  value="<?php echo $_SESSION['userId']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="example-email" class="col-md-12">Email</label>
                                         <div class="col-md-12">
-                                            <input type="email" readonly class="form-control form-control-line" name="email" id="example-email" value="<?php echo $_SESSION['email']; ?>">
+                                            <input type="email" readonly class="form-control form-control-line" name="email"  value="<?php echo $_SESSION['email']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -198,7 +214,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success" name="update_user">Update Profile</button>
+                                            <button class="btn btn-success" id="updateButton" name="update_user">Update Profile</button>
                                         </div>
                                     </div>
 
@@ -206,7 +222,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                             </div>
                         </div>
                         <!-- Column -->
-                </div>
+                    </div>
                 </form>
                 <!-- Row -->
                 <!-- End Page Content -->
@@ -247,19 +263,41 @@ if (($_SESSION['isLoggedIn']) != true) {
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
-
                 reader.onload = function(e) {
                     $('#pp')
                         .attr('src', e.target.result)
                         .width(150)
                         .height(200);
                 };
-
-
-
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        $(document).ready(function() {
+            $('#updateButton').click(function(event) { //Trigger on form submit
+                var formData = { //Fetch form data
+                    'firstname': $('input[name=firstname]').val(),
+                    'lastname': $('input[name=lastname]').val(),
+                    'password': $('input[name=password]').val()
+                };
+                $.ajax({ //Process the form using $.ajax()
+                    type: 'POST', //Method type
+                    url: 'studentProfile.php', //Your form processing file url
+                    data: formData, //Forms name
+                    dataType: 'json',
+                    success: function(d) {
+                        if (!d.success) { //If fails
+                            $('.error').fadeIn(1000).html(d.message); //Throw relevant error
+                            $('#success').empty();
+                        } else {
+                            $('#success').fadeIn(1000).append('<p>' + d.message + '</p>'); //If successful, than throw a success message
+                            $('.error').empty();
+                        }
+                    }
+                });
+                event.preventDefault(); //Prevent the default submit
+            });
+        });
     </script>
 </body>
 

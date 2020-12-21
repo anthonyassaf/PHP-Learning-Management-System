@@ -38,36 +38,6 @@ include_once('login.php');
         </form>
     </div>
 
-    <script>
-        $(document).ready(function() {
-            $('#btnCheckNamePost').click(function(event) { //Trigger on form submit
-
-                var formData = { //Fetch form data
-                    'email': $('input[name=email]').val(),
-                    'password': $('input[name=password]').val()
-                };
-
-                $.ajax({ //Process the form using $.ajax()
-                    type: 'POST', //Method type
-                    url: 'login.php', //Your form processing file url
-                    data: formData, //Forms name
-                    dataType: 'json',
-                    success: function(d) {
-                        if (!d.success) { //If fails
-                            $('.error').fadeIn(1000).html(d.message); //Throw relevant error
-                            $('#success').empty();
-                        } else {
-                            $('#success').fadeIn(1000).append('<p>' + d.message + '</p>'); //If successful, than throw a success message
-                            $('.error').empty();
-                        }
-                    }
-                });
-                event.preventDefault(); //Prevent the default submit
-            });
-
-        });
-    </script>
-
 </body>
 
 </html>
