@@ -154,7 +154,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
-                <form class="form-horizontal form-material" method="post" autocomplete="off" action="studentProfile-page.php" enctype="multipart/form-data">
+                <form id="form" action="" class="form-horizontal form-material" method="post" autocomplete="off" enctype="multipart/form-data">
                     <div class="row">
                         <!-- Column -->
                         <div class="col-lg-4 col-xlg-3 col-md-5">
@@ -214,7 +214,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success" id="updateButton" name="update_user">Update Profile</button>
+                                            <input type="submit" class="btn btn-success" id="updateButton" value="Update Profile" name="update_user">
                                         </div>
                                     </div>
 
@@ -260,7 +260,9 @@ if (($_SESSION['isLoggedIn']) != true) {
     <!--Custom JavaScript -->
     <script src="../scripts/custom.min.js"></script>
     <script>
-        function readURL(input) {
+
+        $(document).ready(function() {
+            function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
@@ -272,30 +274,30 @@ if (($_SESSION['isLoggedIn']) != true) {
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
-        $(document).ready(function() {
-            $('#updateButton').click(function(event) { //Trigger on form submit
-                var formData = { //Fetch form data
+            $('#form').on('submit',function(e) {
+                e.preventDefault();
+                var formData = {
                     'firstname': $('input[name=firstname]').val(),
                     'lastname': $('input[name=lastname]').val(),
-                    'password': $('input[name=password]').val()
+                    'password': $('input[name=currentPassword]').val(),
+                    'newpassword' : $('input[name=newPassword').val()
                 };
-                $.ajax({ //Process the form using $.ajax()
-                    type: 'POST', //Method type
-                    url: 'studentProfile.php', //Your form processing file url
-                    data: formData, //Forms name
+                $.ajax({
+                    type: 'POST', 
+                    url: 'studentProfile.php', 
+                    data: formData,
                     dataType: 'json',
                     success: function(d) {
-                        if (!d.success) { //If fails
-                            $('.error').fadeIn(1000).html(d.message); //Throw relevant error
+                        if (!d.success) {
+                            $('.error').fadeIn(1000).html(d.message);
                             $('#success').empty();
                         } else {
-                            $('#success').fadeIn(1000).append('<p>' + d.message + '</p>'); //If successful, than throw a success message
+                            $('#success').fadeIn(1000).append('<p>' + d.message + '</p>');
                             $('.error').empty();
                         }
                     }
                 });
-                event.preventDefault(); //Prevent the default submit
+               
             });
         });
     </script>

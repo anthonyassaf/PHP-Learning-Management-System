@@ -4,37 +4,14 @@ include_once('../../BLL/userManager.php');
 
 $errors = array();
 
-echo "sadfghfdsadfghjgfdsad";
-
-function passStrength($password)
-{
-	$returnVal = True;
-	if (strlen($password) < 6) {
-		$returnVal = False;
-	}
-	if (!preg_match("#[0-9]+#", $password)) {
-		$returnVal = False;
-	}
-	if (!preg_match("#[a-z]+#", $password)) {
-		$returnVal = False;
-	}
-	if (!preg_match("#[A-Z]+#", $password)) {
-		$returnVal = False;
-	}
-	if (!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $password)) {
-		$returnVal = False;
-	}
-	return $returnVal;
-}
-
 $form_data = array(); //Pass back the data to `form.php`
 
 
 $email = $_SESSION['email'];
 $new_fname = $_POST['firstname'];
 $new_lname = $_POST['lastname'];
-$current_password = $_POST['currentPassword'];
-$new_password = $_POST['newPassword'];
+$current_password = $_POST['password'];
+
 
 if (empty($new_fname)) {
 	$form_data['success'] = false;
@@ -49,10 +26,8 @@ if (empty($new_fname)) {
 } elseif (passStrength($new_password) == false && $new_password != null) {
 	$form_data['success'] = false;
 	$form_data['message'] = "6+ lower and upper case characters / contains at least 1 special characters and 1 number";
-} else { //If not, process the form, and return true on success
-
+} else {
 	$form_data['success'] = true;
-
 	$result = null;
 
 	if ($new_fname != $_SESSION['fname']) {
@@ -79,9 +54,8 @@ if (empty($new_fname)) {
 	$result = edit('profileImageURL', $ppUrl, $email);
 
 	$form_data['message'] = 'Successfully Updated';
-}
-//Return the data back to form.php
 echo json_encode($form_data);
+}
 /*
 if ($result != null) {
 	$_SESSION['ppURL'] = $ppUrl;
@@ -89,4 +63,25 @@ if ($result != null) {
 } else
 	echo '<script type="text/javascript"> alert("Error")</script>';
 	*/
+
+	function passStrength($password)
+{
+	$returnVal = True;
+	if (strlen($password) < 6) {
+		$returnVal = False;
+	}
+	if (!preg_match("#[0-9]+#", $password)) {
+		$returnVal = False;
+	}
+	if (!preg_match("#[a-z]+#", $password)) {
+		$returnVal = False;
+	}
+	if (!preg_match("#[A-Z]+#", $password)) {
+		$returnVal = False;
+	}
+	if (!preg_match("/[\'^£$%&*()}{@#~?><>,|=_+!-]/", $password)) {
+		$returnVal = False;
+	}
+	return $returnVal;
+}
 ?>
