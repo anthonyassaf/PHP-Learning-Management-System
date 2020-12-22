@@ -104,7 +104,7 @@ include_once('../../BLL/userManager.php');
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Course Material</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -143,12 +143,12 @@ include_once('../../BLL/userManager.php');
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 col-md-3">
-                                            <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
+                                            <img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" class="img-circle" width="150" />
                                         </div>
                                         <div class="col-12-col-md-9">
                                             <h4 class="card-title m-t-10"><?php echo $_SESSION['fname']; ?>  <?php echo $_SESSION['lname']; ?></h4>
                                             <h6 class="card-subtitle"><?php echo "Teacher at Antonine University"?></h6>
-                                            <button class="btn btn-primary">Message</button>
+                                            <button type="button" class="btn btn-primary" data-toggle="popover" data-content="Sorry, this functionality is not available at this moment">Messages</button>
                                         </div>
                                     </div>
                                 </div>
@@ -161,20 +161,6 @@ include_once('../../BLL/userManager.php');
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <center>
-                                    <ul class="feeds p-b-20">
-                                        <li>
-                                            <div class="bg-info"><i class="fa fa-home fa-lg"></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-success"><i class="fa fa-calendar fa-lg"></i></div>
-                                        </li>
-                                        <li>
-                                            <div class="bg-warning"><i class="fa fa-book fa-lg"></i></div>
-                                        </li>
-                                    </ul>
-                                </center>
-                                <hr>
                                 <h3>Course Overview</h3>
                                 <center>
                                 <div class="row">

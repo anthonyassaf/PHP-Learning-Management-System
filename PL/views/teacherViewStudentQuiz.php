@@ -54,16 +54,12 @@ if($correctedAnswers>0){
         }
         else {array_push($errors,"Error updating");}
     }
-}else header("location:teacherListQuizEntries-page.php?quizId=$quizId");
+}else {
+    if(correctQuiz($studentQuizid)){
+    header("location:teacherListQuizEntries-page.php?quizId=$quizId");
 }
-
-
-
-
-
-
-
-
-
+    else {array_push($errors,"Error updating");}
+}
+}
 
 ?>

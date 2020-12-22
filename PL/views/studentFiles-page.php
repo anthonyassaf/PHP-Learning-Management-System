@@ -116,7 +116,6 @@ if (($_SESSION['isLoggedIn']) != true) {
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 
-
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Container fluid  -->
@@ -170,7 +169,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                 <div class="card-body">
                                     <form action="studentFiles-page.php" method="post">
                                         <h5><b><?php echo $file['description'] ?></b></h5>
-                                        <a href="<?php echo "../assets/studentsFiles/" . $file['fileUrl'] ?>"><?php echo $file['fileUrl'] ?></a>
+                                        <a href="<?php echo "../assets/studentsFiles/" . $file['fileUrl'] ?>" target="_blank"><?php echo $file['fileUrl'] ?></a>
                                         <input type="hidden" value="<?php echo $file['id'] ?>" name="fileId">
                                         <input type="submit" style="float:right;" class="btn btn-danger" name="delete_file" value="Delete">
                                     </form>

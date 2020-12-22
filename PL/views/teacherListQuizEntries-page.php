@@ -100,7 +100,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Course Material</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
                      </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -140,7 +140,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <h3><?php echo $examDetails['quizTitle'] ?></h3>
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <table class="table">

@@ -3,7 +3,7 @@ include_once("teacherCourseMaterial.php");
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
-}elseif($_SESSION['role']!=2){
+} elseif ($_SESSION['role'] != 2) {
     header('location:index.php');
 }
 ?>
@@ -71,11 +71,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <ul class="navbar-nav my-lg-0">
                         <!-- User profile and search -->
                         <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="60"></div>
+                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?> <?php echo $_SESSION['lname']; ?></h4>
                                         <p class=" m-b-0"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72041300071c32151f131b1e5c111d1f"> <?php echo $_SESSION['email']; ?></a></p>
@@ -103,8 +103,8 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Course Material</span></a></li>
-                   </ul>
+                        <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                    </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -135,6 +135,9 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- End Bread crumb and right sidebar toggle -->
 
                 <!-- Start Page Content -->
+
+                <h2><?php echo $_GET['className'] ?></h4>
+                <br><Br>
 
                 <div style="float:left;">
                     <button type="button" class="btn btn-primary">
@@ -182,10 +185,6 @@ if (($_SESSION['isLoggedIn']) != true) {
 
                 <br><Br><br>
 
-
-
-                <h2><?php echo $_GET['className'] ?></h4>
-
                     <div class="row">
                         <div class="col-12">
                             <?php
@@ -208,27 +207,23 @@ if (($_SESSION['isLoggedIn']) != true) {
                                 <hr>
                             <?php endforeach ?>
                             <h3 style="color: #5cb85c">Quizs</h3>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th style="width:50%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $myQuizs = getClassExams($classId);
-                                    foreach ($myQuizs as $myQuiz) : ?>
-                                        <tr>
-                                            <td> <a href="teacherListQuizEntries-page.php?quizId=<?php echo $myQuiz['id']?>" type="button" class="btn btn-primary">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <?php
+                                            $myQuizs = getClassExams($classId);
+                                            foreach ($myQuizs as $myQuiz) : ?>
+                                                <a href="teacherListQuizEntries-page.php?quizId=<?php echo $myQuiz['id'] ?>" type="button" class="btn btn-primary">
                                                     <?php echo $myQuiz['quizTitle']; ?></a></td>
-                                        </tr>
-                                    <?php endforeach ?>
-                                </tbody>
-                            </table>
+                                            <?php endforeach ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
                     <div>
 
                     </div>

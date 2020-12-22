@@ -4,7 +4,7 @@ include_once('../../BLL/userManager.php');
 if (($_SESSION['isLoggedIn']) != true) {
     $_SESSION['msg'] = "You must log in first";
     header('location: loginForm.php');
-}elseif($_SESSION['role']!=2){
+} elseif ($_SESSION['role'] != 2) {
     header('location:index.php');
 }
 ?>
@@ -68,11 +68,11 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <!-- User profile and search -->
                         <li class="nav-item dropdown"> <?php echo $_SESSION['fname']; ?>
                             <?php echo $_SESSION['lname']; ?>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="30"></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="30"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                                 <span class="with-arrow"><span class="bg-primary"></span></span>
                                 <div class="d-flex no-block align-items-center p-15  m-b-10">
-                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL']?>" alt="user" class="img-circle" width="60"></div>
+                                    <div class=""><img src="../assets/images/users/<?php echo $_SESSION['ppURL'] ?>" alt="user" class="img-circle" width="60"></div>
                                     <div class="m-l-10">
                                         <h4 class="m-b-0"><?php echo $_SESSION['fname']; ?>
                                             <?php echo $_SESSION['lname']; ?></h4>
@@ -102,16 +102,14 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Course Material</span></a></li>
-                   </ul>
+                        <li> <a class="waves-effect waves-dark" href="teacherDashboard-page.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                    </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-
-
 
         <!-- Page wrapper  -->
         <div class="page-wrapper">
@@ -145,20 +143,19 @@ if (($_SESSION['isLoggedIn']) != true) {
                 $quiz = getExamDetails($idExam);
                 $studentAnswers = getStudentAnswers($idExam, $idClass, $idStudent);
                 $questionCounter = 0;
-                $correctableAnswersCount=0;
+                $correctableAnswersCount = 0;
                 ?>
-                <h3><?php echo $quiz['quizTitle'] ?></h3>
-                <h4><?php echo $student['firstname'] . " " . $student['lastname'] ?></h4>
-
-
+                <h3>Quiz Title : <?php echo $quiz['quizTitle'] ?></h3>
+                <h4 style="color : #1A6AC9;">Student Name : <?php echo $student['firstname'] . " " . $student['lastname'] ?></h4>
+                <br><br>
                 <div class="row">
                     <div class="col-12">
 
                         <?php if ($isCorrected == 0) { ?>
                             <form method="POST" action="teacherViewStudentQuiz-page.php?quizId=<?php echo $idExamEntry ?>">
-                            <center style="color: red"><?php include('errors.php'); ?></center>    
-                            <input type="hidden" name="quizId" value="<?php echo $quiz['id'] ?>">
-                            <input type="hidden" name="idStudentQuiz" value="<?php echo $idExamEntry?>">
+                                <center style="color: red"><?php include('errors.php'); ?></center>
+                                <input type="hidden" name="quizId" value="<?php echo $quiz['id'] ?>">
+                                <input type="hidden" name="idStudentQuiz" value="<?php echo $idExamEntry ?>">
                                 <?php foreach ($studentAnswers as $studentAnswer) {
                                 ?><div class=" card">
                                         <div class="card-body">
@@ -166,19 +163,19 @@ if (($_SESSION['isLoggedIn']) != true) {
                                             $questionCounter = $questionCounter + 1;
                                             $question = getQuestion($studentAnswer['idQuestion']);
                                             ?>
-                                            <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
+                                            <h5><b><?php echo $questionCounter . ") " . $question['description'] . " (" . $question['grade'] . "pts)" ?></b></h5>
                                             <?php
                                             if ($question['idType'] == '1' || $question['idType'] == '2') { // mcq or boolean for auto correction
                                                 autoCorrectAnswer($studentAnswer['id']);
                                                 $updatedAnswerData = getStudentAnswer($studentAnswer['id']);
                                             ?>
                                                 <br>
-                                                <h6>Answer:<b><?php echo $updatedAnswerData['answer'] ?></b> </h6>
+                                                <h6>Student Answer: <b><?php echo $updatedAnswerData['answer'] ?></b> </h6>
                                                 <br>
-                                                <label> Grade:<?php echo $updatedAnswerData['grade'] ?> </label>
+                                                <label>Grade: <?php echo $updatedAnswerData['grade'] ?> </label>
                                             <?php
                                             } elseif ($question['idType'] == '3') { // text
-                                                $correctableAnswersCount = $correctableAnswersCount+1;
+                                                $correctableAnswersCount = $correctableAnswersCount + 1;
                                             ?>
                                                 <br>
                                                 <h6>Answer:<b><?php echo $studentAnswer['answer'] ?></b> </h6>
@@ -188,14 +185,14 @@ if (($_SESSION['isLoggedIn']) != true) {
                                                 <label>Grade :</label> <input type="number" name="grade[]" style="width: 50px;">
                                             <?php
                                             } elseif ($question['idType'] == '4') { // upload
-                                                $correctableAnswersCount = $correctableAnswersCount+1;
+                                                $correctableAnswersCount = $correctableAnswersCount + 1;
                                             ?>
                                                 <br>
-                                                <?php if($studentAnswer['answer']== "No Upload") : ?>
-                                                    <h6>Answer:<b><?php echo $studentAnswer['answer']?></b></h6>
-                                                 <?php else : ?>
-                                                <h6>Answer:<b><a href="../assets/studentsQuizUpload/<?php echo $studentAnswer['answer']?>" target="_BLANK"><?php echo $studentAnswer['answer']?></a></b></h6>
-                                                <?php endif;?>
+                                                <?php if ($studentAnswer['answer'] == "No Upload") : ?>
+                                                    <h6>Answer:<b><?php echo $studentAnswer['answer'] ?></b></h6>
+                                                <?php else : ?>
+                                                    <h6>Answer:<b><a href="../assets/studentsQuizUpload/<?php echo $studentAnswer['answer'] ?>" target="_BLANK"><?php echo $studentAnswer['answer'] ?></a></b></h6>
+                                                <?php endif; ?>
                                                 <input type="hidden" name="studentAnswerId[]" value="<?php echo $studentAnswer['id'] ?>">
                                                 <input type="hidden" name="maxGrade[]" value="<?php echo $question['grade'] ?>">
                                                 <br>
@@ -209,29 +206,29 @@ if (($_SESSION['isLoggedIn']) != true) {
                                 }
                                 ?>
                                 <br>
-                                <input type="hidden" name="numCorrectableAnswers" value="<?php echo $correctableAnswersCount?>">
+                                <input type="hidden" name="numCorrectableAnswers" value="<?php echo $correctableAnswersCount ?>">
                                 <input type="submit" class="btn btn-success" name="SubmitAnswerCorrection" value="Submit Correction">
                             </form>
                         <?php
                         } elseif ($isCorrected == 1) { ?>
-                        <div class="card">
-                            <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
 
-                        
-                            <label> You have already corrected this exam entry. </label>
-                            <?php foreach ($studentAnswers as $studentAnswer) {
-                                $questionCounter = $questionCounter + 1;
-                                $question = getQuestion($studentAnswer['idQuestion']);
-                            ?>
-                                <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
-                                <br><label>Answer:<b><?php echo $studentAnswer['answer'] ?> </b></label>
-                                <br><label> Grade:<b><?php echo $studentAnswer['grade'] ?> </b></label>
-                        <?php
-                            }
-                        }
-                        ?>
+
+                                    <label> You have already corrected this exam entry. </label>
+                                    <?php foreach ($studentAnswers as $studentAnswer) {
+                                        $questionCounter = $questionCounter + 1;
+                                        $question = getQuestion($studentAnswer['idQuestion']);
+                                    ?>
+                                        <h5><b><?php echo $questionCounter . ")" . $question['description'] . "(" . $question['grade'] . "pts)" ?></b></h5>
+                                        <br><label>Answer:<b><?php echo $studentAnswer['answer'] ?> </b></label>
+                                        <br><label> Grade:<b><?php echo $studentAnswer['grade'] ?> </b></label>
+                                <?php
+                                    }
+                                }
+                                ?>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

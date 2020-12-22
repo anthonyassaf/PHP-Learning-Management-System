@@ -145,7 +145,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-12">
-                        <h3 style="color: #5cb85c">Materials</h3>
+                        <h3 style="color: #3ECBAB">Materials</h3>
                         <?php
                         $classId = $_GET['classId'];
                         $materials = getClassMaterial($classId);
@@ -160,7 +160,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                         <?php endforeach ?>
                     </div>
                 </div>
-                <h3 style="color: #5cb85c">Quizes</h3>
+                <h3 style="color: #3ECBAB">Quizes</h3>
                 <div class="card">
                     <div class="card-body">
                         <table class="table">
