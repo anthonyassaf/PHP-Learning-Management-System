@@ -287,7 +287,6 @@ if (($_SESSION['isLoggedIn']) != true) {
     <script src="../scripts/custom.min.js"></script>
     <script>
     $(document).ready(function() {
-
         $('#form').on('submit', function(e) {
             var formData;
             e.preventDefault();
@@ -333,7 +332,6 @@ if (($_SESSION['isLoggedIn']) != true) {
                         $('#success').fadeIn(1000).append('<p>' + d.message + '</p>');
                         $('.error').empty();
                         document.getElementById("form").reset();
-
                     }
                 },
                 error: function(e) {

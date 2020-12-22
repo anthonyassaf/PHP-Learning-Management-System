@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #a6e4c7;
+        }
+
+        td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        th {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .white {
+            background-color: #ffffff;
+        }
+
+        .green {
+            background-color: #a6e4c7;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr id="first">
+            <th>Student Name</th>
+            <th>Marks in science</th>
+        </tr>
+        <tr class="green">
+            <td class="name">Janet</td>
+            <td class="grade">85.00</td>
+        </tr>
+        <tr class="white">
+            <td class="name">David</td>
+            <td class="grade">92.00</td>
+        </tr>
+        <tr class="green">
+            <td class="name">Arthur</td>
+            <td class="grade">75.00</td>
+        </tr>
+        <tr class="white">
+            <td class="name">Bill</td>
+            <td class="grade">83.00</td>
+        </tr>
+    </table>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $("tr").not('#first').click(function () {
+            var $row = $(this).closest("tr"); //find the row
+
+            $row.toggleClass("green");
+
+            var $name = $row.find(".name").text(); //find the text
+            var $grade = $row.find(".grade").text();
+
+            alert($name + " " + $grade);
+        });
+    });
+</script>
+
+</html>

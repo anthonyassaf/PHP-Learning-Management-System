@@ -196,7 +196,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                                     <div class="card-body">
                                         <form action="teacherCourseMaterial-page.php" method="post">
                                             <h5><b><?php echo $material['description'] ?></b></h5>
-                                            <a href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
+                                            <a target="_blank" href="<?php echo "../assets/material/" . $material['materialUrl'] ?>"><?php echo $material['materialUrl'] ?></a>
                                             <input type="hidden" value="<?php echo $material['id'] ?>" name="materialId">
                                             <input type="submit" style="float:right;" class="btn btn-danger" name="delete" value="Delete">
                                             <input type="hidden" name="cid" value="<?php echo $_GET['classId']; ?>">

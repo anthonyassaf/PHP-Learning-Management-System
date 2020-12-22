@@ -108,8 +108,6 @@ if (($_SESSION['isLoggedIn']) != true) {
         </aside>
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 
-
-
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Container fluid  -->
@@ -146,7 +144,7 @@ if (($_SESSION['isLoggedIn']) != true) {
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form method="post" action="teacherCreateQuiz-page.php?classId=<?php $_GET['classId']?>&className=<?php $_GET['className']?>">
+                                <form method="post" action="teacherCreateQuiz-page.php?classId=<?php echo $_GET['classId']?>&className=<?php echo $_GET['className']?>">
                                 <center style="color: red"><?php include('errors.php'); ?></center>
                                 
                                     <div class="form-group row">
