@@ -16,7 +16,7 @@ if (isset($_POST["add_file"])) {
         array_push($errors, "Title is required");
     }
 
-    if ($_FILES['file']['size'] > 2097152) {
+    if ($_FILES['file']['size'] > 2097152) { 
         array_push($errors, "The file size is too big (2MB max)");
     }
 
