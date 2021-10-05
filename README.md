@@ -6,6 +6,7 @@ Educational website that will serve as a platform for communication between teac
 Roles : <br />
 
 - Admin<br />
+    . Dashboard<br />
     . Add, Update, Delete users<br />
     . Add, Update, Delete classes<br />
     . Addd students/teachers to classes<br />
@@ -17,6 +18,7 @@ Roles : <br />
     . Add material: Pdfs, videos, music files, ppt...<br />
 
 - Student<br />
+    . Dashbord <br />
     . View and download material<br />
     . Do exams and get results<br />
     . Check classes history and his notes<br />
