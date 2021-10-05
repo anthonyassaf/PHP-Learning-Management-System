@@ -9,7 +9,7 @@ Roles : <br />
     . Dashboard<br />
     . Add, Update, Delete users<br />
     . Add, Update, Delete classes<br />
-    . Addd students/teachers to classes<br />
+    . Add students/teachers to classes<br />
 
 - Teacher<br />
     . Dashboard<br />
